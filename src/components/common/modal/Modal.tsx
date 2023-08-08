@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal as AntdModal, Space } from 'antd';
+import * as St from './style';
 
 const Modal = () => {
   return (
