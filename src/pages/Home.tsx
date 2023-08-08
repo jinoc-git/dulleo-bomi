@@ -1,5 +1,7 @@
+import React from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import Banner from '../components/banner/Banner';
 
 const Home = () => {
   type DuriData = string;
@@ -14,7 +16,11 @@ const Home = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  return <div>Home</div>;
+  return (
+    <>
+      <Banner />
+    </>
+  );
 };
 
 export default Home;
