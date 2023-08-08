@@ -3,7 +3,8 @@ import { styled } from 'styled-components';
 export const BannerContainer = styled.section`
   position: relative;
   width: 100%;
-  height: 540px;
+  min-height: 420px;
+  max-height: 600px;
 `;
 
 export const BanneImage = styled.img`

@@ -1,9 +1,10 @@
 import Layout from '../common/layout/Layout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as St from './style';
 import { Button, Input } from 'antd';
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <St.ContainerHeader>
       <Layout>
