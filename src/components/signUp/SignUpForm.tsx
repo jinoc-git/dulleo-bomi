@@ -6,7 +6,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db, storage } from '../../firebase/firebaseConfig';
-import * as St from './style';
+import * as St from './style'
 
 type SignUpFormData = {
   profileImage: File[];

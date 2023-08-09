@@ -2,5 +2,6 @@ import { styled } from 'styled-components';
 
 export const SearchFormContainer = styled.form`
   display: flex;
-  width: 40%;
+  width: 50%;
+  margin: 0 auto;
 `;
