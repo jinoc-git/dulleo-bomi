@@ -12,9 +12,6 @@ const GlobalStyles = createGlobalStyle`
   *{
     box-sizing: border-box;
   }
-  body {
-    padding-top: 80px;
-  }
   h1 {
     font-family: 'TheJamsil5Bold';
   }
