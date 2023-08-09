@@ -1,10 +1,12 @@
 import Layout from '../common/layout/Layout';
 import { Link, useNavigate } from 'react-router-dom';
 import * as St from './style';
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
+import SearchForm from '../searchForm/SearchForm';
 
 const Header = () => {
   const navigate = useNavigate();
+
   return (
     <St.ContainerHeader>
       <Layout>
@@ -12,11 +14,7 @@ const Header = () => {
           <St.Logo>
             <Link to={'/'}>logo</Link>
           </St.Logo>
-          <St.SearchBox>
-            <label htmlFor="">검색</label>
-            <Input type="text" />
-            <Button>검색버튼</Button>
-          </St.SearchBox>
+          <SearchForm />
           <Button>로그인</Button>
           <Button>회원가입</Button>
         </St.WrapBox>

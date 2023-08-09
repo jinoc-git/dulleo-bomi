@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import * as St from './style';
 import Layout from '../common/layout/Layout';
 import { southRoad, westRoad, eastRoad } from '../../assets';
@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 const RoadList = () => {
   const navigate = useNavigate();
-  const goToSearchRouteList = (road: string) => {
+  const goToSearchRouteList = useCallback((road: string) => {
     navigate('/result', { state: { roadName: road } });
-  };
-  
+  }, []);
+
   return (
     <St.RoadListContainer>
       <Layout>

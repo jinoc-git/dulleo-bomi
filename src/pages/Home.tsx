@@ -6,7 +6,7 @@ import RoadList from '../components/roadList/RoadList';
 
 const Home = () => {
   type DuriData = string;
-  const crsKorNm = encodeURI('해파랑')
+  const crsKorNm = encodeURI('1');
   const DURU_URL = `https://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${crsKorNm}`;
 
   const fetchData = async () => {

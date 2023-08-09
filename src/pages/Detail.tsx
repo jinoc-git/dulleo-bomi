@@ -1,8 +1,12 @@
 import React from 'react'
+import Layout from '../components/common/layout/Layout'
+import CommentForm from '../components/commentForm/CommentForm'
 
 const Detail = () => {
   return (
-    <div>Detail</div>
+    <Layout>
+      <CommentForm />
+    </Layout>
   )
 }
 
