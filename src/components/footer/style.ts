@@ -17,16 +17,16 @@ export const FootInfoBox = styled.div`
   margin: 15px 0;
   span {
     a {
-      width: 30px;
-      height: 30px;
-      padding: 6px;
+      width: 40px;
+      height: 40px;
+      padding: 10px;
       display: inline-flex;
       background-color: #ddd;
       border-radius: 50%;
       cursor: pointer;
       position: relative;
       line-height: 1;
-      margin-right: 10px;
+      margin-right: 12px;
       /* 
       &::before {
         content: '';
@@ -47,7 +47,7 @@ export const FootInfoBox = styled.div`
 
     &:hover a {
       transform: scale(1);
-      background: linear-gradient(180deg, rgba(202, 255, 21, 1) 0%, rgba(28, 69, 173, 0.7147233893557423) 86%);
+      background: #67bed0;
       transition: 0.3s ease-in-out;
     }
     &:hover img {

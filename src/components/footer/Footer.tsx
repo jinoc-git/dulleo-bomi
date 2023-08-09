@@ -1,3 +1,4 @@
+import { figmaSvg, githubSvg, notionSvg } from '../../assets';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
 
@@ -8,17 +9,17 @@ const Footer = () => {
         <St.FootInfoBox>
           <span className="svgIcon">
             <a href="https://github.com/jinoc-git/dulleo-bomi" target="_blank">
-              <img src="/github.svg" alt="" />
+              <img src={githubSvg} alt="" />
             </a>
           </span>
           <span className="svgIcon">
             <a href="https://familiar-beat-d02.notion.site/d057779341f94f5d92d1105cbcccabe4?pvs=4" target="_blank">
-              <img src="/notion.svg" alt="" />
+              <img src={notionSvg} alt="" />
             </a>
           </span>
           <span>
             <a href="https://www.figma.com/file/9O3lls9ArKNhiSOSLAZvqc/%EB%91%98%EB%9F%AC%EB%B3%B4%EB%AF%B8?type=design&node-id=0-1&mode=design&t=S9QzKkmfQS48nutt-0" target="_blank">
-              <img src="/figma.svg" alt="" />
+              <img src={figmaSvg} alt="" />
             </a>
           </span>
         </St.FootInfoBox>
