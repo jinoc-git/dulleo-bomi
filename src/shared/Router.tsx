@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Footer from '../components/footer/Footer';
+import Header from '../components/header/Header';
+import Detail from '../pages/Detail';
 import Home from '../pages/Home';
+import MyPage from '../pages/MyPage';
+import SearchResult from '../pages/SearchResult';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-import MyPage from '../pages/MyPage';
-import Detail from '../pages/Detail';
-import SearchResult from '../pages/SearchResult';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
 
 const Router = () => {
   return (

@@ -12,6 +12,10 @@ const GlobalStyles = createGlobalStyle`
   *{
     box-sizing: border-box;
   }
+  body { 
+    line-height: 1.4;
+    font-size: 0.9rem;
+  }
   h1 {
     font-family: 'TheJamsil5Bold';
   }
@@ -23,12 +27,23 @@ const GlobalStyles = createGlobalStyle`
   h6 {
     /* font-family: 'omnigothic030'; */
   }
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'TheJamsil5Bold';
+    margin-bottom: 15px;
+  }
+  h3 { font-size:1.5rem}
+  h4 {font-size:1rem;font-weight:bold}
   p,
   tr,
   span,
   a {
     /* font-family: 'omnigothic020'; */
   }
+  a:link, a:focus, a:active, a:visited, a:hover  {
+        color: inherit
+    }
 `;
 
 export default GlobalStyles;
