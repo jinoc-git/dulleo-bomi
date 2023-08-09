@@ -4,9 +4,11 @@ import { Button, Input } from 'antd';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addComment } from '../../api/comments';
 import { AxiosError } from 'axios';
+import { useParams } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 
 export type CommentType = {
-  commentId: string;
+  id: string;
   crsId: string;
   writerNikName: string;
   content: string;
@@ -14,35 +16,43 @@ export type CommentType = {
 };
 
 const CommentForm = () => {
+  const { id: crsId } = useParams();
   const [comment, setComment] = useState<string>('');
+
   const queryClient = useQueryClient();
-  // const addMutation = useMutation<void, AxiosError, CommentType, { prevComments: CommentType[] | undefined }>(addComment, {
-  //   onMutate: async (newComment: CommentType) => {
-  //     await queryClient.cancelQueries(['comments']);
-  //     const prevComments = queryClient.getQueryData(['comments']);
-  //     if (prevComments) {
-  //       queryClient.setQueryData(['comments'], [newComment]);
-  //     } else {
-  //       queryClient.setQueryData(['comments'], [newComment]);
-  //     }
-  //     return { prevComments };
-  //   },
-  //   onError: () => {},
-  //   onSettled: () => {},
-  // });
+  const addMutation = useMutation<void, AxiosError, CommentType, { prevComments: CommentType[] | undefined }>(addComment, {
+    onMutate: async (newComment: CommentType) => {
+      await queryClient.cancelQueries(['comments', crsId as string]);
+      const prevComments = queryClient.getQueryData<CommentType[]>(['comments', crsId as string]);
+      if (prevComments) {
+        queryClient.setQueryData(['comments', crsId as string], [...prevComments, newComment]);
+      } else {
+        queryClient.setQueryData(['comments', crsId as string], [newComment]);
+      }
+      return { prevComments };
+    },
+    onError: (err, newComment, context) => {
+      queryClient.setQueriesData(['comments', crsId as string], context?.prevComments);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(['comments', crsId as string]);
+    },
+  });
 
   const onSubmitCommentHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!comment) return;
-    console.log(comment);
-    const newComment = {
-      commentId: '',
-      crsId: '',
-      writerNikName: '',
-      content: '',
-      time: '',
+
+    const newComment: CommentType = {
+      id: nanoid(),
+      crsId: crsId as string,
+      writerNikName: '가나다라마바',
+      content: comment,
+      time: '1',
     };
-    // addMutation.mutate(newComment)
+
+    addMutation.mutate(newComment);
+    setComment('');
   };
 
   return (

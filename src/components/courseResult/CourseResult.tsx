@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Course, CourseList } from '../../api/course';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
@@ -8,6 +8,7 @@ import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 
 const CourseResult = () => {
   const [data, setData] = useState<Course[]>([]);
+  const navigate = useNavigate();
   const { state } = useLocation();
   const crsKorNm = encodeURI(state.roadName);
 
@@ -21,10 +22,15 @@ const CourseResult = () => {
     return responseData;
   };
 
+  const goToDetail = useCallback((id: string) => {
+    navigate(`/detail/${id}`);
+  }, []);
+
   useEffect(() => {
     fetchData();
     console.log(data);
   }, []);
+
   if (!data) {
     return <div>데이터가 존재하지 않습니다.</div>;
   }
@@ -35,7 +41,7 @@ const CourseResult = () => {
       <St.CourseListContainer>
         {data.map((item) => {
           return (
-            <St.CourseBox key={item.crsIdx}>
+            <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsIdx)}>
               <St.CourseName>
                 {item.crsKorNm} /
                 <St.CourseLike>
