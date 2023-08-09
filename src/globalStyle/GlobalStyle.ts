@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
   ${reset};
   *{
     box-sizing: border-box;
+    color: #222;
   }
   body { 
     line-height: 1.4;

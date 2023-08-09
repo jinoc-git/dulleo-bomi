@@ -1,13 +1,17 @@
-import React from 'react'
-import Layout from '../components/common/layout/Layout'
-import CommentForm from '../components/commentForm/CommentForm'
+import React from 'react';
+import Layout from '../components/common/layout/Layout';
+import CommentForm from '../components/commentForm/CommentForm';
+import CommentList from '../components/commentList/CommentList';
 
 const Detail = () => {
   return (
-    <Layout>
-      <CommentForm />
-    </Layout>
-  )
-}
+    <main>
+      <Layout>
+        <CommentForm />
+        <CommentList />
+      </Layout>
+    </main>
+  );
+};
 
-export default Detail
+export default Detail;

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import GlobalStyles from './globalStyle/GlobalStyle';
 import reportWebVitals from './reportWebVitals';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -12,6 +13,7 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <GlobalStyles />
     <App />
+    <ReactQueryDevtools />
   </QueryClientProvider>,
 );
 
