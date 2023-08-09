@@ -1,4 +1,4 @@
-import { Button, Form, FormInstance, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -63,14 +63,14 @@ const SignUpForm = () => {
     },
   });
 
-  const confirmPasswordValidator = (formInstance: FormInstance) => ({
-    validator(_: unknown, value: string) {
-      if (!value || formInstance.getFieldValue('password') === value) {
-        return Promise.resolve();
-      }
-      return Promise.reject(new Error('비밀번호가 일치하지 않습니다.'));
-    },
-  });
+  // const confirmPasswordValidator = (formInstance: FormInstance) => ({
+  //   validator(_: unknown, value: string) {
+  //     if (!value || formInstance.getFieldValue('password') === value) {
+  //       return Promise.resolve();
+  //     }
+  //     return Promise.reject(new Error('비밀번호가 일치하지 않습니다.'));
+  //   },
+  // });
 
   return (
     <St.SignUpFormContainer>
