@@ -5,17 +5,15 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import GlobalStyles from './globalStyle/GlobalStyle';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 root.render(
   <QueryClientProvider client={queryClient}>
     <GlobalStyles />
     <App />
-  </QueryClientProvider>
+  </QueryClientProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
