@@ -1,7 +1,7 @@
 import { Form as AntdForm } from 'antd';
 import { styled } from 'styled-components';
 
-export const SignUpContainer = styled.div`
+export const SignUpFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

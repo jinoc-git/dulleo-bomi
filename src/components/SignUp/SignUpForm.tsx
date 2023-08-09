@@ -14,7 +14,7 @@ type SignUpFormData = {
   nickname: string;
 };
 
-const SignUp = () => {
+const SignUpForm = () => {
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
 
@@ -73,7 +73,7 @@ const SignUp = () => {
   });
 
   return (
-    <St.SignUpContainer>
+    <St.SignUpFormContainer>
       <Form onFinish={onSubmit}>
         <Form.Item label="프로필 이미지" name="profileImage" rules={[{ required: true, message: '이미지를 업로드해주세요.' }]}>
           <Input type="file" id="profileImage" />
@@ -124,8 +124,8 @@ const SignUp = () => {
           </Button>
         </Form.Item>
       </Form>
-    </St.SignUpContainer>
+    </St.SignUpFormContainer>
   );
 };
 
-export default SignUp;
+export default SignUpForm;
