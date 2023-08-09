@@ -2,9 +2,7 @@ import Layout from '../common/layout/Layout';
 import { Link, useNavigate } from 'react-router-dom';
 import * as St from './style';
 import { Button } from 'antd';
-import SearchForm from '../searchForm/SearchForm';
 import { logoColor } from '../../assets';
-
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,10 +11,9 @@ const Header = () => {
     <St.ContainerHeader>
       <Layout>
         <St.WrapBox>
-          <St.Logo>
-            <Link to={'/'}>
-              <img src={logoColor} />{' '}
-            </Link>
+          <St.Logo to={'/'}>
+            <St.LogoImg src={logoColor} />
+            <St.LogoTitH1>둘러보미</St.LogoTitH1>
           </St.Logo>
           <St.UserBtnBox>
             <Button>로그인</Button>

@@ -1,5 +1,6 @@
 import CourseResult from '../components/courseResult/CourseResult';
 import SearchForm from '../components/searchForm/SearchForm';
+import ResultMap from '../components/resultMap/ResultMap';
 
 const SearchResult = () => {
 
