@@ -20,6 +20,7 @@ const SignUpForm = (): ReactElement => {
   const [form] = Form.useForm();
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File>();
 
   const navigate = useNavigate();
 
@@ -37,10 +38,10 @@ const SignUpForm = (): ReactElement => {
           photoURL: '',
         };
 
-        if (data.profileImage.length > 0) {
+        if (selectedFile) {
           const filePath = `profiles/${user.uid}/profile_picture`;
           const imageRef = ref(storage, filePath);
-          const file = data.profileImage[0];
+          const file = selectedFile;
 
           await uploadBytes(imageRef, file);
           const downloadURL = await getDownloadURL(imageRef);
@@ -112,6 +113,12 @@ const SignUpForm = (): ReactElement => {
     },
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   return (
     <St.SignUpFormContainer>
       <St.SignUpForm
@@ -126,9 +133,15 @@ const SignUpForm = (): ReactElement => {
           name="profileImage"
           rules={[{ required: true, message: '이미지를 업로드해주세요.' }]}
         >
-          <St.CustomFileInput type="file" id="profileImage" />
+          <St.CustomFileInput type="file" id="profileImage" onChange={handleFileChange} />
         </Form.Item>
-
+        {selectedFile && (
+          <img
+            src={URL.createObjectURL(selectedFile)}
+            alt="프로필 이미지 미리보기"
+            style={{ maxWidth: '300px', maxHeight: '300px' }}
+          />
+        )}
         <Form.Item
           label="이메일"
           name="email"
