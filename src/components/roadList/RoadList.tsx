@@ -9,7 +9,7 @@ const RoadList = () => {
   const goToSearchRouteList = (road: string) => {
     navigate('/result', { state: { roadName: road } });
   };
-  
+
   return (
     <St.RoadListContainer>
       <Layout>
