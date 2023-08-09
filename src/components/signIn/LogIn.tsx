@@ -3,6 +3,7 @@ import { auth } from '../../firebase/firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Input, Form, Button, Alert } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 
 function SignIn() {
   const [email, setEmail] = useState<string>('');
@@ -32,22 +33,12 @@ function SignIn() {
     setFailLogin(false);
   };
   return (
-    <div>
-      <Form
-        onFinish={signIn}
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
+    <LogInContainer>
+      <Form onFinish={signIn} name="login" initialValues={{ remember: true }} autoComplete="off">
         {failLogin && <Alert message="로그인 실패" description="아이디 또는 비밀번호를 확인해주세요" type="warning" showIcon closable onClick={chageAlertStateHandle} />}
 
         <Form.Item
-          label="이메일을 입력하세요"
+          label="이메일"
           name="email"
           rules={[
             { required: true, message: '이메일을 입력해주세요' },
@@ -56,7 +47,7 @@ function SignIn() {
         >
           <Input type="email" id="email" onChange={onChangeEmail} />
         </Form.Item>
-        <Form.Item label="비밀번호를 입력하세요" name="password" rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}>
+        <Form.Item label="비밀번호" name="password" rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}>
           <Input type="password" id="password" onChange={onChangePassword} />
         </Form.Item>
         <Form.Item>
@@ -65,8 +56,14 @@ function SignIn() {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </LogInContainer>
   );
 }
 
 export default SignIn;
+
+const LogInContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
