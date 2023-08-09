@@ -1,9 +1,12 @@
-import React from 'react'
+import CourseResult from '../components/courseResult/CourseResult';
 
 const SearchResult = () => {
   return (
-    <div>SearchResult</div>
-  )
-}
+    <>
+      <div style={{ background: '#ddd', width: '100%', height: '300px' }}>지도영역</div>
+      <CourseResult />
+    </>
+  );
+};
 
-export default SearchResult
+export default SearchResult;
