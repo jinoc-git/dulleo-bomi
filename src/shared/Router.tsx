@@ -1,11 +1,10 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-import MyPage from '../pages/MyPage';
 import Detail from '../pages/Detail';
+import Home from '../pages/Home';
+import MyPage from '../pages/MyPage';
 import SearchResult from '../pages/SearchResult';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp/SignUp';
 
 const Router = () => {
   return (
