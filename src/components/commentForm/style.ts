@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const CommentFormContainer = styled.div`
+export const CommentFormContainer = styled.section`
   width: 100%;
   height: 60px;
 `
