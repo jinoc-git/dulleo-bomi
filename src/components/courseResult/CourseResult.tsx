@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Course, CourseList } from '../../api/course';
-import Layout from '../../components/common/layout/Layout';
+import Layout from '../common/layout/Layout';
 import * as St from './style';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 
@@ -18,6 +18,7 @@ const CourseResult = () => {
     const response = await axios.get<CourseList>(COURSE_URL);
     const responseData = response.data.response.body.items.item;
     setData(responseData);
+    console.log(responseData);
     return responseData;
   };
 
@@ -27,6 +28,7 @@ const CourseResult = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(data);
   }, []);
 
   if (!data) {
