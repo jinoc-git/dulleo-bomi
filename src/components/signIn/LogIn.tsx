@@ -10,15 +10,14 @@ function SignIn() {
   const [password, setPassword] = useState<string>('');
   const [failLogin, setFailLogin] = useState<Boolean>(false);
   const navigate = useNavigate();
-  const onChangeEmail = (event: any) => {
-    setEmail(event.target.value);
+  const onChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
+    setEmail(event.currentTarget.value);
   };
-  const onChangePassword = (event: any) => {
-    setPassword(event.target.value);
+  const onChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
+    setPassword(event.currentTarget.value);
   };
 
-  const signIn = async (event: any) => {
-    // event.preventDefault();
+  const signIn = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
@@ -26,7 +25,6 @@ function SignIn() {
     } catch (error) {
       setFailLogin(true);
       console.error(error);
-      // console.log('에러');
     }
   };
   const chageAlertStateHandle = () => {

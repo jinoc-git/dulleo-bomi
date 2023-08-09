@@ -11,6 +11,7 @@ export const CourseBox = styled.div`
   padding: 20px;
   border: solid 1px #ddd;
   border-radius: 15px;
+  cursor: pointer;
 `;
 export const CourseName = styled.h4`
   margin-bottom: 15px;
