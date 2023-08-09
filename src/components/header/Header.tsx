@@ -18,9 +18,6 @@ const Header = () => {
               <img src={logoColor} />{' '}
             </Link>
           </St.Logo>
-          <St.SearchBox>
-            <SearchForm />
-          </St.SearchBox>
           <St.UserBtnBox>
             <Button>로그인</Button>
             <Button>회원가입</Button>

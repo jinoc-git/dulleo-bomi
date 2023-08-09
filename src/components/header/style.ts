@@ -13,13 +13,4 @@ export const Logo = styled.h1`
   }
 `;
 
-export const SearchBox = styled.div`
-  display: flex;
-  width: 40%;
-  label {
-    display: none;
-  }
-`;
-
 export const UserBtnBox = styled.div``;
-

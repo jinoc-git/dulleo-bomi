@@ -20,7 +20,12 @@ const CommentForm = () => {
   const [comment, setComment] = useState<string>('');
 
   const queryClient = useQueryClient();
-  const addMutation = useMutation<void, AxiosError, CommentType, { prevComments: CommentType[] | undefined }>(addComment, {
+  const addMutation = useMutation<
+    void,
+    AxiosError,
+    CommentType,
+    { prevComments: CommentType[] | undefined }
+  >(addComment, {
     onMutate: async (newComment: CommentType) => {
       await queryClient.cancelQueries(['comments', crsId as string]);
       const prevComments = queryClient.getQueryData<CommentType[]>(['comments', crsId as string]);
@@ -47,6 +52,7 @@ const CommentForm = () => {
       id: nanoid(),
       crsId: crsId as string,
       writerNikName: '가나다라마바',
+
       content: comment,
       time: '1',
     };
