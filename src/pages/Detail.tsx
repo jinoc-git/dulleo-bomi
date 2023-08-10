@@ -4,6 +4,7 @@ import CommentForm from '../components/commentForm/CommentForm';
 import CommentList from '../components/commentList/CommentList';
 
 const Detail = () => {
+  // 
   return (
     <main>
       <Layout>
