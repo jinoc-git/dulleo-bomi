@@ -22,7 +22,13 @@ const MyComments = () => {
       <h3>내 댓글 목록</h3>
       <St.CommentsBox>
         {data.map((comment) => {
-          return <CommentItem key={comment.id} comment={comment} />;
+          // return <CommentItem key={comment.id} comment={comment} />;
+          return (
+            <div key={comment.id}>
+              <p>{comment.writerNikName}</p>
+              <p>{comment.content}</p>
+            </div>
+          );
         })}
       </St.CommentsBox>
     </St.CommentsContaine>
