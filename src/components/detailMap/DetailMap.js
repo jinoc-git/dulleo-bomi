@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import * as St from './style';
 import { Map, Polyline } from 'react-kakao-maps-sdk';
 import axios from 'axios';
-// import { Course } from '../../api/course';
+import { Course } from '../../api/course';
 
 const DetailMap = () => {
   const GPX_URL = `https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx`;
@@ -10,7 +10,7 @@ const DetailMap = () => {
 
   useEffect(() => {
     const fetchGPX = async () => {
-      const res = await axios.get(`https://florentine-rustic-open.glitch.me/gpx?data=${GPX_URL}`);
+      const res = await axios.get(`http://localhost:5000/gpx?data=${GPX_URL}`);
       console.log(res);
 
       // fetch(GPX_URL)
