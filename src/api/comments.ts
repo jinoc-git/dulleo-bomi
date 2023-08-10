@@ -9,8 +9,14 @@ export const getComments = async ({ queryKey }: { queryKey: string[] }) => {
   return res.data;
 };
 
+export const getMyComments = async ({ queryKey }: { queryKey: string[] }) => {
+  const [_, writerNikName] = queryKey;
+  const res = await axios.get<CommentType[]>(`${COMMENT_URL}?writerNikName=${writerNikName}`);
+  return res.data;
+};
+
 export const addComment = async (newComment: CommentType) => {
-  await axios.post(`${COMMENT_URL}`, newComment)
+  await axios.post(`${COMMENT_URL}`, newComment);
 };
 
 export const modifyComment = async () => {

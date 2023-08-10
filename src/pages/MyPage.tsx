@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from 'styled-components';
 import Layout from '../components/common/layout/Layout';
 import MyProfile from '../components/myProfile/MyProfile';
+import MyComments from '../components/myComments/MyComments';
 
 const MyPage = () => {
   return (
@@ -9,7 +10,7 @@ const MyPage = () => {
       <MyProfile />
       <ListSection>
         <ListBox>내가 좋아요 한 코스</ListBox>
-        <ListBox>내가 쓴 댓글 목록</ListBox>
+        <MyComments />
       </ListSection>
     </Layout>
   );
