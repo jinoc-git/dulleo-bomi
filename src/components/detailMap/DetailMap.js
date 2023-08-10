@@ -3,52 +3,24 @@ import * as St from './style';
 import { Map, Polyline } from 'react-kakao-maps-sdk';
 import axios from 'axios';
 import { Course } from '../../api/course';
-import GpxParser from 'gpx-parser-ts';
-import { GpxJson } from 'gpx-parser-ts/dist/types';
 
 const DetailMap = () => {
-  // gpx parser ------------
-  // var gpx = new GpxParser(); //Create gpxParser Object
-  // gpx.parse(
-  //   'https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx',
-  // ); //parse gpx file from string data
-  // console.log(gpx);
-
-  //reat-xml-parser
-  // var totalDistance = gpx.tracks[0].distance.total;
-  // console.log(totalDistance);
-  // let geoJSON = gpx.toGeoJSON();
-  // const gpxData = "https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx"
-  // const positions = gpxData.tracks[0].points.map(p => [p.lat, p.lon]);
-
-  // *************
-  const GPX_URL = `https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/course/summap/T_CRS_MNG0000005117.gpx`;
-  // const GPX_URL = `https://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=2YtHi8ygqeURYZcYTMSNqcdp3D3Iam1oNLodmvo1hj0cLZ9xzqkmaCET1SBnOe/6Ut8YvVoKG8pH55oINUR7tw==&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json`;
-
+  const GPX_URL = `https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx`;
   console.log(GPX_URL);
-  // useEffect(() => {
-  //   const fetchGPX = async () => {
-  //     // const parser: GpxParser = new GpxParser();
-  //     // const gpxJson: GpxJson = await parser.parse(GPX_URL);
-  //     // const response = await axios.get(GPX_URL);
-  //     // console.log(response);
-  //     // return response;
-  //     // console.log(gpxJson);
 
-  //     fetch(GPX_URL)
-  //       .then((response) => response.text())
-  //       .then((response) => {
-  //         console.log(response);
-  //       });
-  //   };
-  //   fetchGPX();
-  // }, []);
+  useEffect(() => {
+    const fetchGPX = async () => {
+      const res = await axios.get(`http://localhost:5000/gpx?data=${GPX_URL}`);
+      console.log(res);
 
-  // 블로그 ----------
-  // var xml = new XMLParser().parseFromString(`
-  //   https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/course/summap/T_CRS_MNG0000005117.gpx`); // Assume xmlText contains the example XML
-  // console.log(xml);
-  // console.log(xml.getElementsByTagName('Name'));
+      // fetch(GPX_URL)
+      //   .then((response) => response.text())
+      //   .then((response) => {
+      //     console.log(response);
+      //   });
+    };
+    fetchGPX();
+  }, []);
 
   return (
     <Map
