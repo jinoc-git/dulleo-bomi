@@ -9,14 +9,20 @@ export const getComments = async ({ queryKey }: { queryKey: string[] }) => {
   return res.data;
 };
 
+export const getMyComments = async ({ queryKey }: { queryKey: string[] }) => {
+  const [_, writerEmail] = queryKey;
+  const res = await axios.get<CommentType[]>(`${COMMENT_URL}?writerEmail=${writerEmail}`);
+  return res.data;
+};
+
 export const addComment = async (newComment: CommentType) => {
-  await axios.post(`${COMMENT_URL}`, newComment)
+  await axios.post(`${COMMENT_URL}`, newComment);
 };
 
-export const modifyComment = async () => {
-  // axios.patch
+export const modifyComment = async (commentId: string, updatedComment: CommentType) => {
+  await axios.patch(`${COMMENT_URL}/${commentId}`, updatedComment);
 };
 
-export const deleteComment = async () => {
-  // axios.delete
+export const deleteComment = async (commentId: string) => {
+  await axios.delete(`${COMMENT_URL}/${commentId}`);
 };

@@ -1,15 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
 import { styled } from 'styled-components';
 import Layout from '../components/common/layout/Layout';
 import MyProfile from '../components/myProfile/MyProfile';
+import MyComments from '../components/myComments/MyComments';
 
 const MyPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert('로그인이 필요합니다.');
+        navigate('/signin');
+      }
+    });
+  }, [navigate]);
+
   return (
     <Layout>
+      <h2>마이 페이지</h2>
       <MyProfile />
       <ListSection>
         <ListBox>내가 좋아요 한 코스</ListBox>
-        <ListBox>내가 쓴 댓글 목록</ListBox>
+        <MyComments />
       </ListSection>
     </Layout>
   );
