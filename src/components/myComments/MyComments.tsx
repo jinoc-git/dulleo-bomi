@@ -6,12 +6,9 @@ import CommentItem from '../commentItem/CommentItem';
 
 const MyComments = () => {
   const { user } = useUserStore();
-  const writerNikName = user?.displayName;
+  const writerEmail = user?.email;
 
-  const { data, isError, isLoading } = useQuery(
-    ['comments', writerNikName as string],
-    getMyComments,
-  );
+  const { data, isError, isLoading } = useQuery(['comments', writerEmail as string], getMyComments);
 
   if (isLoading || !data) {
     return <St.CommentsContaine>로딩중...</St.CommentsContaine>;

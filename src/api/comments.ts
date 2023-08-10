@@ -10,8 +10,8 @@ export const getComments = async ({ queryKey }: { queryKey: string[] }) => {
 };
 
 export const getMyComments = async ({ queryKey }: { queryKey: string[] }) => {
-  const [_, writerNikName] = queryKey;
-  const res = await axios.get<CommentType[]>(`${COMMENT_URL}?writerNikName=${writerNikName}`);
+  const [_, writerEmail] = queryKey;
+  const res = await axios.get<CommentType[]>(`${COMMENT_URL}?writerEmail=${writerEmail}`);
   return res.data;
 };
 
