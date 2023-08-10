@@ -12,6 +12,8 @@ export type CommentType = {
   id: string;
   crsId: string;
   writerNikName: string;
+  writerEmail: string;
+  writerPhotoURL: string;
   content: string;
   timestamp: number;
 };
@@ -55,6 +57,8 @@ const CommentForm = () => {
       id: nanoid(),
       crsId: crsId as string,
       writerNikName: user?.displayName || '익명',
+      writerEmail: user?.email || '',
+      writerPhotoURL: user?.photoURL || '',
       content: comment,
       timestamp: Date.now(),
     };

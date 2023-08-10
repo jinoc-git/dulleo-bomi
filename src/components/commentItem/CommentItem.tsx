@@ -1,5 +1,5 @@
 import { MoreOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Menu } from 'antd';
+import { Avatar, Button, Form, Input, Menu } from 'antd';
 import { useState } from 'react';
 import { useUserStore } from '../../zustand/UserStore';
 import { CommentType } from '../commentForm/CommentForm';
@@ -15,7 +15,7 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
   const [isEditing, setIsEditing] = useState(false);
 
   const { user } = useUserStore();
-  const isCommentAuthor = comment.writerNikName === user?.displayName;
+  const isCommentAuthor = comment.writerEmail === user?.email;
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -48,7 +48,10 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
   return (
     <St.CommentItemContainer>
       <St.CommentItemsHeader>
-        <St.CommentWriterName>{comment.writerNikName}</St.CommentWriterName>
+        <St.CommentProfileSection>
+          <Avatar src={comment.writerPhotoURL} />
+          <St.CommentWriterName>{comment.writerNikName}</St.CommentWriterName>
+        </St.CommentProfileSection>
         {isCommentAuthor && (
           <St.Dropdown overlay={dropdownMenu} trigger={['click']} placement="bottomRight">
             <Button icon={<MoreOutlined />} />

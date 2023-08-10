@@ -21,8 +21,16 @@ export const CommentItemsHeader = styled.div`
   width: 100%;
 `;
 
+export const CommentProfileSection = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const CommentWriterName = styled.p`
   font-size: 1rem;
+  font-weight: bold;
 `;
 
 export const CommentTime = styled.p`
