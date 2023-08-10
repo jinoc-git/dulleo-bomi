@@ -22,9 +22,9 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
   };
 
   const handleSubmit = (values: { edited: string }) => {
-    setIsEditing(false);
     const updatedComment = { ...comment, content: values.edited };
     onEditComment(comment.id, updatedComment);
+    setIsEditing(false);
   };
 
   const handleDelete = () => {
@@ -62,7 +62,14 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
         <St.CommentContent>
           <Form initialValues={{ edited: comment.content }} onFinish={handleSubmit}>
             <Form.Item name="edited">
-              <Input autoFocus onBlur={() => setIsEditing(false)} />
+              <Input
+                autoFocus
+                onBlur={() => {
+                  setTimeout(() => {
+                    setIsEditing(false);
+                  }, 100);
+                }}
+              />
             </Form.Item>
             <Button htmlType="submit">수정 완료</Button>
           </Form>
