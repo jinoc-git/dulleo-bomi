@@ -24,3 +24,4 @@ export const BannerParagraph = styled.p`
   line-height: 1.8;
   text-align: right;
 `;
+

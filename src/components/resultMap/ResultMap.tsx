@@ -9,7 +9,7 @@ const ResultMap = () => {
   console.log(GPX_URL);
 
   const fetchGPX = async () => {
-    const res = await axios.get(`http://localhost:5000/gpx?data=${GPX_URL}`);
+    const res = await axios.get(`https://florentine-rustic-open.glitch.me/gpx?data=${GPX_URL}`);
 
     // const parser: GpxParser = new GpxParser();
     // const gpxJson: GpxJson = await parser.parse(GPX_URL);

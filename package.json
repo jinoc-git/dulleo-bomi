@@ -14,7 +14,6 @@
     "antd": "^5.8.2",
     "axios": "^1.4.0",
     "firebase": "^10.1.0",
-    "gpxparser": "^3.0.8",
     "json-server": "^0.17.3",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",

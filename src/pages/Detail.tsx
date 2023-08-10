@@ -5,6 +5,7 @@ import CommentList from '../components/commentList/CommentList';
 import DetailInfo from '../components/detailInfo/DetailInfo';
 
 const Detail = () => {
+  // 
   return (
     <main>
       <Layout>
