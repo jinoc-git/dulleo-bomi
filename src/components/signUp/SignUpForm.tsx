@@ -6,7 +6,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db, storage } from '../../firebase/firebaseConfig';
-import * as St from './style'
+import * as St from './style';
 
 type SignUpFormData = {
   profileImage: File[];
@@ -60,7 +60,7 @@ const SignUpForm = (): ReactElement => {
 
       message.success('회원가입이 성공적으로 처리되었습니다');
       setError(null);
-      navigate('/');
+      navigate('/signin');
     } catch (err) {
       if (err instanceof FirebaseError) {
         if (err.code === 'auth/email-already-in-use') {
