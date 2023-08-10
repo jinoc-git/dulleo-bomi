@@ -49,7 +49,7 @@ const CourseResult = () => {
   });
 
   const goToDetail = useCallback((id: string) => {
-    navigate(`/detail/${id}`, { state: { id: id, course: crsKorNm } });
+    navigate(`/detail/${id}`);
   }, []);
 
   useEffect(() => {}, []);

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import * as St from './style';
-import { Course } from '../../api/course';
 import axios from 'axios';
+import { Course } from '../../@types/course/courseType';
 
 const DetailInfo = () => {
   const param = useParams();
@@ -20,19 +20,19 @@ const DetailInfo = () => {
       <div>
         <ul>
           <li>
-            <span></span>{' '}
+            <span></span>
           </li>
           <li>
-            <span></span>{' '}
+            <span></span>
           </li>
           <li>
-            <span></span>{' '}
+            <span></span>
           </li>
           <li>
-            <span></span>{' '}
+            <span></span>
           </li>
           <li>
-            <span></span>{' '}
+            <span></span>
           </li>
         </ul>
       </div>

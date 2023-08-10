@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as St from './style';
 import { Map, Polyline } from 'react-kakao-maps-sdk';
-import GpxParser from 'gpxparser';
+import axios from 'axios';
+// import { Course } from '../../api/course';
+import GpxParser from 'gpx-parser-ts';
+import { GpxJson } from 'gpx-parser-ts/dist/types';
 
 const DetailMap = () => {
-  var gpx = new GpxParser(); //Create gpxParser Object
-  gpx.parse(
-    'https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx',
-  ); //parse gpx file from string data
-  console.log(gpx);
+  const GPX_URL = `https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx`;
+  console.log(GPX_URL);
 
-  // var totalDistance = gpx.tracks[0].distance.total;
-  // console.log(totalDistance);
-  // let geoJSON = gpx.toGeoJSON();
-  // const gpxData = "https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx"
-  // const positions = gpxData.tracks[0].points.map(p => [p.lat, p.lon]);
+  useEffect(() => {
+    const fetchGPX = async () => {
+      const res = await axios.get(`http://localhost:5000/gpx?data=${GPX_URL}`);
+      console.log(res);
+
+      // fetch(GPX_URL)
+      //   .then((response) => response.text())
+      //   .then((response) => {
+      //     console.log(response);
+      //   });
+    };
+    fetchGPX();
+  }, []);
+
   return (
     <Map
       // 지도를 표시할 Container
