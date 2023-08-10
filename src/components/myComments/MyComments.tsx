@@ -1,11 +1,13 @@
-import React from 'react';
-import * as St from './style';
-import CommentItem from '../commentItem/CommentItem';
 import { useQuery } from '@tanstack/react-query';
 import { getMyComments } from '../../api/comments';
+import { useUserStore } from '../../zustand/UserStore';
+import * as St from './style';
+import CommentItem from '../commentItem/CommentItem';
 
 const MyComments = () => {
-  const writerNikName = '가나다라마바';
+  const { user } = useUserStore();
+  const writerNikName = user?.displayName;
+
   const { data, isError, isLoading } = useQuery(
     ['comments', writerNikName as string],
     getMyComments,
@@ -18,11 +20,9 @@ const MyComments = () => {
     return <St.CommentsContaine>오류가 생겼습니다.</St.CommentsContaine>;
   }
 
-  console.log(data);
-
   return (
     <St.CommentsContaine>
-      <St.CommentsTitle>내 댓글 목록</St.CommentsTitle>
+      <h3>내 댓글 목록</h3>
       <St.CommentsBox>
         {data.map((comment) => {
           return <CommentItem key={comment.id} comment={comment} />;

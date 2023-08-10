@@ -11,10 +11,6 @@ export const CommentsContaine = styled.div`
   background-color: #9acdde;
 `;
 
-export const CommentsTitle = styled.h3`
-  font-size: larger;
-`;
-
 export const CommentsBox = styled.div`
   padding: 20px;
   overflow: auto;
