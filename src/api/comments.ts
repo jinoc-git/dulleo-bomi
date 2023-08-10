@@ -9,6 +9,12 @@ export const getComments = async ({ queryKey }: { queryKey: string[] }) => {
   return res.data;
 };
 
+export const getMyComments = async ({ queryKey }: { queryKey: string[] }) => {
+  const [_, writerEmail] = queryKey;
+  const res = await axios.get<CommentType[]>(`${COMMENT_URL}?writerEmail=${writerEmail}`);
+  return res.data;
+};
+
 export const addComment = async (newComment: CommentType) => {
   await axios.post(`${COMMENT_URL}`, newComment);
 };
