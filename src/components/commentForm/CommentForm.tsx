@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
-import * as St from './style';
-import { Button, Input } from 'antd';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addComment } from '../../api/comments';
+import { Button, Input } from 'antd';
 import { AxiosError } from 'axios';
-import { useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { addComment } from '../../api/comments';
+import { useUserStore } from '../../zustand/UserStore';
+import * as St from './style';
 
 export type CommentType = {
   id: string;
   crsId: string;
   writerNikName: string;
+  writerEmail: string;
+  writerPhotoURL: string;
   content: string;
-  time: string;
+  timestamp: number;
 };
 
 const CommentForm = () => {
   const { id: crsId } = useParams();
   const [comment, setComment] = useState<string>('');
+
+  const { user } = useUserStore();
 
   const queryClient = useQueryClient();
   const addMutation = useMutation<
@@ -51,10 +56,11 @@ const CommentForm = () => {
     const newComment: CommentType = {
       id: nanoid(),
       crsId: crsId as string,
-      writerNikName: '가나다라마바',
-      
+      writerNikName: user?.displayName || '익명',
+      writerEmail: user?.email || '',
+      writerPhotoURL: user?.photoURL || '',
       content: comment,
-      time: '1',
+      timestamp: Date.now(),
     };
 
     addMutation.mutate(newComment);
