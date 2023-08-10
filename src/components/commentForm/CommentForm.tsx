@@ -52,7 +52,7 @@ const CommentForm = () => {
       id: nanoid(),
       crsId: crsId as string,
       writerNikName: '가나다라마바',
-      
+
       content: comment,
       time: '1',
     };

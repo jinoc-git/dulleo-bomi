@@ -11,7 +11,6 @@ export const fetchCouseList = async ({
   pageParam: number;
 }): Promise<Course> => {
   const crsKorNm = encodeURI(roadName);
-
   const response = await axios.get<ResponseCourseList>(
     `${COURSE_URL}&pageNo=${pageParam}&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${crsKorNm}`,
   );
