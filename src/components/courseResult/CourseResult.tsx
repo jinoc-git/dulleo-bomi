@@ -1,35 +1,58 @@
-import axios from 'axios';
-import { useEffect, useState, useCallback } from 'react';
+import axios, { AxiosDefaults } from 'axios';
+import { useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Course, CourseList } from '../../api/course';
+import { Course, CourseDataResult } from '../../@types/course/courseType';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchCouseList } from '../../api/course';
+import { useInView } from 'react-intersection-observer';
 
 const CourseResult = () => {
-  const [data, setData] = useState<Course[]>([]);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const crsKorNm = encodeURI(state.roadName);
 
-  const COURSE_URL = `https://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=30&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${crsKorNm}`;
+  const queryClient = useQueryClient();
 
-  const fetchData = async (): Promise<Course[]> => {
-    const response = await axios.get<CourseList>(COURSE_URL);
-    const responseData = response.data.response.body.items.item;
-    setData(responseData);
-    console.log(responseData);
-    return responseData;
-  };
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
+    Course,
+    AxiosDefaults,
+    CourseDataResult,
+    string[]
+  >(
+    ['course', state.roadName],
+    ({ pageParam = 1 }) => fetchCouseList({ roadName: state.roadName, pageParam }),
+    {
+      getNextPageParam: (lastPage) => {
+        const allPages =
+          lastPage.totalCount % 20 !== 0
+            ? Math.floor(lastPage.totalCount / 20) + 1
+            : lastPage.totalCount / 20;
+        if (lastPage.pageNo < allPages) {
+          return lastPage.pageNo + 1;
+        }
+      },
+      select: (data) => {
+        const result = data.pages.map((item) => item.items.item).flat();
+        return { pages: result, pageParams: data.pageParams };
+      },
+    },
+  );
+
+  const { ref } = useInView({
+    threshold: 0.2,
+    onChange: (inView) => {
+      if (!inView || !hasNextPage || isFetchingNextPage) return;
+      fetchNextPage();
+    },
+  });
 
   const goToDetail = useCallback((id: string) => {
     navigate(`/detail/${id}`);
   }, []);
 
-  useEffect(() => {
-    fetchData();
-    console.log(data);
-  }, []);
+  useEffect(() => {}, []);
 
   if (!data) {
     return <div>데이터가 존재하지 않습니다.</div>;
@@ -39,7 +62,7 @@ const CourseResult = () => {
     <Layout>
       <St.PageTitleH2>{state.roadName} 코스 추천</St.PageTitleH2>
       <St.CourseListContainer>
-        {data.map((item) => {
+        {data.pages.map((item) => {
           return (
             <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsIdx)}>
               <St.CourseName>
@@ -57,6 +80,7 @@ const CourseResult = () => {
             </St.CourseBox>
           );
         })}
+        <div ref={ref}></div>
       </St.CourseListContainer>
     </Layout>
   );
