@@ -4,17 +4,17 @@ import CommentForm from '../components/commentForm/CommentForm';
 import CommentList from '../components/commentList/CommentList';
 import DetailInfo from '../components/detailInfo/DetailInfo';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 
-const Detail = () => {
+const Detail = ({}) => {
   const { state } = useLocation();
   console.log('=================세부 디테일 페이지 state', state);
+  console.log('=================세부 디테일 페이지 state', state.item.gpxpath);
 
   return (
     <main>
       <Layout>
-        <DetailInfo />
-        <DetailMap />
+        <DetailInfo state={state} />
+        <DetailMap path={state.item.gpxpath} />
         <CommentForm />
         <CommentList />
       </Layout>

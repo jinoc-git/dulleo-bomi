@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import * as St from './style';
 
 const Banner = () => {
