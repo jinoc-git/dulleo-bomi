@@ -1,12 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import { southRoad, westRoad, eastRoad } from '../../assets';
 import { useNavigate } from 'react-router-dom';
+import { eastRoad, southRoad, westRoad } from '../../assets';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
-import { useQueryClient } from '@tanstack/react-query';
-import { Course, CourseDataResult } from '../../@types/course/courseType';
-import { AxiosError } from 'axios';
-import { fetchCourseList } from '../../api/course';
 
 const RoadList = () => {
   const navigate = useNavigate();
