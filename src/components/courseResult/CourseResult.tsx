@@ -1,11 +1,11 @@
-import React, { useEffect, useCallback } from 'react';
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../common/layout/Layout';
-import * as St from './style';
-import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
 import { CourseDataResult } from '../../@types/course/courseType';
+import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
+import Layout from '../common/layout/Layout';
+import TopButton from '../common/topButton/TopButton';
+import * as St from './style';
 
 type CourseResultProps = {
   searchKeyword?: string;
@@ -58,6 +58,7 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
           })}
         <div ref={ref}></div>
       </St.CourseListContainer>
+      <TopButton />
     </Layout>
   );
 };

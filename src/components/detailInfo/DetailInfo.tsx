@@ -2,6 +2,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import * as St from './style';
 import axios from 'axios';
 import { Course } from '../../@types/course/courseType';
+import Like from '../like/Like';
 
 const DetailInfo = ({ state }: { state: Course }) => {
   const param = useParams();
@@ -16,6 +17,7 @@ const DetailInfo = ({ state }: { state: Course }) => {
 
   return (
     <div>
+      <Like />
       <div>XX 코스 | 좋아요 수</div>
       <div>
         <ul>

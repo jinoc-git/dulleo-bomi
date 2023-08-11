@@ -35,5 +35,15 @@
     {
       "id": 6
     }
+  ],
+  "likes": [
+    {
+      "id": "T_CRS_MNG0000005298",
+      "userList": []
+    },
+    {
+      "id": "T_CRS_MNG0000005310",
+      "userList": []
+    }
   ]
 }
