@@ -1,23 +1,21 @@
-import axios, { AxiosError } from 'axios';
 import React, { useEffect, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Course, CourseDataResult } from '../../@types/course/courseType';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
+import { CourseDataResult } from '../../@types/course/courseType';
 
 type CourseResultProps = {
   searchKeyword?: string;
+  roadName: string;
 };
 
-const CourseResult = ({ searchKeyword }: CourseResultProps) => {
+const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   const navigate = useNavigate();
-  const { state } = useLocation();
 
-  const queryClient = useQueryClient();
-  const [courseList, ref] = useInfiniteGetCourse(state.roadName);
+  const [courseList, ref] = useInfiniteGetCourse(roadName);
 
   // 데이터 저장?
   // const mutation = useMutation(addCourse, {
@@ -36,7 +34,9 @@ const CourseResult = ({ searchKeyword }: CourseResultProps) => {
 
   return (
     <Layout>
-      <St.PageTitleH2>{state.roadName} 코스 추천</St.PageTitleH2>
+      <St.PageTitleH2>
+        {searchKeyword ? `${roadName} ${searchKeyword}` : roadName} 코스 추천
+      </St.PageTitleH2>
       <St.CourseListContainer>
         {courseList
           .filter((item) => {
@@ -67,4 +67,4 @@ const CourseResult = ({ searchKeyword }: CourseResultProps) => {
   );
 };
 
-export default React.memo(CourseResult);
+export default CourseResult;

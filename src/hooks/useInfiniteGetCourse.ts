@@ -14,7 +14,7 @@ const useInfiniteGetCourse = (
     CourseDataResult,
     string[]
   >(
-    ['course', roadName],
+    ['infiniteCourse', roadName],
     ({ pageParam = 1 }) => fetchCourseList({ roadName: roadName, pageParam }),
     {
       getNextPageParam: (lastPage) => {

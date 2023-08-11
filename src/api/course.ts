@@ -14,7 +14,7 @@ export const fetchCourseList = async ({
   const response = await axios.get<ResponseCourseList>(
     `${COURSE_URL}&pageNo=${pageParam}&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${crsKorNm}`,
   );
-
+  console.log(response)
   const responseData = response.data.response.body;
   return responseData;
 };
