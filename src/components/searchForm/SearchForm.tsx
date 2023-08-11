@@ -1,15 +1,16 @@
 import React, { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as St from './style';
 import { Button, Input, Space, Select } from 'antd';
 
 type SearchFormProps = {
   setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
+  setSelectKeyword: React.Dispatch<React.SetStateAction<string>>;
+  roadName: string;
 };
 
-const SearchForm = ({ setSearchKeyword }: SearchFormProps) => {
+const SearchForm = ({ setSearchKeyword, setSelectKeyword, roadName }: SearchFormProps) => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const navigate = useNavigate();
+  const [selectedValue, setSelectedValue] = useState<string>('');
 
   const options = [
     {
@@ -29,26 +30,34 @@ const SearchForm = ({ setSearchKeyword }: SearchFormProps) => {
   const onSubmitSearchHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (searchValue.length < 2) return;
       setSearchKeyword(searchValue);
+      setSelectKeyword(selectedValue);
       setSearchValue('');
     },
-    [searchValue],
+    [searchValue, selectedValue],
   );
 
   return (
     <St.SearchFormContainer onSubmit={onSubmitSearchHandler}>
-      <label htmlFor="search">검색</label>
       <Space.Compact>
-        <Select defaultValue={''} />
-      <Input
-        id="search"
-        type="text"
-        value={searchValue}
-        onChange={({ target }) => setSearchValue(target.value)}
-      />
+        <Select
+          defaultValue={roadName}
+          options={options}
+          size="large"
+          onSelect={(value) => setSelectedValue(value)}
+        />
+        <Input
+          id="search"
+          type="text"
+          value={searchValue}
+          onChange={({ target }) => setSearchValue(target.value)}
+          size="large"
+          placeholder="지역을 입력해 주세요"
+        />
+        <Button htmlType="submit" size="large">
+          검색버튼
+        </Button>
       </Space.Compact>
-      <Button htmlType="submit">검색버튼</Button>
     </St.SearchFormContainer>
   );
 };
