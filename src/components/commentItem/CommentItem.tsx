@@ -1,8 +1,10 @@
 import { MoreOutlined } from '@ant-design/icons';
 import { Avatar, Button, Form, Input, Menu } from 'antd';
 import { useState } from 'react';
+import { useDialogStore } from '../../zustand/DialogStore';
 import { useUserStore } from '../../zustand/UserStore';
 import { CommentType } from '../commentForm/CommentForm';
+import CustomConfirm from '../common/customConfirm/CustomConfirm';
 import * as St from './style';
 
 type CommentItemType = {
@@ -16,6 +18,7 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
 
   const { user } = useUserStore();
   const isCommentAuthor = comment.writerEmail === user?.email;
+  const showConfirm = useDialogStore((state) => state.showConfirm);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -28,10 +31,7 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
   };
 
   const handleDelete = () => {
-    const isConfirm = window.confirm('정말 삭제하시겠습니까?');
-    if (isConfirm) {
-      return onDeleteComment(comment.id);
-    }
+    showConfirm('정말 삭제하시겠습니까?', () => onDeleteComment(comment.id));
   };
 
   const dropdownMenu = (
@@ -62,14 +62,7 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
         <St.CommentContent>
           <Form initialValues={{ edited: comment.content }} onFinish={handleSubmit}>
             <Form.Item name="edited">
-              <Input
-                autoFocus
-                onBlur={() => {
-                  setTimeout(() => {
-                    setIsEditing(false);
-                  }, 100);
-                }}
-              />
+              <Input />
             </Form.Item>
             <Button htmlType="submit">수정 완료</Button>
           </Form>
@@ -80,6 +73,7 @@ const CommentItem = ({ comment, onDeleteComment, onEditComment }: CommentItemTyp
           <St.CommentTime>{new Date(comment.timestamp).toLocaleString()}</St.CommentTime>
         </>
       )}
+      <CustomConfirm />
     </St.CommentItemContainer>
   );
 };
