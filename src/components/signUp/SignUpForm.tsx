@@ -1,4 +1,4 @@
-import { Form, FormInstance, Input, message } from 'antd';
+import { Form, FormInstance, Input, message, Spin } from 'antd';
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
@@ -6,6 +6,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db, storage } from '../../firebase/firebaseConfig';
+import { UserInfo, useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
 
 type SignUpFormData = {
@@ -21,46 +22,47 @@ const SignUpForm = (): ReactElement => {
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const onSubmit = async (values: unknown) => {
+    setIsLoading(true);
     const data = values as SignUpFormData;
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
       const { user } = userCredential;
 
       if (user) {
-        const userData = {
-          uid: user.uid,
-          email: data.email,
-          displayName: data.nickname,
-          photoURL: '',
-        };
-
+        let photoURL = '';
         if (selectedFile) {
           const filePath = `profiles/${user.uid}/profile_picture`;
           const imageRef = ref(storage, filePath);
           const file = selectedFile;
 
           await uploadBytes(imageRef, file);
-          const downloadURL = await getDownloadURL(imageRef);
-
-          await updateProfile(user, {
-            displayName: data.nickname,
-            photoURL: downloadURL,
-          });
-
-          userData.photoURL = downloadURL; // 이미지 다운로드 URL을 데이터에 추가
+          photoURL = await getDownloadURL(imageRef);
         }
 
-        // 파이어스토어 'users' 컬렉션에 데이터 추가
-        await addDoc(collection(db, 'users'), userData);
-      }
+        await updateProfile(user, {
+          displayName: data.nickname,
+          photoURL: photoURL,
+        });
 
-      message.success('회원가입이 성공적으로 처리되었습니다');
-      setError(null);
-      navigate('/signin');
+        const userInfo: UserInfo = {
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          email: user.email,
+        };
+
+        await addDoc(collection(db, 'users'), userInfo);
+        useUserStore.getState().refreshUserInfo(userInfo);
+
+        message.success('회원가입이 성공적으로 처리되었습니다');
+        setError(null);
+        navigate('/');
+      }
     } catch (err) {
       if (err instanceof FirebaseError) {
         if (err.code === 'auth/email-already-in-use') {
@@ -70,6 +72,7 @@ const SignUpForm = (): ReactElement => {
         }
       } else {
         setError('회원가입에 실패했습니다. 다시 시도해 주세요.');
+        setIsLoading(false);
       }
     }
   };
@@ -189,6 +192,7 @@ const SignUpForm = (): ReactElement => {
         <St.ButtonContainer>
           <St.Button type="default" htmlType="submit">
             회원가입
+            {isLoading && <Spin style={{ marginLeft: '8px' }} />}
           </St.Button>
         </St.ButtonContainer>
         <St.NavigateToSignInContainer>

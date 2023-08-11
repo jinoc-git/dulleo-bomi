@@ -1,3 +1,4 @@
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 import React from 'react';
 import { useDialogStore } from '../../../zustand/DialogStore';
@@ -10,13 +11,21 @@ const CustomConfirm: React.FC = () => {
 
   return (
     <Modal
-      title="확인"
+      title={
+        <>
+          <ExclamationCircleOutlined style={{ color: 'orange', marginRight: 8 }} />
+          확인
+        </>
+      }
       visible={confirmVisible}
       onOk={() => {
         confirmCallback();
         hideConfirm();
       }}
       onCancel={hideConfirm}
+      okText="확인"
+      cancelText="취소"
+      closable={false}
     >
       <p>{confirmContent}</p>
     </Modal>
