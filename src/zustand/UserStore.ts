@@ -15,6 +15,7 @@ type UserState = {
   setupAuthObserver: () => () => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  refreshUserInfo: (userInfo: UserInfo) => void;
 };
 
 export const useUserStore = create<UserState>((set) => {
@@ -31,6 +32,10 @@ export const useUserStore = create<UserState>((set) => {
         set({ user: null, isLoggedIn: false });
       }
     });
+  };
+
+  const refreshUserInfo = (userInfo: UserInfo) => {
+    set({ user: userInfo, isLoggedIn: true });
   };
 
   const login = async (email: string, password: string) => {
@@ -52,5 +57,6 @@ export const useUserStore = create<UserState>((set) => {
     setupAuthObserver,
     login,
     logout,
+    refreshUserInfo,
   };
 });
