@@ -5,7 +5,7 @@ import { Course, CourseDataResult } from '../../@types/course/courseType';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
 
 type CourseResultProps = {
@@ -19,11 +19,16 @@ const CourseResult = ({ searchKeyword }: CourseResultProps) => {
   const queryClient = useQueryClient();
   const [courseList, ref] = useInfiniteGetCourse(state.roadName);
 
-  const goToDetail = useCallback((id: string) => {
-    navigate(`/detail/${id}`);
-  }, []);
+  // 데이터 저장?
+  // const mutation = useMutation(addCourse, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(['courseList']);
+  //   },
+  // });
 
-  useEffect(() => {}, []);
+  const goToDetail = useCallback((item: CourseDataResult) => {
+    navigate(`/detail/${item.crsIdx}`, { state: { item } });
+  }, []);
 
   if (!courseList) {
     return <div>데이터가 존재하지 않습니다.</div>;
@@ -40,7 +45,7 @@ const CourseResult = ({ searchKeyword }: CourseResultProps) => {
           })
           .map((item) => {
             return (
-              <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsIdx)}>
+              <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item)}>
                 <St.CourseName>
                   {item.crsKorNm} /
                   <St.CourseLike>

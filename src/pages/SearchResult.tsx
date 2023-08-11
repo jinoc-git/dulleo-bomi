@@ -6,15 +6,15 @@ import axios from 'axios';
 
 const SearchResult = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
-  
+
   // useEffect(() => {
   //   return setSearchKeyword('');
   // }, []);
-  
+
   return (
     <main>
       <SearchForm setSearchKeyword={setSearchKeyword} />
-      <div style={{ background: '#ddd', width: '100%', height: '300px' }}>지도영역</div>
+      <ResultMap />
       <CourseResult searchKeyword={searchKeyword} />
     </main>
   );

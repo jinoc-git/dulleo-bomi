@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Course, CourseDataResult } from '../@types/course/courseType';
 import { AxiosError } from 'axios';
-import { fetchCouseList } from '../api/course';
+import { fetchCourseList } from '../api/course';
 import { useInView } from 'react-intersection-observer';
 
 const useInfiniteGetCourse = (
@@ -15,7 +15,7 @@ const useInfiniteGetCourse = (
     string[]
   >(
     ['course', roadName],
-    ({ pageParam = 1 }) => fetchCouseList({ roadName: roadName, pageParam }),
+    ({ pageParam = 1 }) => fetchCourseList({ roadName: roadName, pageParam }),
     {
       getNextPageParam: (lastPage) => {
         const allPages =
