@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as St from './style';
 import axios from 'axios';
 import { Course } from '../../@types/course/courseType';

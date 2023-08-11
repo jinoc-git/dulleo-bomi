@@ -4,7 +4,6 @@ import ResultMap from '../components/resultMap/ResultMap';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Course } from '../@types/course/courseType';
 
 const SearchResult = () => {
   const { state } = useLocation();
