@@ -1,7 +1,7 @@
 import React from 'react';
 import * as St from './style';
 import Layout from '../common/layout/Layout';
-import { Map } from 'react-kakao-maps-sdk';
+import { Map, Polyline } from 'react-kakao-maps-sdk';
 import axios from 'axios';
 
 const ResultMap = () => {
@@ -10,20 +10,6 @@ const ResultMap = () => {
 
   const fetchGPX = async () => {
     const res = await axios.get(`https://florentine-rustic-open.glitch.me/gpx?data=${GPX_URL}`);
-
-    // const parser: GpxParser = new GpxParser();
-    // const gpxJson: GpxJson = await parser.parse(GPX_URL);
-    // const response = await axios.get(GPX_URL);
-    // console.log(response);
-    // return response;
-
-    // console.log(gpxJson);
-
-    fetch(GPX_URL)
-      .then((response) => response.text())
-      .then((response) => {
-        console.log(response);
-      });
   };
   fetchGPX();
 
