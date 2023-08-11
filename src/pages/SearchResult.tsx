@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { Course } from '../@types/course/courseType';
 
 const SearchResult = () => {
   const { state } = useLocation();
