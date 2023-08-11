@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ErrorPage from '../components/common/errorPage/ErrorPage';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Detail from '../pages/Detail';
@@ -12,7 +13,7 @@ import ScrollToTop from '../utils/ScrollToTop';
 const Router = () => {
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,6 +22,7 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/result" element={<SearchResult />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

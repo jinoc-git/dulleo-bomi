@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { deleteComment, getComments, modifyComment } from '../../api/comments';
 import { CommentType } from '../commentForm/CommentForm';
 import CommentItem from '../commentItem/CommentItem';
+import ErrorPage from '../common/errorPage/ErrorPage';
 import * as St from './style';
 
 const CommentList = () => {
@@ -47,7 +47,7 @@ const CommentList = () => {
   }
 
   if (isError && error) {
-    return <div>댓글 목록을 불러오는 중 오류가 발생했습니다: {(error as AxiosError).message}</div>;
+    return <ErrorPage />;
   }
 
   return (
