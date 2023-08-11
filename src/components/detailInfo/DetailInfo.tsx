@@ -5,12 +5,12 @@ import { Course } from '../../@types/course/courseType';
 
 const DetailInfo = () => {
   const param = useParams();
-  console.log(param.id);
+  // console.log(param.id);
   const COURSE_URL = `https://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=30&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&`;
 
   const fetchItem = async () => {
     const response = await axios.get<Course>(`${COURSE_URL}&crsId=${param.id}`);
-    console.log(response);
+    // console.log(response);
   };
   fetchItem();
 
