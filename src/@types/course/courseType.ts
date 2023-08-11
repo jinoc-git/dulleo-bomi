@@ -1,22 +1,22 @@
 export type CourseDataResult = {
-crsLevel: string;
+  crsLevel: string;
   crsCycle: string;
   crsContents: string;
   crsKorNm: string;
   createdtime: string;
   travelerinfo: string;
-  crsTournfo: string;
+  crsTourInfo: string;
   crsSummary: string;
   routeIdx: string;
   crsIdx: string;
   crsKorm: string;
   crsDstnc: string;
-  crsTotlqrmHour: string;
+  crsTotlRqrmHour: string;
   modifiedtime: string;
   sigun: string;
   brdDiv: string;
   gpxpath: string;
-}
+};
 
 export type Course = {
   items: {
@@ -33,11 +33,9 @@ export type ResponseCourseList = {
       resultCode: string;
       resultMsg: string;
     };
-    body: Course
+    body: Course;
   };
 };
-
-
 
 // type RoadItem = {
 //   routeIdx: string;

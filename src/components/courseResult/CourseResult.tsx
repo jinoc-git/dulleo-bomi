@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from '../common/layout/Layout';
 import * as St from './style';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
 import { CourseDataResult } from '../../@types/course/courseType';
 
@@ -16,13 +17,16 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
 
   const [courseList, ref] = useInfiniteGetCourse(roadName);
 
-  const goToDetail = useCallback((item: CourseDataResult) => {
-    navigate(`/detail/${item.crsIdx}`, {
-      state: { item },
-    });
-  }, []);
+  // 데이터 저장?
+  // const mutation = useMutation(addCourse, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(['courseList']);
+  //   },
+  // });
 
-  useEffect(() => {}, []);
+  const goToDetail = useCallback((item: CourseDataResult) => {
+    navigate(`/detail/${item.crsIdx}`, { state: { item } });
+  }, []);
 
   if (!courseList) {
     return <div>데이터가 존재하지 않습니다.</div>;

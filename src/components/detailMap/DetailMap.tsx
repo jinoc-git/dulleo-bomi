@@ -6,18 +6,12 @@ import axios from 'axios';
 
 const DetailMap = () => {
   const GPX_URL = `https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx`;
-  console.log(GPX_URL);
+  // console.log(typeof GPX_URL);
 
   useEffect(() => {
     const fetchGPX = async () => {
       const res = await axios.get(`https://florentine-rustic-open.glitch.me/gpx?data=${GPX_URL}`);
-      console.log(res);
-
-      // fetch(GPX_URL)
-      //   .then((response) => response.text())
-      //   .then((response) => {
-      //     console.log(response);
-      //   });
+      // console.log(res);
     };
     fetchGPX();
   }, []);
