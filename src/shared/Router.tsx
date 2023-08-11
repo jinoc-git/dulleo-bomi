@@ -12,7 +12,7 @@ import ScrollToTop from '../utils/ScrollToTop';
 const Router = () => {
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
