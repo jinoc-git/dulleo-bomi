@@ -1,3 +1,9 @@
+export type pathProps = {
+  // [key: string]: number | undefined;
+  lat: number;
+  lon: number;
+};
+
 export type CourseDataResult = {
   crsLevel: string;
   crsCycle: string;

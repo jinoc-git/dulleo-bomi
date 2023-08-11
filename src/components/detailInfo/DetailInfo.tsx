@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Course } from '../../@types/course/courseType';
 import Like from '../like/Like';
 
-const DetailInfo = () => {
+const DetailInfo = ({ state }: { state: Course }) => {
   const param = useParams();
   // console.log(param.id);
   const COURSE_URL = `https://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=30&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&`;
