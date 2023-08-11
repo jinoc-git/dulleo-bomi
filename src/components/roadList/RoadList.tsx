@@ -17,11 +17,10 @@ const RoadList = () => {
   const queryClient = useQueryClient();
 
   const prefetchInfiniteCourse = async (roadName: string) => {
-    console.log('prefetching');
-    // await queryClient.prefetchInfiniteQuery<Course, AxiosError, CourseDataResult, string[]>(
-    //   ['infiniteCourse', roadName],
-    //   ({ pageParam = 1, signal }) => fetchCouseList({ roadName: roadName, pageParam, signal }),
-    // );
+    await queryClient.prefetchInfiniteQuery<Course, AxiosError, CourseDataResult, string[]>(
+      ['infiniteCourse', roadName],
+      ({ pageParam = 1 }) => fetchCourseList({ roadName: roadName, pageParam }),
+    );
   };
 
   return (
@@ -30,17 +29,17 @@ const RoadList = () => {
         <St.RoadItem
           src={westRoad}
           onClick={() => goToSearchRouteList('서해랑길')}
-          // onMouseOver={() => prefetchInfiniteCourse('서해랑길')}
+          onMouseOver={() => prefetchInfiniteCourse('서해랑길')}
         />
         <St.RoadItem
           src={southRoad}
           onClick={() => goToSearchRouteList('남파랑길')}
-          // onMouseOver={() => prefetchInfiniteCourse('남파랑길')}
+          onMouseOver={() => prefetchInfiniteCourse('남파랑길')}
         />
         <St.RoadItem
           src={eastRoad}
           onClick={() => goToSearchRouteList('해파랑길')}
-          // onMouseOver={() => prefetchInfiniteCourse('해파랑길')}
+          onMouseOver={() => prefetchInfiniteCourse('해파랑길')}
         />
       </Layout>
     </St.RoadListContainer>
