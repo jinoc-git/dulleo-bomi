@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getMyComments } from '../../api/comments';
 import { useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
-import CommentItem from '../commentItem/CommentItem';
 
 const MyComments = () => {
   const { user } = useUserStore();
@@ -22,7 +21,6 @@ const MyComments = () => {
       <h3>내 댓글 목록</h3>
       <St.CommentsBox>
         {data.map((comment) => {
-          // return <CommentItem key={comment.id} comment={comment} />;
           return (
             <div key={comment.id}>
               <p>{comment.writerNikName}</p>
