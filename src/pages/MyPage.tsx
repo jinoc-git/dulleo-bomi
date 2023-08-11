@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
 import { styled } from 'styled-components';
+import { message } from 'antd';
 import Layout from '../components/common/layout/Layout';
 import MyProfile from '../components/myProfile/MyProfile';
 import MyComments from '../components/myComments/MyComments';
@@ -13,7 +14,7 @@ const MyPage = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        alert('로그인이 필요합니다.');
+        message.error('로그인이 필요합니다');
         navigate('/signin');
       }
     });
