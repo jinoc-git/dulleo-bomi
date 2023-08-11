@@ -24,7 +24,7 @@ const SearchResult = () => {
         setSelectKeyword={setSelectKeyword}
         roadName={state.roadName}
       />
-      <ResultMap />
+      <ResultMap roadName={state.roadName} />
       <CourseResult
         searchKeyword={searchKeyword}
         roadName={selectKeyword ? selectKeyword : state.roadName}
