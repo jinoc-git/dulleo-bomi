@@ -10,9 +10,7 @@ const useInfiniteGetCourse = (
 ): [CourseDataResult[], (node?: Element | null) => void] | [] => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
     Course,
-    AxiosError,
-    CourseDataResult,
-    string[]
+    AxiosError
   >(
     ['infiniteCourse', roadName],
     ({ pageParam = 1 }) => fetchCourseList({ roadName: roadName, pageParam }),
@@ -25,10 +23,6 @@ const useInfiniteGetCourse = (
         if (lastPage.pageNo < allPages) {
           return lastPage.pageNo + 1;
         }
-      },
-      select: (data) => {
-        const result = data.pages.map((item) => item.items.item).flat();
-        return { pages: result, pageParams: data.pageParams };
       },
     },
   );
@@ -45,7 +39,9 @@ const useInfiniteGetCourse = (
     return [[], ref];
   }
 
-  return [data.pages, ref];
+  const rourseList = data.pages.map((item) => item.items.item).flat();
+
+  return [rourseList, ref];
 };
 
 export default useInfiniteGetCourse;
