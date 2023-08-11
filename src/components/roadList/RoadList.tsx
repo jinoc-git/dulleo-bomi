@@ -17,10 +17,10 @@ const RoadList = () => {
   const queryClient = useQueryClient();
 
   const prefetchInfiniteCourse = async (roadName: string) => {
-    await queryClient.prefetchInfiniteQuery<Course, AxiosError, CourseDataResult, string[]>(
-      ['infiniteCourse', roadName],
-      ({ pageParam = 1 }) => fetchCourseList({ roadName: roadName, pageParam }),
-    );
+    // await queryClient.prefetchInfiniteQuery<Course, AxiosError, CourseDataResult, string[]>(
+    //   ['infiniteCourse', roadName],
+    //   ({ pageParam = 1 }) => fetchCourseList({ roadName: roadName, pageParam }),
+    // );
   };
 
   return (
