@@ -30,7 +30,6 @@ const EditProfileForm = (): ReactElement => {
     if (auth.currentUser) {
       setPhotoUrl(auth.currentUser.photoURL);
       form.setFieldsValue({ email: auth.currentUser.email });
-      // Set currentNickname here after fetching from the database.
     }
   }, [auth.currentUser]);
 
@@ -39,7 +38,6 @@ const EditProfileForm = (): ReactElement => {
     const data = values as EditProfileFormData;
 
     try {
-      // Re-authenticate the user
       if (auth.currentUser) {
         const credential = EmailAuthProvider.credential(
           auth.currentUser.email!,
@@ -47,15 +45,11 @@ const EditProfileForm = (): ReactElement => {
         );
         await reauthenticateWithCredential(auth.currentUser!, credential);
 
-        // Update nickname
-        // Perform duplication check for the new nickname
         const usersRef = collection(db, 'users');
         const q = query(usersRef, where('nickname', '==', data.nickname));
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-          // Update user data in the database with the new nickname
-          // Assuming 'users' collection exists on Firestore, replace 'your_field_name' with actual path to the nickname field
           const userDocRef = doc(usersRef, auth.currentUser.uid);
           await updateDoc(userDocRef, { your_field_name: data.nickname });
 
@@ -68,7 +62,6 @@ const EditProfileForm = (): ReactElement => {
           return;
         }
 
-        // Update photoURL if a new photo has been uploaded
         if (fileList.length > 0 && fileList[0]?.originFileObj) {
           const storageRef = ref(storage, `profileImages/${auth.currentUser.uid}`);
           await uploadBytes(storageRef, fileList[0].originFileObj as Blob);
