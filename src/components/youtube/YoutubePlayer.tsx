@@ -4,14 +4,6 @@ type YoutubeType = {
   id: string;
 };
 
-// const style: YouTubeProps['style'] = {
-//   position: 'absolute',
-//   width: '100%',
-//   height: '100%',
-//   top: 0,
-//   left: 0,
-// };
-
 const opts: YouTubeProps['opts'] = {
   width: '100%',
   height: '200px',
@@ -24,7 +16,7 @@ const opts: YouTubeProps['opts'] = {
 
 const YoutubePlayer = ({ id }: YoutubeType) => {
   const onPlayerReady: YouTubeProps['onReady'] = (e) => {};
-  console.log('1111');
+
   return <Youtube opts={opts} videoId={id} />;
 };
 

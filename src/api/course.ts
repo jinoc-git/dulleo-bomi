@@ -28,3 +28,5 @@ export const fetchCourseData = async (): Promise<CourseDataResult[]> => {
   console.log(responseData2);
   return responseData2;
 };
+
+// 1개 코스 받아오는 함수
