@@ -1,37 +1,38 @@
 import * as St from './style';
 import Layout from '../common/layout/Layout';
 import { Map, MapMarker, useMap } from 'react-kakao-maps-sdk';
-import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import {
-  Course,
-  CourseDataResult,
-  ResponseCourseList,
-  pathProps,
-} from '../../@types/course/courseType';
+import { MapPair, PageRoadProps, ThirdType, pathProps } from '../../@types/course/courseType';
+import { fetchCourseData, fetchGPXONE } from '../../api/course';
 
-type pageProps = {
-  roadName: string;
-};
+const ResultMap = ({ roadName }: PageRoadProps) => {
+  const { data, isLoading, isError } = useQuery([], () => fetchCourseData({ roadName }));
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError || !data || data.length === 0) {
+    return <div>데이터를 불러오는 중에 오류가 발생했습니다.</div>;
+  }
 
-const ResultMap = ({ roadName }: pageProps) => {
-  // const URL = `http://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=249&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${roadName}`;
-  const URL = `http://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=150&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${roadName}`;
-  console.log(roadName);
+  let gpxArr: MapPair[] = [];
+  data.forEach((item) => {
+    gpxArr.push({
+      crsKorNm: item.crsKorNm,
+      gpxpath: item.gpxpath,
+    });
+  });
+  console.log(gpxArr);
 
-  const fetchAllInfo = async (): Promise<ResponseCourseList[]> => {
-    const response = await axios.get(`${URL}`);
-    const dataItem = response.data.response.body.items.item;
-    console.log('fetchAllInfo', dataItem);
-    return dataItem;
-  };
-  const courseLists = fetchAllInfo();
-  console.log('courseLists', courseLists);
-  const { data, isLoading, isError } = useQuery([`${URL}`], fetchAllInfo);
-  console.log('data', data);
-
-  // const markerTitle:CourseDataResult[] = data && data.crsKorNm;
+  // let gpxArrNew: ThirdType[] = [];
+  // gpxArr.forEach(async (item) => {
+  //   const fetchedData = await fetchGPXONE({ path: item.gpxpath });
+  //   gpxArrNew.push({
+  //     ...item,
+  //     thirdValue: fetchedData,
+  //   });
+  // });
+  // console.log(gpxArrNew);
 
   // const data = [
   //   {
@@ -43,19 +44,6 @@ const ResultMap = ({ roadName }: pageProps) => {
   //     latlng: { lat: 33.451393, lng: 126.570738 },
   //   },
   // ];
-
-  // 서버에 gpx 파일 fetch
-  const mapArr = [];
-  // const fetchGPX = async (data: CourseDataResult[]) => {
-  //   const { dataPath } = await axios.get(
-  //     `https://florentine-rustic-open.glitch.me/gpx?data=${gpxpath}`,
-  //   );
-  //   return dataPath;
-  //   data?.map((item) => {   });
-  // };
-
-  // fetchGPX(data);
-  // const { data: data2, isLoading: isLoading2, isError: isError2 } = useQuery(['gpx'], fetchGPX);
 
   const EventMarkerContainer = ({
     position,
@@ -97,11 +85,11 @@ const ResultMap = ({ roadName }: pageProps) => {
           level={3} // 지도의 확대 레벨
         >
           {/* {data.map((value) => (
-            <EventMarkerContainer
-              key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
-              position={{ lat: 33.450879, lon: 126.56994 }}
-              content={`<div style={{ color: '#000' }}>카카오</div>`}
-            />
+             <EventMarkerContainer
+          key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
+          position={value.latlng}
+          content={value.content}
+        />
           ))} */}
         </Map>
       </St.ResultMapContainer>
