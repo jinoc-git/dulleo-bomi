@@ -1,4 +1,3 @@
-import React from 'react';
 import Youtube, { YouTubeProps } from 'react-youtube';
 
 type YoutubeType = {
@@ -25,7 +24,7 @@ const opts: YouTubeProps['opts'] = {
 
 const YoutubePlayer = ({ id }: YoutubeType) => {
   const onPlayerReady: YouTubeProps['onReady'] = (e) => {};
-  console.log('1111')
+  console.log('1111');
   return <Youtube opts={opts} videoId={id} />;
 };
 
