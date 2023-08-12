@@ -4,6 +4,10 @@ export type pathProps = {
   lon: number;
 };
 
+export type CourseItem = {
+  item: CourseDataResult;
+};
+
 export type CourseDataResult = {
   crsLevel: string;
   crsCycle: string;
