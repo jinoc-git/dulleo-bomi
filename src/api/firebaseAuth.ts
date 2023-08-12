@@ -1,15 +1,15 @@
+import { FirebaseError } from 'firebase/app';
 import {
   User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
-import { auth, db, storage } from '../firebase/firebaseConfig';
-import { FirebaseError } from 'firebase/app';
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { SignUpFormData } from '../components/signUp/SignUpForm';
+import { auth, db, storage } from '../firebase/firebaseConfig';
 import { UserInfo } from '../zustand/UserStore';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 
 // sign in
 export const signInWithFB = async (email: string, password: string) => {
@@ -62,8 +62,9 @@ export const signUpWithFB = async (
       displayName: user.displayName,
       photoURL: user.photoURL,
       email: user.email,
+      id: user.uid,
     };
-    await addDoc(collection(db, 'users'), userInfo);
+    await setDoc(doc(collection(db, 'users'), user.uid), userInfo);
 
     return userInfo;
   } catch (error) {

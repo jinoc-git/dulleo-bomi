@@ -5,6 +5,7 @@ export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 export const ButtonContainer = styled.div`
@@ -35,20 +36,23 @@ export const Form = styled(AntdForm)`
 `;
 
 export const CustomFileInput = styled.input`
-  &::-webkit-file-upload-button {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: #ffffff;
-    background-color: #9acdde;
-    transition: background-color 0.3s;
+  display: none !important;
+`;
 
-    &:hover {
-      background-color: #b8e3e8;
-    }
-    &:active {
-      background-color: #67bed0;
-    }
+export const FileLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+export const ProfileImage = styled.img`
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+
+  &:hover {
+    border: 2px solid #a5cc9c;
   }
 `;

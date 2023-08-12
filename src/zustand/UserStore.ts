@@ -7,6 +7,7 @@ export type UserInfo = {
   displayName: string | null;
   photoURL?: string | null;
   email: string | null;
+  id: string;
 };
 
 type UserState = {
@@ -26,6 +27,7 @@ export const useUserStore = create<UserState>((set) => {
           displayName: user.displayName,
           photoURL: user.photoURL,
           email: user.email,
+          id: user.uid,
         };
         set({ user: userInfo, isLoggedIn: true });
       } else {
