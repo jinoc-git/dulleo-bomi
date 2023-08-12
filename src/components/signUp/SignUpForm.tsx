@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db, storage } from '../../firebase/firebaseConfig';
 import { UserInfo, useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
+import Layout from '../common/layout/Layout';
 
 type SignUpFormData = {
   profileImage: File[];
@@ -123,84 +124,86 @@ const SignUpForm = (): ReactElement => {
   };
 
   return (
-    <St.SignUpFormContainer>
-      <St.SignUpForm
-        form={form}
-        onFinish={onSubmit}
-        name="validateOnly"
-        layout="vertical"
-        autoComplete="off"
-      >
-        <Form.Item
-          label="프로필 이미지"
-          name="profileImage"
-          rules={[{ required: true, message: '이미지를 업로드해주세요.' }]}
+    <Layout>
+      <St.SignUpFormContainer>
+        <St.SignUpForm
+          form={form}
+          onFinish={onSubmit}
+          name="validateOnly"
+          layout="vertical"
+          autoComplete="off"
         >
-          <St.CustomFileInput type="file" id="profileImage" onChange={handleFileChange} />
-        </Form.Item>
-        {selectedFile && (
-          <img
-            src={URL.createObjectURL(selectedFile)}
-            alt="프로필 이미지 미리보기"
-            style={{ maxWidth: '300px', maxHeight: '300px' }}
-          />
-        )}
-        <Form.Item
-          label="이메일"
-          name="email"
-          rules={[
-            { required: true, message: '이메일 주소를 입력해주세요.' },
-            { type: 'email', message: '올바른 이메일 형식이 아닙니다.' },
-          ]}
-          validateStatus={emailError ? 'error' : ''}
-          help={emailError}
-        >
-          <Input type="email" id="email" onChange={() => setEmailError(null)} />
-        </Form.Item>
+          <Form.Item
+            label="프로필 이미지"
+            name="profileImage"
+            rules={[{ required: true, message: '이미지를 업로드해주세요.' }]}
+          >
+            <St.CustomFileInput type="file" id="profileImage" onChange={handleFileChange} />
+          </Form.Item>
+          {selectedFile && (
+            <img
+              src={URL.createObjectURL(selectedFile)}
+              alt="프로필 이미지 미리보기"
+              style={{ maxWidth: '300px', maxHeight: '300px' }}
+            />
+          )}
+          <Form.Item
+            label="이메일"
+            name="email"
+            rules={[
+              { required: true, message: '이메일 주소를 입력해주세요.' },
+              { type: 'email', message: '올바른 이메일 형식이 아닙니다.' },
+            ]}
+            validateStatus={emailError ? 'error' : ''}
+            help={emailError}
+          >
+            <Input type="email" id="email" onChange={() => setEmailError(null)} />
+          </Form.Item>
 
-        <Form.Item
-          label="비밀번호"
-          name="password"
-          rules={[{ required: true, message: '비밀번호를 입력해주세요.' }, passwordValidator()]}
-        >
-          <Input type="password" id="password" />
-        </Form.Item>
+          <Form.Item
+            label="비밀번호"
+            name="password"
+            rules={[{ required: true, message: '비밀번호를 입력해주세요.' }, passwordValidator()]}
+          >
+            <Input type="password" id="password" />
+          </Form.Item>
 
-        <Form.Item
-          label="비밀번호 확인"
-          name="confirmPassword"
-          rules={[
-            { required: true, message: '비밀번호를 한 번 더 입력해주세요.' },
-            confirmPasswordValidator(form),
-          ]}
-        >
-          <Input type="password" id="confirmPassword" />
-        </Form.Item>
+          <Form.Item
+            label="비밀번호 확인"
+            name="confirmPassword"
+            rules={[
+              { required: true, message: '비밀번호를 한 번 더 입력해주세요.' },
+              confirmPasswordValidator(form),
+            ]}
+          >
+            <Input type="password" id="confirmPassword" />
+          </Form.Item>
 
-        <Form.Item
-          label="닉네임"
-          name="nickname"
-          rules={[
-            { required: true, message: '닉네임을 입력해주세요.' },
-            { min: 2, max: 6, message: '닉네임은 2~6글자로 제한됩니다.' },
-            nicknameValidator,
-          ]}
-        >
-          <Input type="text" id="nickname" />
-        </Form.Item>
-        {error && <p>{error}</p>}
-        <St.ButtonContainer>
-          <St.Button type="default" htmlType="submit">
-            회원가입
-            {isLoading && <Spin style={{ marginLeft: '8px' }} />}
-          </St.Button>
-        </St.ButtonContainer>
-        <St.NavigateToSignInContainer>
-          이미 회원이신가요?{' '}
-          <St.SignInText onClick={() => navigate('/signin')}>로그인으로 이동</St.SignInText>
-        </St.NavigateToSignInContainer>
-      </St.SignUpForm>
-    </St.SignUpFormContainer>
+          <Form.Item
+            label="닉네임"
+            name="nickname"
+            rules={[
+              { required: true, message: '닉네임을 입력해주세요.' },
+              { min: 2, max: 6, message: '닉네임은 2~6글자로 제한됩니다.' },
+              nicknameValidator,
+            ]}
+          >
+            <Input type="text" id="nickname" />
+          </Form.Item>
+          {error && <p>{error}</p>}
+          <St.ButtonContainer>
+            <St.Button type="default" htmlType="submit">
+              회원가입
+              {isLoading && <Spin style={{ marginLeft: '8px' }} />}
+            </St.Button>
+          </St.ButtonContainer>
+          <St.NavigateToSignInContainer>
+            이미 회원이신가요? &nbsp;
+            <St.SignInText onClick={() => navigate('/signin')}>로그인으로 이동</St.SignInText>
+          </St.NavigateToSignInContainer>
+        </St.SignUpForm>
+      </St.SignUpFormContainer>
+    </Layout>
   );
 };
 
