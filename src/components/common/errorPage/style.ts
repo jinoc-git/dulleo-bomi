@@ -6,7 +6,13 @@ export const ErrorWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
+
+export const ErrorImg = styled.img`
+  width: 50%;
+  object-fit: cover;
 `;
 
 export const ErrorCode = styled.h1`
@@ -14,6 +20,22 @@ export const ErrorCode = styled.h1`
   margin-bottom: 1rem;
 `;
 
+export const ErrorMessageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  margin: 20px;
+`;
+
 export const ErrorMessage = styled.p`
-  font-size: 18px;
+  font-size: 15px;
+`;
+
+export const ErrorBtnBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px;
 `;
