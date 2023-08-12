@@ -38,12 +38,22 @@
   ],
   "likes": [
     {
-      "id": "T_CRS_MNG0000005298",
-      "userList": []
+      "id": "iVSJQLcoq95cxZDsXo5m9",
+      "crsId": "T_CRS_MNG0000005298",
+      "crsName": "서해랑길 25코스",
+      "likedUserEmail": "song2@test.com"
     },
     {
-      "id": "T_CRS_MNG0000005310",
-      "userList": []
+      "id": "C0o5Qx9hsbBDkXGuwB46k",
+      "crsId": "T_CRS_MNG0000005298",
+      "crsName": "서해랑길 25코스",
+      "likedUserEmail": "song@test.com"
+    },
+    {
+      "id": "1PvlDORlkRm8dEYgryKCm",
+      "crsId": "T_CRS_MNG0000005310",
+      "crsName": "서해랑길 37코스",
+      "likedUserEmail": "song@test.com"
     }
   ]
 }

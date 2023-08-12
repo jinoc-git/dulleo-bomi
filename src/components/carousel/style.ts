@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const SwiperContainer = styled.section`
+export const CarouselContainer = styled.section`
   & .flicking-arrow-prev,
   .flicking-arrow-prev,
   .flicking-arrow-next,

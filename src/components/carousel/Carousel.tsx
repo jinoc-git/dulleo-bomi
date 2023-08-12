@@ -12,7 +12,7 @@ import '@egjs/flicking-plugins/dist/arrow.css';
 const Carousel = () => {
   const _plugins = [new Arrow()];
   return (
-    <St.SwiperContainer>
+    <St.CarouselContainer>
       <Layout>
         <Flicking panelsPerView={3} align="prev" circular={true} plugins={_plugins}>
           {VIDOO_ID.map((id) => {
@@ -28,7 +28,7 @@ const Carousel = () => {
           </ViewportSlot>
         </Flicking>
       </Layout>
-    </St.SwiperContainer>
+    </St.CarouselContainer>
   );
 };
 

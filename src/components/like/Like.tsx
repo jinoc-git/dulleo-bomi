@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useMutation, useQuery, QueryClient, useQueryClient } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
+import { AxiosError } from 'axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUserStore } from '../../zustand/UserStore';
-import { addLikes } from '../../api/likes';
+import { nanoid } from 'nanoid';
+import { getLikes, addLike, deleteLike } from '../../api/likes';
 import * as St from './style';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 
 export type LikeType = {
   id: string;
-  userList: string[];
+  crsId: string;
+  crsName: string;
+  likedUserEmail: string;
 };
 
 type LikeStateType = {
@@ -17,74 +20,90 @@ type LikeStateType = {
 };
 
 const Like = () => {
-  const { id: crsId } = useParams();
+  const { state } = useLocation();
+  const crsId: string = state.item.crsIdx;
+  const crsName: string = state.item.crsKorNm;
   const { user } = useUserStore();
-  const { data, isLoading, isError } = useQuery(['likes'], async () => {
-    const response = await axios.get(`http://localhost:4000/likes/${crsId}`);
-    return response;
-  });
-  const queryClient = new QueryClient();
+  const userEmail = user?.email || '';
+  const { data } = useQuery(['Likes', crsId as string], getLikes);
 
-  const likesMutation = useMutation(addLikes, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['likes']);
-    },
-  });
-
-  useEffect(() => {
-    if (isError) {
-      console.log('좋아요 오류');
-      likesMutation.mutate({
-        id: crsId as string,
-        userList: [],
-      });
-    }
-  }, [isError]);
-
-  // const addMutation = useMutation(addLikes, {
-  //   onMutate: async (newLikes: LikeType) => {
-  //     console.log('onMutate 호출');
-  //     await queryClient.cancelQueries(['likes', crsId as string]);
-  //     const previousLikes = queryClient.getQueryData<LikeType>(['likes', crsId as string]);
-
-  //     queryClient.setQueryData(["todos"], (old) => [...old, newTodo]);
-
-  //     return { previousTodos };
-  //   },
-  //   onError: (err, newLike, context) => {
-  //     console.log('onError');
-  //     console.log('context:', context);
-  //     queryClient.setQueryData(['todos'], context.previousTodos);
-  //   },
-  //   onSettled: () => {
-  //     console.log('onSettled');
-  //     queryClient.invalidateQueries({ queryKey: ['todos'] });
-  //   },
-  // });
-
+  const [likeId, setLikeId] = useState<string>('');
+  const [likesCount, setLikesCount] = useState<number>(0);
   const [likeState, setLikeState] = useState<LikeStateType>({
     isChecked: false,
   });
 
+  useEffect(() => {
+    setLikesCount(data?.length || 0);
+  }, [data]);
+
+  let userLike = data?.find((like) => like.likedUserEmail === userEmail);
+  useEffect(() => {
+    if (userLike) {
+      setLikeId(userLike.id || '');
+    }
+  }, [userLike]);
+
+  let isLiked = data?.find((like) => like.likedUserEmail === userEmail);
+  useEffect(() => {
+    if (isLiked) {
+      setLikeState({
+        isChecked: true,
+      });
+    }
+  }, [isLiked]);
+
+  const queryClient = useQueryClient();
+  const addMutation = useMutation<void, AxiosError, LikeType>(addLike, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['likes']);
+      setLikeState({ isChecked: true });
+      setLikesCount((pre) => pre + 1);
+    },
+    onError: () => {
+      setLikeState({ isChecked: false });
+    },
+  });
+  const deleteMutation = useMutation(deleteLike, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['likes']);
+      setLikeState({ isChecked: false });
+      setLikesCount((pre) => pre - 1);
+    },
+    onError: () => {
+      setLikeState({ isChecked: true });
+    },
+  });
+
   const switchLike = () => {
-    likeState.isChecked
-      ? setLikeState({
-          isChecked: false,
-        })
-      : setLikeState({
-          isChecked: true,
-        });
+    if (!user) return;
+
+    const newLike: LikeType = {
+      id: nanoid(),
+      crsId,
+      crsName,
+      likedUserEmail: userEmail,
+    };
+
+    if (likeState.isChecked) {
+      deleteMutation.mutate(likeId);
+      setLikeId('');
+    }
+    if (!likeState.isChecked) {
+      addMutation.mutate(newLike);
+      setLikeId(newLike.id);
+    }
   };
 
   return (
-    <St.likeContainer>
+    <St.LikeContainer>
       {likeState.isChecked ? (
         <HeartFilled style={{ fontSize: '20px' }} onClick={switchLike} />
       ) : (
         <HeartOutlined style={{ fontSize: '20px' }} onClick={switchLike} />
       )}
-      <p>???</p>
-    </St.likeContainer>
+      <p>{likesCount}</p>
+    </St.LikeContainer>
   );
 };
 
