@@ -5,17 +5,18 @@ import { auth } from '../firebase/firebaseConfig';
 
 export type UserInfo = {
   displayName: string | null;
-  photoURL: string | null;
+  photoURL?: string | null;
   email: string | null;
+  id: string;
 };
 
 type UserState = {
-  user: UserInfo | null;
+  user: Partial<UserInfo> | null;
   isLoggedIn: boolean;
   setupAuthObserver: () => () => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshUserInfo: (userInfo: UserInfo) => void;
+  refreshUserInfo: (userInfo: Partial<UserInfo>) => void;
 };
 
 export const useUserStore = create<UserState>((set) => {
@@ -26,6 +27,7 @@ export const useUserStore = create<UserState>((set) => {
           displayName: user.displayName,
           photoURL: user.photoURL,
           email: user.email,
+          id: user.uid,
         };
         set({ user: userInfo, isLoggedIn: true });
       } else {
@@ -34,8 +36,8 @@ export const useUserStore = create<UserState>((set) => {
     });
   };
 
-  const refreshUserInfo = (userInfo: UserInfo) => {
-    set({ user: userInfo, isLoggedIn: true });
+  const refreshUserInfo = (userInfo: Partial<UserInfo>) => {
+    set((state) => ({ user: { ...state.user, ...userInfo }, isLoggedIn: true }));
   };
 
   const login = async (email: string, password: string) => {
