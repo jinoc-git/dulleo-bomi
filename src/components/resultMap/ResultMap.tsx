@@ -1,53 +1,38 @@
 import * as St from './style';
 import Layout from '../common/layout/Layout';
 import { Map, MapMarker, useMap } from 'react-kakao-maps-sdk';
-import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import {
-  Course,
-  CourseDataResult,
-  ResponseCourseList,
-  pathProps,
-} from '../../@types/course/courseType';
+import { MapPair, PageRoadProps, ThirdType, pathProps } from '../../@types/course/courseType';
+import { fetchCourseData, fetchGPXONE } from '../../api/course';
 
-type PageProps = {
-  roadName: string;
-};
-
-const ResultMap = ({ roadName }: PageProps) => {
-  const URL = `http://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=${process.env.REACT_APP_DURUNUBI_API_TOKKEN}&numOfRows=150&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${roadName}`;
-
-  const fetchAllInfo = async (): Promise<CourseDataResult[]> => {
-    const response = await axios.get(`${URL}`);
-    const dataItem = response.data.response.body.items.item;
-    // console.log('fetchAllInfo', dataItem);
-    return dataItem;
-  };
-  // const courseLists = fetchAllInfo();
-  // console.log('courseLists', courseLists);
-  const { data, isLoading, isError } = useQuery([`${URL}`], fetchAllInfo);
-  // console.log('코스 전체 data', data);
-  // console.log('path 경로', data && data[0].gpxpath);
-
-  // const ddd = data?.map((item) => arr.push([item.crsKorNm, item.gpxpath]));
-  // const arr = [];
-  // const obj = {
-  //   name: courseName,
-  //   path,
-  // };
-  // let obj = new Object();
-
-  // const ddd = data?.map((item) => {
-  //   (obj.courseName = item.crsKorNm), (obj.path = item.gpxpath);
-  // });
-  // console.log('ddd', ddd);
-
+const ResultMap = ({ roadName }: PageRoadProps) => {
+  const { data, isLoading, isError } = useQuery([], () => fetchCourseData({ roadName }));
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   if (isError || !data || data.length === 0) {
     return <div>데이터를 불러오는 중에 오류가 발생했습니다.</div>;
   }
 
-  // const markerTitle: CourseDataResult[] = data && data.crsKorNm;
+  let gpxArr: MapPair[] = [];
+  data.forEach((item) => {
+    gpxArr.push({
+      crsKorNm: item.crsKorNm,
+      gpxpath: item.gpxpath,
+    });
+  });
+  console.log(gpxArr);
+
+  // let gpxArrNew: ThirdType[] = [];
+  // gpxArr.forEach(async (item) => {
+  //   const fetchedData = await fetchGPXONE({ path: item.gpxpath });
+  //   gpxArrNew.push({
+  //     ...item,
+  //     thirdValue: fetchedData,
+  //   });
+  // });
+  // console.log(gpxArrNew);
 
   // const data = [
   //   {
@@ -59,36 +44,6 @@ const ResultMap = ({ roadName }: PageProps) => {
   //     latlng: { lat: 33.451393, lng: 126.570738 },
   //   },
   // ];
-  // const mapArr: any[] = [];
-  // const OBJ_GPX = data && data.gpxpath;
-
-  // console.log('OBJ_GPX', OBJ_GPX);
-  // const fetchGPX = async (item: any): Promise<pathProps[]> => {
-  //   const a: any = await axios.get(
-  //     `https://florentine-rustic-open.glitch.me/gpx?data=${data.gpxpath}`,
-  //   );
-  //   return a.dataPath;
-  // };
-  // data?.map((item) => {
-  //   fetchGPX(item.gpxpath).then((data) => mapArr.push(data));
-  // });
-  // console.log(mapArr);
-
-  // 서버에 gpx 파일 fetch
-  const mapArr = [];
-  // const OBJ_GPX = data && data.gpxpath;
-  // console.log('OBJ_GPX', OBJ_GPX);
-  // const fetchGPX = async (): Promise<pathProps[]> => {
-  //   const dataPath = await axios.get(
-  //     `${process.env.REACT_APP_NODE_SERVER}/gpxOne?data=https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx"`,
-  //   );
-  //   console.log(dataPath);
-
-  //   const arrr = dataPath.map((item) => mapArr.push(item));
-  //   return arrr;
-  // };
-  // fetchGPX();
-  // const { data: data2, isLoading: isLoading2, isError: isError2 } = useQuery(['gpxOne'], fetchGPX);
 
   const EventMarkerContainer = ({
     position,

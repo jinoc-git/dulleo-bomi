@@ -18,7 +18,7 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   const [courseList, ref] = useInfiniteGetCourse(roadName);
 
   const goToDetail = useCallback((item: CourseDataResult) => {
-    navigate(`/detail/${item.crsIdx}`, { state: { item } });
+    navigate(`/detail/${item.crsKorNm}`, { state: { item } });
   }, []);
 
   if (!courseList) {
@@ -28,7 +28,7 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   return (
     <Layout>
       <St.PageTitleH2>
-        {searchKeyword ? `${roadName} ${searchKeyword}` : roadName} 코스 추천
+        {searchKeyword ? `${roadName} ${searchKeyword}` : roadName} 추천
       </St.PageTitleH2>
       <St.CourseListContainer>
         {courseList

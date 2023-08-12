@@ -1,8 +1,6 @@
 import * as St from './style';
 import { Map, Polyline } from 'react-kakao-maps-sdk';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
-import { pathProps } from '../../@types/course/courseType';
 import { fetchGPX } from '../../api/course';
 
 // ***************issue : 이전의 지도가 보여지고 다시 리렌더링됨
@@ -17,7 +15,6 @@ const DetailMap = ({ path }: { path: string }) => {
     return <div>데이터를 불러오는 중에 오류가 발생했습니다.</div>;
   }
 
-  // 위치 가운데로 잡기
   const middlePoint: number = data.length > 0 ? Math.floor(data.length / 2) : 0;
   const centerData = { lat: data[middlePoint].lat, lng: data[middlePoint].lon };
 

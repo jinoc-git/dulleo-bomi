@@ -3,7 +3,18 @@ export type pathProps = {
   lat: number;
   lon: number;
 };
-
+export type PageRoadProps = {
+  roadName: string;
+};
+export type MapPair = {
+  crsKorNm: string;
+  gpxpath: string;
+};
+export type ThirdType = {
+  crsKorNm: string;
+  gpxpath: string;
+  thirdValue: pathProps;
+};
 export type CourseDataResult = {
   crsLevel: string;
   crsCycle: string;
@@ -24,25 +35,7 @@ export type CourseDataResult = {
   gpxpath: string;
 };
 export type CourseItem = {
-  item: {
-    crsLevel: string;
-    crsCycle: string;
-    crsContents: string;
-    crsKorNm: string;
-    createdtime: string;
-    travelerinfo: string;
-    crsTourInfo: string;
-    crsSummary: string;
-    routeIdx: string;
-    crsIdx: string;
-    crsKorm: string;
-    crsDstnc: string;
-    crsTotlRqrmHour: string;
-    modifiedtime: string;
-    sigun: string;
-    brdDiv: string;
-    gpxpath: string;
-  };
+  item: CourseDataResult;
 };
 export type Course = {
   items: {
