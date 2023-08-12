@@ -11,7 +11,7 @@ export const SignUpFormContainer = styled.div`
 
 export const SignUpForm = styled(AntdForm)`
   min-width: 360px;
-  max-width: 800px;
+  max-width: 900px;
 `;
 
 export const ButtonContainer = styled(AntdForm.Item)`
