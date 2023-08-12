@@ -1,18 +1,17 @@
-import * as St from './style';
-import { CourseItem } from '../../@types/course/courseType';
-import Like from '../like/Like';
+import { CourseDataResult } from '../../@types/course/courseType';
 import { Typography } from 'antd';
+import Like from '../like/Like';
 const { Title, Paragraph } = Typography;
 
-const DetailInfo = ({ state }: { state: CourseItem }) => {
+const DetailInfo = ({ state }: { state: CourseDataResult }) => {
   const propsData = state;
 
-  const hour = Math.floor(Number(propsData.item.crsTotlRqrmHour) / 60);
-  const min = Number(propsData.item.crsTotlRqrmHour) % 60;
+  const hour = Math.floor(Number(propsData.crsTotlRqrmHour) / 60);
+  const min = Number(propsData.crsTotlRqrmHour) % 60;
 
-  const fixedCrsContents = propsData.item.crsContents.replace(/\-/g, '');
+  const fixedCrsContents = propsData.crsContents.replace(/\-/g, '');
 
-  const fixedCrsTourInfoArr: string[] = propsData.item.crsTourInfo
+  const fixedCrsTourInfoArr: string[] = propsData.crsTourInfo
     .replace(/[<br>]/g, '')
     .split('-')
     .map((item) => item.trim());
@@ -20,9 +19,9 @@ const DetailInfo = ({ state }: { state: CourseItem }) => {
 
   return (
     <div>
-      <Like crsName={propsData.item.crsKorNm} crsId={propsData.item.crsIdx} />
+      <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
       <Typography>
-        <Title level={3}>{propsData.item.crsKorNm}</Title>
+        <Title level={3}>{propsData.crsKorNm}</Title>
       </Typography>
 
       <Paragraph>
@@ -32,10 +31,10 @@ const DetailInfo = ({ state }: { state: CourseItem }) => {
               <span>{fixedCrsContents}</span>
             </li>
             <li>
-              <span>{propsData.item.sigun}</span>
+              <span>{propsData.sigun}</span>
             </li>
             <li>
-              <span>난이도 : {'⭐️'.repeat(Number(propsData.item.crsLevel))}</span>
+              <span>난이도 : {'⭐️'.repeat(Number(propsData.crsLevel))}</span>
             </li>
             <li>
               <span>
@@ -52,15 +51,13 @@ const DetailInfo = ({ state }: { state: CourseItem }) => {
               </span>
             </li>
             <li>
-              <span>코스길이: {propsData.item.crsDstnc}km</span>
+              <span>코스길이: {propsData.crsDstnc}km</span>
             </li>
             <li>
               <span>총 소요시간: {min > 0 ? `${hour}시간 ${min}분` : `${hour}시간`}</span>
             </li>
             <li>
-              <span>
-                걷기 / 자전거 구분: {propsData.item.brdDiv == 'DNWW' ? '걷기길' : '자전거길'}
-              </span>
+              <span>걷기 / 자전거 구분: {propsData.brdDiv == 'DNWW' ? '걷기길' : '자전거길'}</span>
             </li>
           </ul>
         </blockquote>

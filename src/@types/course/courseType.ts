@@ -7,13 +7,12 @@ export type PageRoadProps = {
   roadName: string;
 };
 export type MapPair = {
-  crsKorNm: string;
+  content: string;
   gpxpath: string;
 };
 export type ThirdType = {
-  crsKorNm: string;
-  gpxpath: string;
-  thirdValue: pathProps;
+  content: string;
+  latlng: pathProps;
 };
 export type CourseDataResult = {
   crsLevel: string;
