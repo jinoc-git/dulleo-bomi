@@ -1,7 +1,7 @@
 import { Button as AntdButton, Form as AntdForm } from 'antd';
 import { styled } from 'styled-components';
 
-export const SignUpFormContainer = styled.div`
+export const SignInFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +9,7 @@ export const SignUpFormContainer = styled.div`
   min-height: calc(100vh - 120px - 235.97px);
 `;
 
-export const SignUpForm = styled(AntdForm)`
+export const SignInForm = styled(AntdForm)`
   min-width: 360px;
   max-width: 900px;
 `;
@@ -38,31 +38,12 @@ export const Button = styled(AntdButton)`
   }
 `;
 
-export const CustomFileInput = styled.input`
-  &::-webkit-file-upload-button {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: #ffffff;
-    background-color: #9acdde;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #b8e3e8;
-    }
-    &:active {
-      background-color: #67bed0;
-    }
-  }
-`;
-
-export const NavigateToSignInContainer = styled.div`
+export const NavigateToSignUpContainer = styled.div`
   margin-top: 10px;
   text-align: right;
 `;
 
-export const SignInText = styled.span`
+export const SignUpText = styled.span`
   color: #9acdde;
   cursor: pointer;
   text-decoration: none;

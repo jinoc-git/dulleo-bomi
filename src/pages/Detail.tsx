@@ -7,8 +7,6 @@ import { useLocation } from 'react-router-dom';
 
 const Detail = ({}) => {
   const { state } = useLocation();
-  console.log('=================세부 디테일 페이지 state', state);
-  console.log('=================세부 디테일 페이지 state', state.item.gpxpath);
 
   return (
     <main>
