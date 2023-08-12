@@ -5,27 +5,7 @@ export type pathProps = {
 };
 
 export type CourseItem = {
-  item: {
-    crsLevel: string;
-    crsCycle: string;
-    crsContents: string;
-    crsKorNm: string;
-    createdtime: string;
-    travelerinfo: string;
-    crsTourInfo: string;
-    crsSummary: string;
-    routeIdx: string;
-    crsIdx: string;
-    crsKorm: string;
-    crsDstnc: string;
-    crsTotlRqrmHour: string;
-    modifiedtime: string;
-    sigun: string;
-    brdDiv: string;
-    gpxpath: string;
-    fixedCrsTourInfo: string;
-    fixedCrsTourInfoArr: string[];
-  };
+  item: CourseDataResult;
 };
 
 export type CourseDataResult = {

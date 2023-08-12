@@ -1,8 +1,8 @@
 import * as St from './style';
 import { CourseItem } from '../../@types/course/courseType';
-import { Divider, Typography } from 'antd';
-const { Title, Paragraph, Text, Link } = Typography;
 import Like from '../like/Like';
+import { Typography } from 'antd';
+const { Title, Paragraph } = Typography;
 
 const DetailInfo = ({ state }: { state: CourseItem }) => {
   const propsData = state;
@@ -41,12 +41,12 @@ const DetailInfo = ({ state }: { state: CourseItem }) => {
               <span>
                 관광포인트
                 <br />
-                {fixedCrsTourInfoArr.map((item) => {
+                {fixedCrsTourInfoArr.map((item, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       {item}
                       <br />
-                    </>
+                    </div>
                   );
                 })}
               </span>
