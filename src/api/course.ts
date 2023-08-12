@@ -27,12 +27,25 @@ export const fetchCourseList = async ({
 
 // 각 길 데이터 가져오는
 export const fetchCourseData = async ({ roadName }: PageRoadProps): Promise<CourseDataResult[]> => {
-  const crsKorNm = encodeURI(roadName);
+  const crsKorNm = encodeURI(roadName); //  빼고 실험
   const response = await axios.get<ResponseCourseList>(
     `${COURSE_URL}&numOfRows=150&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${crsKorNm}`,
   );
   const responseData2 = response.data.response.body.items.item;
   // console.log('responseData2', responseData2);
+  return responseData2;
+};
+
+export const fetchCourseNotEncodeData = async ({
+  roadName,
+}: PageRoadProps): Promise<CourseDataResult[]> => {
+  const crsKorNm = encodeURI(roadName);
+
+  const response = await axios.get<ResponseCourseList>(
+    `${COURSE_URL}&numOfRows=150&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&crsKorNm=${crsKorNm}`,
+  );
+  const responseData2 = response.data.response.body.items.item;
+
   return responseData2;
 };
 
@@ -43,6 +56,5 @@ export const fetchGPX = async ({ path }: { path: string }): Promise<pathProps[]>
 
 export const fetchGPXONE = async ({ path }: { path: string }): Promise<pathProps[]> => {
   const { data } = await axios.get(`${process.env.REACT_APP_NODE_SERVER}/gpxOne?data=${path}`);
-  // console.log(data);
   return data;
 };

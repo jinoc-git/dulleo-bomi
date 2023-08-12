@@ -22,10 +22,10 @@ const MyComments = () => {
       <St.CommentsBox>
         {data.map((comment) => {
           return (
-            <div key={comment.id}>
-              <p>{comment.writerNikName}</p>
+            <St.Commentitem key={comment.id}>
+              <St.CommentTitleParagraph>{comment.writerNikName}</St.CommentTitleParagraph>
               <p>{comment.content}</p>
-            </div>
+            </St.Commentitem>
           );
         })}
       </St.CommentsBox>

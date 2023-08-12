@@ -19,10 +19,12 @@ type LikeStateType = {
   isChecked: boolean;
 };
 
-const Like = () => {
-  const { state } = useLocation();
-  const crsId: string = state.item.crsIdx;
-  const crsName: string = state.item.crsKorNm;
+type LikePropsType = {
+  crsId: string;
+  crsName: string;
+};
+
+const Like = ({ crsName, crsId }: LikePropsType) => {
   const { user } = useUserStore();
   const userEmail = user?.email || '';
   const { data } = useQuery(['Likes', crsId as string], getLikes);
@@ -75,7 +77,8 @@ const Like = () => {
     },
   });
 
-  const switchLike = () => {
+  const switchLike = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
     if (!user) return;
 
     const newLike: LikeType = {

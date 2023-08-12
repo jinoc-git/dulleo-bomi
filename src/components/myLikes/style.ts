@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const CommentsContaine = styled.div`
+export const LikesContaine = styled.div`
   height: 500px;
   padding: 20px;
   flex-basis: 500px;
@@ -11,7 +11,7 @@ export const CommentsContaine = styled.div`
   border: solid 1px #ddd;
 `;
 
-export const CommentsBox = styled.div`
+export const LikesBox = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -19,13 +19,14 @@ export const CommentsBox = styled.div`
   overflow: auto;
 `;
 
-export const Commentitem = styled.div`
+export const Likeitem = styled.div`
   padding: 20px;
   border-radius: 10px;
   border: solid 3px #9acdde;
+  cursor: pointer;
 `;
 
-export const CommentTitleParagraph = styled.p`
+export const LikeTitleParagraph = styled.p`
   font-size: 1rem;
   font-weight: bold;
 `;

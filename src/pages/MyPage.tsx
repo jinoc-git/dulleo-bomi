@@ -7,6 +7,7 @@ import { message } from 'antd';
 import Layout from '../components/common/layout/Layout';
 import MyProfile from '../components/myProfile/MyProfile';
 import MyComments from '../components/myComments/MyComments';
+import MyLikes from '../components/myLikes/MyLikes';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const MyPage = () => {
       <h2>마이 페이지</h2>
       <MyProfile />
       <ListSection>
-        <ListBox>내가 좋아요 한 코스</ListBox>
+        <MyLikes />
         <MyComments />
       </ListSection>
     </Layout>
@@ -37,14 +38,6 @@ const ListSection = styled.section`
   justify-content: center;
   gap: 15px;
   flex-flow: row wrap;
-`;
-
-const ListBox = styled.div`
-  height: 500px;
-  flex-basis: 500px;
-  flex-grow: 1;
-  border-radius: 10px;
-  background-color: #9acdde;
 `;
 
 export default MyPage;
