@@ -40,8 +40,10 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
             return (
               <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item)}>
                 <St.CourseName>
-                  {item.crsKorNm} /
-                  <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+                  {item.crsKorNm}
+                  <span>
+                    <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+                  </span>
                 </St.CourseName>
                 <St.CourseInfo>
                   {item.crsCycle} Lv.{item.crsLevel}

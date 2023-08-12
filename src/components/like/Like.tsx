@@ -77,7 +77,8 @@ const Like = ({ crsName, crsId }: LikePropsType) => {
     },
   });
 
-  const switchLike = () => {
+  const switchLike = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
     if (!user) return;
 
     const newLike: LikeType = {
