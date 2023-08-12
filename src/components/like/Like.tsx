@@ -19,27 +19,27 @@ type LikeStateType = {
 const Like = () => {
   const { id: crsId } = useParams();
   const { user } = useUserStore();
-  const { data, isLoading, isError } = useQuery(['likes'], async () => {
-    const response = await axios.get(`http://localhost:4000/likes/${crsId}`);
-    return response;
-  });
-  const queryClient = new QueryClient();
+  // const { data, isLoading, isError } = useQuery(['likes'], async () => {
+  //   const response = await axios.get(`http://localhost:4000/likes/${crsId}`);
+  //   return response;
+  // });
+  // const queryClient = new QueryClient();
 
-  const likesMutation = useMutation(addLikes, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['likes']);
-    },
-  });
+  // const likesMutation = useMutation(addLikes, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(['likes']);
+  //   },
+  // });
 
-  useEffect(() => {
-    if (isError) {
-      console.log('좋아요 오류');
-      likesMutation.mutate({
-        id: crsId as string,
-        userList: [],
-      });
-    }
-  }, [isError]);
+  // useEffect(() => {
+  //   if (isError) {
+  //     console.log('좋아요 오류');
+  //     likesMutation.mutate({
+  //       id: crsId as string,
+  //       userList: [],
+  //     });
+  //   }
+  // }, [isError]);
 
   // const addMutation = useMutation(addLikes, {
   //   onMutate: async (newLikes: LikeType) => {

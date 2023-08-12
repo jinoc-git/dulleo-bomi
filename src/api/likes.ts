@@ -11,6 +11,7 @@ const LIKE_URL = process.env.REACT_APP_SERVER_URL + '/likes';
 export const addLikes = async (newLike: LikeType) => {
   await axios.post(`http://localhost:4000/likes`, newLike);
 };
+
 // export const addLikes = async (newLike: LikeType) => {
 //   await axios.post(`${LIKE_URL}`, newLike);
 // };

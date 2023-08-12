@@ -24,7 +24,6 @@ const opts: YouTubeProps['opts'] = {
 
 const YoutubePlayer = ({ id }: YoutubeType) => {
   const onPlayerReady: YouTubeProps['onReady'] = (e) => {};
-  console.log('1111');
   return <Youtube opts={opts} videoId={id} />;
 };
 

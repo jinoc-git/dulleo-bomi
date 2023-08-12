@@ -16,11 +16,9 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   const navigate = useNavigate();
 
   const [courseList, ref] = useInfiniteGetCourse(roadName);
-  console.log(roadName);
 
   const goToDetail = useCallback((item: CourseDataResult) => {
     navigate(`/detail/${item.crsIdx}`, { state: { item } });
-    console.log(item);
   }, []);
 
   if (!courseList) {
