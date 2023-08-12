@@ -1,5 +1,6 @@
 import { CourseDataResult } from '../../@types/course/courseType';
 import { Typography } from 'antd';
+import Like from '../like/Like';
 const { Title, Paragraph } = Typography;
 
 const DetailInfo = ({ state }: { state: CourseDataResult }) => {
@@ -18,7 +19,7 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
 
   return (
     <div>
-      {/* <Like /> */}
+      <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
       <Typography>
         <Title level={3}>{propsData.crsKorNm}</Title>
       </Typography>
