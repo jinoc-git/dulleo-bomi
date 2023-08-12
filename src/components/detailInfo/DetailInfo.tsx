@@ -20,7 +20,7 @@ const DetailInfo = ({ state }: { state: CourseItem }) => {
 
   return (
     <div>
-      <Like />
+      <Like crsName={propsData.item.crsKorNm} crsId={propsData.item.crsIdx} />
       <Typography>
         <Title level={3}>{propsData.item.crsKorNm}</Title>
       </Typography>

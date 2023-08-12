@@ -1,10 +1,10 @@
-import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CourseDataResult } from '../../@types/course/courseType';
 import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
 import Layout from '../common/layout/Layout';
 import TopButton from '../common/topButton/TopButton';
+import Like from '../like/Like';
 import * as St from './style';
 
 type CourseResultProps = {
@@ -43,10 +43,7 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
               <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item)}>
                 <St.CourseName>
                   {item.crsKorNm} /
-                  <St.CourseLike>
-                    <HeartOutlined /> 1,234
-                    <HeartFilled />
-                  </St.CourseLike>
+                  <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
                 </St.CourseName>
                 <St.CourseInfo>
                   {item.crsCycle} Lv.{item.crsLevel}

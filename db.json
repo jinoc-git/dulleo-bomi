@@ -38,21 +38,27 @@
   ],
   "likes": [
     {
-      "id": "iVSJQLcoq95cxZDsXo5m9",
-      "crsId": "T_CRS_MNG0000005298",
-      "crsName": "서해랑길 25코스",
-      "likedUserEmail": "song2@test.com"
-    },
-    {
-      "id": "C0o5Qx9hsbBDkXGuwB46k",
-      "crsId": "T_CRS_MNG0000005298",
-      "crsName": "서해랑길 25코스",
+      "id": "0MXvFZwuc60S8SEMFYPG4",
+      "crsId": "T_CRS_MNG0000005310",
+      "crsName": "서해랑길 37코스",
       "likedUserEmail": "song@test.com"
     },
     {
-      "id": "1PvlDORlkRm8dEYgryKCm",
-      "crsId": "T_CRS_MNG0000005310",
-      "crsName": "서해랑길 37코스",
+      "id": "bXJhJPPGmH4NrXJSNRXPe",
+      "crsId": "T_CRS_MNG0000005375",
+      "crsName": "서해랑길 101코스",
+      "likedUserEmail": "song@test.com"
+    },
+    {
+      "id": "P4XfTBED5ZZ1iLhebKOKN",
+      "crsId": "T_CRS_MNG0000005278",
+      "crsName": "서해랑길 4코스",
+      "likedUserEmail": "song@test.com"
+    },
+    {
+      "id": "raGpAnf2lz-TD8I0oP21t",
+      "crsId": "T_CRS_MNG0000005298",
+      "crsName": "서해랑길 25코스",
       "likedUserEmail": "song@test.com"
     }
   ]
