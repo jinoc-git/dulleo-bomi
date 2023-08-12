@@ -3,11 +3,18 @@ export type pathProps = {
   lat: number;
   lon: number;
 };
-
-export type CourseItem = {
-  item: CourseDataResult;
+export type PageRoadProps = {
+  roadName: string;
 };
-
+export type MapPair = {
+  crsKorNm: string;
+  gpxpath: string;
+};
+export type ThirdType = {
+  crsKorNm: string;
+  gpxpath: string;
+  thirdValue: pathProps;
+};
 export type CourseDataResult = {
   crsLevel: string;
   crsCycle: string;
@@ -27,7 +34,9 @@ export type CourseDataResult = {
   brdDiv: string;
   gpxpath: string;
 };
-
+export type CourseItem = {
+  item: CourseDataResult;
+};
 export type Course = {
   items: {
     item: CourseDataResult[];
