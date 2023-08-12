@@ -11,7 +11,7 @@ export const SignInFormContainer = styled.div`
 
 export const SignInForm = styled(AntdForm)`
   min-width: 360px;
-  max-width: 800px;
+  max-width: 900px;
 `;
 
 export const ButtonContainer = styled(AntdForm.Item)`
