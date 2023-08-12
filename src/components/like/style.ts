@@ -1,10 +1,9 @@
 import { styled } from 'styled-components';
 
-export const likeContainer = styled.div`
+export const LikeContainer = styled.div`
   width: 100px;
   padding: 5px;
   display: flex;
-  flex-direction: row-reverse;
   align-items: baseline;
   gap: 5px;
   border: solid 1px #ddd;
