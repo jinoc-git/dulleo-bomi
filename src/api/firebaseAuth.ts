@@ -15,6 +15,7 @@ import { UserInfo } from '../zustand/UserStore';
 export const signInWithFB = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential;
   } catch (error) {
     if (error instanceof FirebaseError) {
       switch (error.code) {
@@ -87,8 +88,8 @@ export const signUpWithFB = async (
   }
 };
 
-// update profile
-const setUserProfileImageAndDisplayName = async (
+// set profile
+export const setUserProfileImageAndDisplayName = async (
   user: User,
   selectedFile: File,
   displayName: string,
@@ -120,4 +121,26 @@ export const checkNicknameDuplication = async (nickname: string): Promise<boolea
     query(collection(db, 'users'), where('displayName', '==', nickname)),
   );
   return !querySnapshot.empty;
+};
+
+export const updateUserProfileImage = async (user: User, selectedFile: File) => {
+  try {
+    const filePath = `profiles/${user.uid}/profile_picture`;
+    const imageRef = ref(storage, filePath);
+
+    await uploadBytes(imageRef, selectedFile);
+    const photoURL = await getDownloadURL(imageRef);
+
+    await updateProfile(user, { photoURL });
+  } catch (error) {
+
+  }
+};
+
+export const updateUserDisplayName = async (user: User, displayName: string) => {
+  try {
+    await updateProfile(user, { displayName });
+  } catch (error) {
+    
+  }
 };
