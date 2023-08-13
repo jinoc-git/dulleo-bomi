@@ -31,9 +31,9 @@ const Detail = () => {
   return (
     <main>
       <Layout>
-        <DetailInfo state={data[0]} />
-        <DetailMap state={data[0]} />
-        <CommentForm state={data[0]} />
+        <DetailInfo courseData={data[0]} />
+        <DetailMap path={data[0].gpxpath} />
+        <CommentForm crsKorNm={data[0].crsKorNm} />
         <CommentList />
       </Layout>
     </main>

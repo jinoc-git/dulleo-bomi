@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as St from './style';
 import { signInWithFB } from '../../api/firebaseAuth';
 import Layout from '../common/layout/Layout';
+import { useTextInput } from '../../hooks/useTextInput';
 
 type FailError = {
   isFail: boolean;
@@ -12,18 +13,10 @@ type FailError = {
 
 const SignInForm = () => {
   const [form] = Form.useForm();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useTextInput<string>('');
+  const [password, setPassword] = useTextInput<string>('');
   const [failLogin, setFailLogin] = useState<FailError>();
   const navigate = useNavigate();
-
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
 
   const onSubmitSignInHandler = async () => {
     try {
@@ -70,14 +63,14 @@ const SignInForm = () => {
               { type: 'email', message: '올바른 이메일 형식이 아닙니다.' },
             ]}
           >
-            <Input type="email" id="email" onChange={onChangeEmail} />
+            <Input type="email" id="email" onChange={setEmail} />
           </Form.Item>
           <Form.Item
             label="비밀번호"
             name="password"
             rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
           >
-            <Input type="password" id="password" onChange={onChangePassword} />
+            <Input type="password" id="password" onChange={setPassword} />
           </Form.Item>
           <St.ButtonContainer>
             <St.Button type="primary" htmlType="submit">
