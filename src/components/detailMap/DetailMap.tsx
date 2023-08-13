@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Map, MapTypeControl, Polyline, ZoomControl } from 'react-kakao-maps-sdk';
 import { CourseDataResult } from '../../@types/course/courseType';
+import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 import { fetchGPX } from '../../api/map';
 import * as St from './style';
 
@@ -10,7 +11,7 @@ const DetailMap = ({ path }: { path: string }) => {
   const { data, isLoading, isError } = useQuery(['gpx', path], () => fetchGPX({ path }));
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
   if (isError || !data || data.length === 0) {
     return <div>데이터를 불러오는 중에 오류가 발생했습니다.</div>;
@@ -41,8 +42,6 @@ const DetailMap = ({ path }: { path: string }) => {
           path={[polylinePath]}
           strokeWeight={7}
           strokeColor={'#994df0'}
-          // strokeColor={'#00ad96'} // 선의 색깔입니다
-          // strokeColor={'#003ab8'} // 선의 색깔입니다
           strokeOpacity={0.8}
           strokeStyle={'solid'}
         />
