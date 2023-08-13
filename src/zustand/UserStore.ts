@@ -1,6 +1,6 @@
 import { message } from 'antd';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import create from 'zustand';
+import { signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { create } from 'zustand';
 import { auth } from '../firebase/firebaseConfig';
 
 export type UserInfo = {
@@ -37,6 +37,9 @@ export const useUserStore = create<UserState>((set) => {
   };
 
   const refreshUserInfo = (userInfo: UserInfo) => {
+    if (auth.currentUser) {
+      updateProfile(auth.currentUser, userInfo);
+    }
     set((state) => ({ user: { ...state.user, ...userInfo }, isLoggedIn: true }));
   };
 

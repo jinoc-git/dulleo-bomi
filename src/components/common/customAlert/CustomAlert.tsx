@@ -20,7 +20,7 @@ const CustomAlert: React.FC = () => {
           알림
         </>
       }
-      visible={alertVisible}
+      open={alertVisible}
       onOk={handleOk}
       closable={false}
       footer={[
