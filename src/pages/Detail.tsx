@@ -33,7 +33,7 @@ const Detail = () => {
       <Layout>
         <DetailInfo state={data[0]} />
         <DetailMap state={data[0]} />
-        <CommentForm />
+        <CommentForm state={data[0]} />
         <CommentList />
       </Layout>
     </main>
