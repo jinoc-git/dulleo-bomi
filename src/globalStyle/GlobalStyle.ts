@@ -34,7 +34,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'TheJamsil5Bold';
     margin-bottom: 15px;
   }
-  h3 { font-size:1.5rem}
+  h3 { 
+    font-size:1.5rem;
+    font-family: 'TheJamsil5Bold';
+  }
   h4 {font-size:1rem;font-weight:bold}
   p,
   tr,
@@ -45,6 +48,9 @@ const GlobalStyles = createGlobalStyle`
   a:link, a:focus, a:active, a:visited, a:hover  {
         color: inherit
     }
+  ul {
+    list-style: none;
+  }
 `;
 
 export default GlobalStyles;
