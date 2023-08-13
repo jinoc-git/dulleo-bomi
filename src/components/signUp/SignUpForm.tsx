@@ -28,7 +28,7 @@ const SignUpForm = (): ReactElement => {
   const { passwordValidator, confirmPasswordValidator, nickNameValidator } =
     useSignUpFormValidator(form);
 
-  const onSubmit = async (values: unknown) => {
+  const onSubmitSignUpHandler = async (values: unknown) => {
     setIsLoading(true);
     const data = values as SignUpFormData;
     try {
@@ -61,7 +61,7 @@ const SignUpForm = (): ReactElement => {
       <St.SignUpFormContainer>
         <St.SignUpForm
           form={form}
-          onFinish={onSubmit}
+          onFinish={onSubmitSignUpHandler}
           name="validateOnly"
           layout="vertical"
           autoComplete="off"

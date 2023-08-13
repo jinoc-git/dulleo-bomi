@@ -4,11 +4,11 @@ import RoadList from '../components/roadList/RoadList';
 
 const Home = () => {
   return (
-    <>
+    <main>
       <Banner />
       <RoadList />
       <Carousel />
-    </>
+    </main>
   );
 };
 

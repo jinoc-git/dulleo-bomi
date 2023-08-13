@@ -17,16 +17,14 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
     .replace(/[<br>]/g, '')
     .split('-')
     .join('');
-  // .map((item) => item.trim());
-
-  // const a = fixedCrsTourInfoArr.shift();
 
   return (
     <St.InfoContainer>
-      <Typography>
-        <Title level={3}>{propsData.crsKorNm}</Title>
-      </Typography>
-      <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
+      <St.InfoBox>
+        <St.InfoTitle>{propsData.crsKorNm}</St.InfoTitle>
+        <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
+      </St.InfoBox>
+
       <Paragraph>
         <blockquote>
           <St.CourseInfo>

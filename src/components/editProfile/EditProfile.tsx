@@ -5,8 +5,8 @@ import { Form, Input, Spin, message } from 'antd';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { auth, db, storage } from '../../firebase/firebaseConfig';
-import { useInput } from '../../hooks/useInput';
 import useSignUpFormValidator from '../../hooks/useSignUpFormValidator';
+import { useTextInput } from '../../hooks/useTextInput';
 import { useModal } from '../../zustand/ModalStore';
 import { useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
@@ -21,8 +21,8 @@ export const EditProfileForm = () => {
   const [form] = Form.useForm();
   const { closeModal } = useModal();
 
-  const [password, onPasswordChangeHandler] = useInput('');
-  const [editNickname, onNicknameChangeHandler] = useInput('');
+  const [password, onPasswordChangeHandler] = useTextInput('');
+  const [editNickname, onNicknameChangeHandler] = useTextInput('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 

@@ -1,5 +1,4 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { eastRoad, southRoad, westRoad } from '../../assets';
 import Layout from '../common/layout/Layout';
@@ -8,9 +7,9 @@ import * as St from './style';
 const RoadList = () => {
   const navigate = useNavigate();
 
-  const goToSearchRouteList = useCallback((road: string) => {
+  const goToSearchRouteList = (road: string) => {
     navigate('/result', { state: { roadName: road } });
-  }, []);
+  };
   const queryClient = useQueryClient();
 
   const prefetchInfiniteCourse = async (roadName: string) => {
