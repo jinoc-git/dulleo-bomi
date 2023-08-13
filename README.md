@@ -52,16 +52,50 @@
 
 ### 6. API Table
 
-![screencapture-notion-so-915e42aa55a54ca9b0796922b9b4176a-2023-08-13-22_33_10](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/8b313a70-8b05-4a1e-b338-823bc82bc180)
+![screencapture-notion-so-915e42aa55a54ca9b0796922b9b4176a-2023-08-14-00_43_14](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/10111cf0-a3d6-41a4-a8e2-28d754962748)
 
 ### 7. 페이지
 
-**로그인/회원가입**
+### 로그인/회원가입
 
-**메인 페이지**
+![스크린샷 2023-08-14 002724](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/52f84349-7aa2-46b3-a374-67f41dde56d8)
 
-**검색 결과 페이지**
+회원가입 화면. 모든 인풋에 유효성 검증이 적용 되어있다.
 
-**상세 페이지**
+![스크린샷 2023-08-14 002707](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/63a561a9-3498-4bdc-803c-013c36b6e59e)
 
-**마이 페이지**
+로그인 화면이다. 로그아웃을 하면 위와 같이 메세지가 뜨면서 로그인 화면으로 자동으로 이동한다.
+
+### 메인 페이지
+
+![screencapture-localhost-3000-2023-08-14-00_23_36](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/3febc61d-3f42-49c8-9899-e9f43296b3c4)
+
+웹사이트 소개 및 코스여행이 가능한 길 종류와 관련 유튜브 영상콘텐츠를 볼 수 있다.
+
+### 검색 결과 페이지
+
+![screencapture-localhost-3000-result-2023-08-14-00_25_25](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/531bd4e3-4f81-41f8-8d70-26010de39416)
+
+길 종류에 따른 모든 코스를 확인하거나 검색이 가능하다.
+
+### 상세 페이지
+
+![screencapture-localhost-3000-detail-25-2023-08-14-00_26_08](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/aada3b61-6c81-47fb-ad80-27a726753f54)
+
+코스에 대한 상세설명 및 지도로 경로 확인, 코멘트 작성을 할 수 있다.
+(코멘트는 작성자에 한해 수정/삭제가 가능하다.)
+(마음에 드는 코스의 경우 '좋아요'로 코스정보를 저장 할 수 있다.)
+
+![스크린샷 2023-08-14 002602](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/793ed7a2-0b12-417f-8bee-c58ddb4928d1)
+
+데이터를 불러오는데 시간이 소요될 경우, Spiner를 적용해 유저가 로딩 중이라는 사실을 알 수 있게 했다.
+
+### 마이 페이지
+
+![screencapture-localhost-3000-mypage-2023-08-14-00_26_35](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/9614be0c-7303-4120-8e75-a9be8e62434d)
+
+마이 페이지에서는 내가 좋아요 한 코스목록과 작성한 댓글 목록, 내 정보 수정을 할 수 있다.
+
+![스크린샷 2023-08-14 002842](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/806a3642-f027-45a2-bb67-06feb7cac332)
+
+내 정보는 프로필 이미지와 닉네임만 수정 가능하다.
