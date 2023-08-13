@@ -5,14 +5,18 @@ export const CarouselContainer = styled.section`
 
   & .prev-button {
     position: absolute;
-    top: -50px;
-    right: 50px;
+    top: -32px;
+    right: 0;
   }
 
   & .next-button {
     position: absolute;
-    top: -50px;
+    top: 0;
     right: 0;
+    span {
+      position: relative;
+      top: 2px;
+    }
   }
 `;
 
