@@ -8,7 +8,7 @@ export const SliderItem = styled.div`
   cursor: pointer;
   img {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 30px;
     filter: brightness(0.7);
     transition: all 0.4s;
   }

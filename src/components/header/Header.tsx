@@ -31,8 +31,9 @@ const Header = () => {
           <St.UserBtnBox>
             {isLoggedIn && user ? (
               <>
-                <span>{user.displayName}님 반갑습니다</span>
+                <St.Welcome>{user.displayName}님 반갑습니다</St.Welcome>
                 <Avatar
+                  size={30}
                   src={user.photoURL}
                   alt="프로필 사진"
                   onClick={() => navigate('/mypage')}

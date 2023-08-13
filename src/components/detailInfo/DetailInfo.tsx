@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 import Like from '../like/Like';
 import * as St from './style';
 
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 
 const DetailInfo = ({ courseData }: { courseData: CourseDataResult }) => {
   const {
@@ -17,7 +17,7 @@ const DetailInfo = ({ courseData }: { courseData: CourseDataResult }) => {
     crsDstnc,
     brdDiv,
   } = courseData;
-  
+
   const hour = Math.floor(Number(crsTotlRqrmHour) / 60);
   const min = Number(crsTotlRqrmHour) % 60;
 

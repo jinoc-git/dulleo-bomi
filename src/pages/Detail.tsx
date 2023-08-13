@@ -32,7 +32,7 @@ const Detail = () => {
     <main>
       <Layout>
         <DetailInfo courseData={data[0]} />
-        <DetailMap path={data[0].gpxpath} />
+        <DetailMap path={data[0].gpxpath} roadName={data[0].crsKorNm} />
         <CommentForm crsKorNm={data[0].crsKorNm} />
         <CommentList />
       </Layout>
