@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { fetchCourseNotEncodeData } from '../api/course';
 import { CourseDataResult } from '../@types/course/courseType';
 
-const Detail = ({}) => {
+const Detail = () => {
   const [data, setData] = useState<CourseDataResult[]>();
   const { pathname } = useLocation();
   const path = pathname.split('/');
@@ -24,14 +24,15 @@ const Detail = ({}) => {
   }, [pathname]);
 
   if (!data) {
-    return <div>데이터가 없습니다.</div>;
+    // 데이터가 없을리가 없는데 로딩중이라고 하면 안되나요....?
+    return <div>Loading...</div>;
   }
 
   return (
     <main>
       <Layout>
         <DetailInfo state={data[0]} />
-        <DetailMap path={path[2]} />
+        <DetailMap state={data[0]} />
         <CommentForm />
         <CommentList />
       </Layout>

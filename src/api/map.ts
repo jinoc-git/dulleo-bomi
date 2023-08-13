@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { pathProps } from '../@types/course/courseType';
 
-// export const getFetchGPX = async () => {
-//   const GPX_URL = `https://www.durunubi.kr/editImgUp.do?filePath=/data/koreamobility/file/2021/09/46e0055b28ac46ea9420106c8939fa61.gpx`;
-//   console.log(GPX_URL);
-//   const res = await axios.get(`https://florentine-rustic-open.glitch.me/gpx?data=${GPX_URL}`);
-//   console.log(res);
+export const fetchGPX = async ({ path }: { path: string }): Promise<pathProps[]> => {
+  const { data } = await axios.get(`${process.env.REACT_APP_NODE_SERVER}/gpx?data=${path}`);
+  return data;
+};
 
-//   return res.data;
-// };
+export const fetchGPXONE = async ({ path }: { path: string }): Promise<pathProps[]> => {
+  const { data } = await axios.get(`${process.env.REACT_APP_NODE_SERVER}/gpxOne?data=${path}`);
+  return data;
+};

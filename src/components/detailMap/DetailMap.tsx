@@ -1,11 +1,14 @@
 import * as St from './style';
 import { Map, Polyline } from 'react-kakao-maps-sdk';
 import { useQuery } from '@tanstack/react-query';
-import { fetchGPX } from '../../api/course';
+import { fetchGPX } from '../../api/map';
+
+import { CourseDataResult } from '../../@types/course/courseType';
 
 // ***************issue : 이전의 지도가 보여지고 다시 리렌더링됨
 
-const DetailMap = ({ path }: { path: string }) => {
+const DetailMap = ({ state }: { state: CourseDataResult }) => {
+  const path = state.gpxpath;
   const { data, isLoading, isError } = useQuery(['gpx', path], () => fetchGPX({ path }));
 
   if (isLoading) {
@@ -24,24 +27,26 @@ const DetailMap = ({ path }: { path: string }) => {
   }));
 
   return (
-    <Map
-      center={centerData}
-      style={{
-        width: '100%',
-        height: '450px',
-      }}
-      level={8}
-    >
-      <Polyline
-        path={[polylinePath]}
-        strokeWeight={7}
-        strokeColor={'#994df0'}
-        // strokeColor={'#00ad96'} // 선의 색깔입니다
-        // strokeColor={'#003ab8'} // 선의 색깔입니다
-        strokeOpacity={0.8}
-        strokeStyle={'solid'}
-      />
-    </Map>
+    <St.MapContainer>
+      <Map
+        center={centerData}
+        style={{
+          width: '100%',
+          height: '450px',
+        }}
+        level={8}
+      >
+        <Polyline
+          path={[polylinePath]}
+          strokeWeight={7}
+          strokeColor={'#994df0'}
+          // strokeColor={'#00ad96'} // 선의 색깔입니다
+          // strokeColor={'#003ab8'} // 선의 색깔입니다
+          strokeOpacity={0.8}
+          strokeStyle={'solid'}
+        />
+      </Map>
+    </St.MapContainer>
   );
 };
 export default DetailMap;

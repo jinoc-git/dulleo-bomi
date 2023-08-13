@@ -1,6 +1,8 @@
 import { CourseDataResult } from '../../@types/course/courseType';
 import { Typography } from 'antd';
 import Like from '../like/Like';
+import * as St from './style';
+
 const { Title, Paragraph } = Typography;
 
 const DetailInfo = ({ state }: { state: CourseDataResult }) => {
@@ -11,58 +13,53 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
 
   const fixedCrsContents = propsData.crsContents.replace(/\-/g, '');
 
-  const fixedCrsTourInfoArr: string[] = propsData.crsTourInfo
+  const fixedCrsTourInfoArr: string = propsData.crsTourInfo
     .replace(/[<br>]/g, '')
     .split('-')
-    .map((item) => item.trim());
-  const a = fixedCrsTourInfoArr.shift();
+    .join('');
+  // .map((item) => item.trim());
+
+  // const a = fixedCrsTourInfoArr.shift();
 
   return (
-    <div>
-      <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
+    <St.InfoContainer>
       <Typography>
         <Title level={3}>{propsData.crsKorNm}</Title>
       </Typography>
-
+      <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
       <Paragraph>
         <blockquote>
-          <ul>
-            <li>
-              <span>{fixedCrsContents}</span>
-            </li>
-            <li>
-              <span>{propsData.sigun}</span>
-            </li>
-            <li>
-              <span>난이도 : {'⭐️'.repeat(Number(propsData.crsLevel))}</span>
-            </li>
-            <li>
-              <span>
-                관광포인트
-                <br />
-                {fixedCrsTourInfoArr.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      {item}
-                      <br />
-                    </div>
-                  );
-                })}
-              </span>
-            </li>
-            <li>
-              <span>코스길이: {propsData.crsDstnc}km</span>
-            </li>
-            <li>
-              <span>총 소요시간: {min > 0 ? `${hour}시간 ${min}분` : `${hour}시간`}</span>
-            </li>
-            <li>
-              <span>걷기 / 자전거 구분: {propsData.brdDiv == 'DNWW' ? '걷기길' : '자전거길'}</span>
-            </li>
-          </ul>
+          <St.CourseInfo>
+            <St.InfoList>
+              <span>코스 정보 </span>
+              <p>{fixedCrsContents}</p>
+            </St.InfoList>
+            <St.InfoList>
+              <span>위치 </span>
+              <p>{propsData.sigun}</p>
+            </St.InfoList>
+            <St.InfoList>
+              <span>난이도 </span>
+              <p>{'⭐️'.repeat(Number(propsData.crsLevel))}</p>
+            </St.InfoList>
+            <St.InfoList>
+              <span>관광포인트</span>
+              <p>{fixedCrsTourInfoArr}</p>
+            </St.InfoList>
+            <St.InfoList>
+              <span>코스길이 </span> <p>{propsData.crsDstnc}km</p>
+            </St.InfoList>
+            <St.InfoList>
+              <span>총 소요시간 </span> <p>{min > 0 ? `${hour}시간 ${min}분` : `${hour}시간`}</p>
+            </St.InfoList>
+            <St.InfoList>
+              <span>걷기 / 자전거 구분 </span>{' '}
+              <p>{propsData.brdDiv == 'DNWW' ? '걷기길' : '자전거길'}</p>
+            </St.InfoList>
+          </St.CourseInfo>
         </blockquote>
       </Paragraph>
-    </div>
+    </St.InfoContainer>
   );
 };
 export default DetailInfo;
