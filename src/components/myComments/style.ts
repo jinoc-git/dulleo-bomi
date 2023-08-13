@@ -29,3 +29,8 @@ export const CommentTitleParagraph = styled.p`
   font-size: 1rem;
   font-weight: bold;
 `;
+
+export const CommentContent = styled.p`
+  font-size: 1rem;
+  word-break: break-all;
+`;

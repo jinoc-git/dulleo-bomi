@@ -24,7 +24,7 @@ const MyComments = () => {
           return (
             <St.Commentitem key={comment.id}>
               <St.CommentTitleParagraph>{comment.writerNikName}</St.CommentTitleParagraph>
-              <p>{comment.content}</p>
+              <St.CommentContent>{comment.content}</St.CommentContent>
             </St.Commentitem>
           );
         })}
