@@ -1,0 +1,65 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "courseList": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    }
+  ],
+  "likes": [
+    {
+      "id": "0MXvFZwuc60S8SEMFYPG4",
+      "crsId": "T_CRS_MNG0000005310",
+      "crsName": "서해랑길 37코스",
+      "likedUserEmail": "song@test.com"
+    },
+    {
+      "id": "bXJhJPPGmH4NrXJSNRXPe",
+      "crsId": "T_CRS_MNG0000005375",
+      "crsName": "서해랑길 101코스",
+      "likedUserEmail": "song@test.com"
+    },
+    {
+      "id": "P4XfTBED5ZZ1iLhebKOKN",
+      "crsId": "T_CRS_MNG0000005278",
+      "crsName": "서해랑길 4코스",
+      "likedUserEmail": "song@test.com"
+    },
+    {
+      "id": "sD2-hLqeAleezlTuiNS6J",
+      "crsId": "T_CRS_MNG0000005298",
+      "crsName": "서해랑길 25코스",
+      "likedUserEmail": "song@test.com"
+    }
+  ]
+}

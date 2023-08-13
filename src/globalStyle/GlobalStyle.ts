@@ -8,29 +8,36 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 700;
     font-style: normal;
   }
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
   ${reset};
   *{
     box-sizing: border-box;
   }
-  body {
-    padding-top: 80px;
+  body { 
+    line-height: 1.4;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    color: #222;
   }
   h1 {
-    font-family: 'TheJamsil5Bold';
+    font-family: 'TheJamsil5Bold', sans-serif;
   }
-  th,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    /* font-family: 'omnigothic030'; */
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'TheJamsil5Bold', sans-serif;
+    margin-bottom: 15px;
   }
-  p,
-  tr,
-  span,
-  a {
-    /* font-family: 'omnigothic020'; */
+  h3 { 
+    font-size:1.5rem;
+    font-family: 'TheJamsil5Bold', sans-serif;
+  }
+  h4 {font-size:1rem;font-weight:bold}
+  a:link, a:focus, a:active, a:visited, a:hover  {
+        color: inherit
+    }
+  ul {
+    list-style: none;
   }
 `;
 
