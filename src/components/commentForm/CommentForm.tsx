@@ -1,10 +1,9 @@
-import { CourseDataResult } from '../../@types/course/courseType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
 import { AxiosError } from 'axios';
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addComment } from '../../api/comments';
 import { useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
@@ -20,12 +19,11 @@ export type CommentType = {
   timestamp: number;
 };
 
-const CommentForm = ({ state }: { state: CourseDataResult }) => {
-  const propsData = state;
+const CommentForm = ({ crsKorNm }: { crsKorNm: string }) => {
   const { id: crsId } = useParams();
   const [comment, setComment] = useState<string>('');
-
-  const { user } = useUserStore();
+  const navigate = useNavigate();
+  const { user, isLoggedIn } = useUserStore();
 
   const queryClient = useQueryClient();
   const addMutation = useMutation<
@@ -54,15 +52,20 @@ const CommentForm = ({ state }: { state: CourseDataResult }) => {
 
   const onSubmitCommentHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isLoggedIn || !user) {
+      message.warning('로그인이 필요합니다');
+      navigate('/');
+      return;
+    }
     if (!comment) return;
 
     const newComment: CommentType = {
       id: nanoid(),
       crsId: crsId as string,
-      crsName: propsData.crsKorNm,
-      writerNikName: user?.displayName || '익명',
-      writerEmail: user?.email || '',
-      writerPhotoURL: user?.photoURL || '',
+      crsName: crsKorNm,
+      writerNikName: user.displayName,
+      writerEmail: user.email,
+      writerPhotoURL: user.photoURL,
       content: comment,
       timestamp: Date.now(),
     };

@@ -5,15 +5,25 @@ import * as St from './style';
 
 const { Title, Paragraph } = Typography;
 
-const DetailInfo = ({ state }: { state: CourseDataResult }) => {
-  const propsData = state;
+const DetailInfo = ({ courseData }: { courseData: CourseDataResult }) => {
+  const {
+    crsTotlRqrmHour,
+    crsContents,
+    crsTourInfo,
+    crsKorNm,
+    crsIdx,
+    sigun,
+    crsLevel,
+    crsDstnc,
+    brdDiv,
+  } = courseData;
+  
+  const hour = Math.floor(Number(crsTotlRqrmHour) / 60);
+  const min = Number(crsTotlRqrmHour) % 60;
 
-  const hour = Math.floor(Number(propsData.crsTotlRqrmHour) / 60);
-  const min = Number(propsData.crsTotlRqrmHour) % 60;
+  const fixedCrsContents = crsContents.replace(/\-/g, '');
 
-  const fixedCrsContents = propsData.crsContents.replace(/\-/g, '');
-
-  const fixedCrsTourInfoArr: string = propsData.crsTourInfo
+  const fixedCrsTourInfoArr: string = crsTourInfo
     .replace(/[<br>]/g, '')
     .split('-')
     .join('');
@@ -21,8 +31,8 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
   return (
     <St.InfoContainer>
       <St.InfoBox>
-        <St.InfoTitle>{propsData.crsKorNm}</St.InfoTitle>
-        <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
+        <St.InfoTitle>{crsKorNm}</St.InfoTitle>
+        <Like crsName={crsKorNm} crsId={crsIdx} />
       </St.InfoBox>
 
       <Paragraph>
@@ -34,25 +44,24 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
             </St.InfoList>
             <St.InfoList>
               <span>위치 </span>
-              <p>{propsData.sigun}</p>
+              <p>{sigun}</p>
             </St.InfoList>
             <St.InfoList>
               <span>난이도 </span>
-              <p>{'⭐️'.repeat(Number(propsData.crsLevel))}</p>
+              <p>{'⭐️'.repeat(Number(crsLevel))}</p>
             </St.InfoList>
             <St.InfoList>
               <span>관광포인트</span>
               <p>{fixedCrsTourInfoArr}</p>
             </St.InfoList>
             <St.InfoList>
-              <span>코스길이 </span> <p>{propsData.crsDstnc}km</p>
+              <span>코스길이 </span> <p>{crsDstnc}km</p>
             </St.InfoList>
             <St.InfoList>
               <span>총 소요시간 </span> <p>{min > 0 ? `${hour}시간 ${min}분` : `${hour}시간`}</p>
             </St.InfoList>
             <St.InfoList>
-              <span>걷기 / 자전거 구분 </span>{' '}
-              <p>{propsData.brdDiv == 'DNWW' ? '걷기길' : '자전거길'}</p>
+              <span>걷기 / 자전거 구분 </span> <p>{brdDiv == 'DNWW' ? '걷기길' : '자전거길'}</p>
             </St.InfoList>
           </St.CourseInfo>
         </blockquote>
