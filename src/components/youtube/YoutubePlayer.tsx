@@ -20,8 +20,8 @@ const opts: YouTubeProps['opts'] = {
     volume: 0,
     iv_load_policy: 3,
     origin: window.location.origin,
-    widget_referrer : window.location.href
-  }
+    widget_referrer: window.location.href,
+  },
 };
 
 const YoutubePlayer = ({ id }: YoutubeType) => {
