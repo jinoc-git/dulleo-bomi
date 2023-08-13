@@ -1,7 +1,7 @@
-import * as St from './style';
-import { Map, Polyline } from 'react-kakao-maps-sdk';
 import { useQuery } from '@tanstack/react-query';
+import { Map, Polyline } from 'react-kakao-maps-sdk';
 import { fetchGPX } from '../../api/map';
+import * as St from './style';
 
 import { CourseDataResult } from '../../@types/course/courseType';
 

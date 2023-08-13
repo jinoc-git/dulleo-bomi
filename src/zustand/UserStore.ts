@@ -4,19 +4,19 @@ import create from 'zustand';
 import { auth } from '../firebase/firebaseConfig';
 
 export type UserInfo = {
-  displayName: string | null;
-  photoURL?: string | null;
-  email: string | null;
+  displayName: string;
+  photoURL: string;
+  email: string;
   id: string;
 };
 
 type UserState = {
-  user: Partial<UserInfo> | null;
+  user: UserInfo | null;
   isLoggedIn: boolean;
   setupAuthObserver: () => () => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshUserInfo: (userInfo: Partial<UserInfo>) => void;
+  refreshUserInfo: (userInfo: UserInfo) => void;
 };
 
 export const useUserStore = create<UserState>((set) => {
@@ -24,9 +24,9 @@ export const useUserStore = create<UserState>((set) => {
     return auth.onAuthStateChanged((user) => {
       if (user) {
         const userInfo: UserInfo = {
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          email: user.email,
+          displayName: user.displayName!,
+          photoURL: user.photoURL!,
+          email: user.email!,
           id: user.uid,
         };
         set({ user: userInfo, isLoggedIn: true });
@@ -36,7 +36,7 @@ export const useUserStore = create<UserState>((set) => {
     });
   };
 
-  const refreshUserInfo = (userInfo: Partial<UserInfo>) => {
+  const refreshUserInfo = (userInfo: UserInfo) => {
     set((state) => ({ user: { ...state.user, ...userInfo }, isLoggedIn: true }));
   };
 
