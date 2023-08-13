@@ -4,7 +4,6 @@ import Layout from '../common/layout/Layout';
 import TopButton from '../common/topButton/TopButton';
 import Like from '../like/Like';
 import * as St from './style';
-import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 
 type CourseResultProps = {
   searchKeyword?: string;

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const CommentsContaine = styled.div`
+export const CommentsContainer = styled.div`
   height: 500px;
   padding: 20px;
   flex-basis: 500px;

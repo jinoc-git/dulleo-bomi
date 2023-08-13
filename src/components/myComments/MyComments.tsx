@@ -3,23 +3,34 @@ import { useQuery } from '@tanstack/react-query';
 import { getMyComments } from '../../api/comments';
 import { useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
+import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 
 const MyComments = () => {
   const navigate = useNavigate();
   const { user } = useUserStore();
   const writerEmail = user?.email;
 
-  const { data, isError, isLoading } = useQuery(['comments', writerEmail as string], getMyComments);
+  const { data, isError, isLoading } = useQuery(
+    ['comments', writerEmail as string],
+    getMyComments,
+    {
+      enabled: !!user,
+    },
+  );
 
-  if (isLoading || !data) {
-    return <St.CommentsContaine>로딩중...</St.CommentsContaine>;
+  if (isLoading) {
+    return (
+      <St.CommentsContainer>
+        <LoadingSpinner />
+      </St.CommentsContainer>
+    );
   }
   if (isError || !data) {
-    return <St.CommentsContaine>오류가 생겼습니다.</St.CommentsContaine>;
+    return <St.CommentsContainer>오류가 생겼습니다.</St.CommentsContainer>;
   }
 
   return (
-    <St.CommentsContaine>
+    <St.CommentsContainer>
       <h3>내 댓글 목록</h3>
       <St.CommentsBox>
         {data.map((comment) => {
@@ -31,7 +42,7 @@ const MyComments = () => {
           );
         })}
       </St.CommentsBox>
-    </St.CommentsContaine>
+    </St.CommentsContainer>
   );
 };
 
