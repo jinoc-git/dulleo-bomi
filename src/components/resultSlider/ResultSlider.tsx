@@ -13,10 +13,10 @@ const ResultSlider = ({ roadName }: { roadName: string }) => {
   const _plugins = [new Perspective({ rotate: 0.5 })];
 
   const navigate = useNavigate();
-  const goToSearchRouteList = useCallback((road: string) => {
+  const goToSearchRouteList = (road: string) => {
     navigate('/result', { state: { roadName: road } });
     window.scrollTo(0, 700); //ref?
-  }, []);
+  };
 
   return (
     <St.SliderContainer>
