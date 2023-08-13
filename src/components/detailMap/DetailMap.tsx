@@ -3,6 +3,8 @@ import { Map, MapTypeControl, Polyline, ZoomControl } from 'react-kakao-maps-sdk
 import { useQuery } from '@tanstack/react-query';
 import { fetchGPX } from '../../api/map';
 import { CourseDataResult } from '../../@types/course/courseType';
+import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
+import Layout from '../common/layout/Layout';
 
 // ***************issue : 이전의 지도가 보여지고 다시 리렌더링됨
 
@@ -11,7 +13,7 @@ const DetailMap = ({ state }: { state: CourseDataResult }) => {
   const { data, isLoading, isError } = useQuery(['gpx', path], () => fetchGPX({ path }));
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
   if (isError || !data || data.length === 0) {
     return <div>데이터를 불러오는 중에 오류가 발생했습니다.</div>;

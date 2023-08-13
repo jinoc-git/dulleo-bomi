@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { CourseDataResult } from '../../@types/course/courseType';
 import useInfiniteGetCourse from '../../hooks/useInfiniteGetCourse';
 import Layout from '../common/layout/Layout';
 import TopButton from '../common/topButton/TopButton';
 import Like from '../like/Like';
 import * as St from './style';
+import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 
 type CourseResultProps = {
   searchKeyword?: string;
@@ -39,15 +39,17 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
         {filteredCourseList.map((item) => {
           return (
             <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsKorNm)}>
-              <St.CourseName>{item.crsKorNm}</St.CourseName>
-              <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+              <St.CourseTitBox>
+                <St.CourseName>{item.crsKorNm}</St.CourseName>
+                <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+              </St.CourseTitBox>
               <St.CourseInfo>
                 {item.crsCycle} Lv.{item.crsLevel}
               </St.CourseInfo>
               <St.CourseInfo>{item.sigun}</St.CourseInfo>
               <St.CourseInfo>
                 {item.crsContents
-                  .replace(/[<br>]/g, '')
+                  .replace(/[<br>'-]/g, '')
                   .split('-')
                   .join('')}
               </St.CourseInfo>
