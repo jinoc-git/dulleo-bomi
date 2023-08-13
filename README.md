@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# 🚵🏻‍♂️ 둘러보미
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+한국 레저여행에 대해 코스정보를 중심으로 주변 관광정보를 제공하는 웹사이트
 
-## Available Scripts
+2023.08.07-2023.08.13
 
-In the project directory, you can run:
+### 🧷 팀원
 
-### `yarn start`
+| 노진철 | 유희정 | 양지원 | 송현섭 | 양현서 |
+| ------ | ------ | ------ | ------ | ------ |
+| `팀장` | 팀원   | 팀원   | 팀원   | 팀원   |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🧷 목차
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [1. 프로젝트 소개](#1-프로젝트-소개)
+- [2. 배포 주소](#2-배포-주소)
+- [3. S.A (Starting Assignments)](#3-sa-starting-assignments)
+- [4. 기술스택](#4-기술스택)
+- [5. Project Structure](#5-project-structure)
+- [6. API Table](#6-api-table)
+- [7. 페이지](#7-페이지)
 
-### `yarn test`
+### 1. 프로젝트 소개
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**🚵🏻‍♂️ 둘러보미 🚵🏻‍♂️** (community meeting service)
 
-### `yarn build`
+"환영합니다! 둘러보미는 즐거운 한국 레저여행을 지원하는 웹사이트입니다." 우리의 목표는 다양한 레저활동 코스와 함께 주변 관광정보를 제공하여 여러분들의 여행이 최고의 경험이 될 수 있도록 도와드립니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> 걷기, 자전거 등 인간의 힘을 이용한 레저여행에 대해 코스정보를 중심으로 주변 관광정보를 종합 제공하는 통합여행정보 서비스인 '두루누비'의 길 정보와 코스 정보를 제공합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 카카오맵을 활용하고 있어 코스경로를 직관적으로 확인하실 수 있습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. 배포 주소
 
-### `yarn eject`
+[🚵🏻‍♂️둘러보미](배포주소 들어갈 자리)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 3. S.A (Starting Assignments)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[S.A 문서 링크](https://www.notion.so/d057779341f94f5d92d1105cbcccabe4?pvs=4)
+![image](https://github.com/setItUpLater/comeit/assets/130683029/0c2eef05-5ab8-43c5-9be1-39265ec622fc)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 4. 기술스택
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"><img src="https://img.shields.io/badge/reactrouterdom-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"><img src="https://img.shields.io/badge/ZUSTAND-764ABC?style=for-the-badge&logo=&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/antdesign-0170FE?style=for-the-badge&logo=antdesign&logoColor=white"><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/kakaomap-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/jsonSever-000000?style=for-the-badge&logo=json&logoColor=white">
 
-## Learn More
+### 5. Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://github.com/HyunseoY/GOE_CINEMA/assets/130683029/586f2a79-4909-40ca-a790-78e811b335fd)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 6. API Table
+
+![screencapture-notion-so-915e42aa55a54ca9b0796922b9b4176a-2023-08-13-22_33_10](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/8b313a70-8b05-4a1e-b338-823bc82bc180)
+
+### 7. 페이지
+
+**로그인/회원가입**
+
+**메인 페이지**
+
+**검색 결과 페이지**
+
+**상세 페이지**
+
+**마이 페이지**
