@@ -6,7 +6,6 @@ export type pathProps = {
 export type PageRoadProps = {
   roadName: string;
 };
-
 export type CourseDataResult = {
   crsLevel: string;
   crsCycle: string;

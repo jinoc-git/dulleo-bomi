@@ -3,6 +3,7 @@ import SearchForm from '../components/searchForm/SearchForm';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import ResultSlider from '../components/resultSlider/ResultSlider';
 import { styled } from 'styled-components';
 
 const SearchResult = () => {
@@ -19,6 +20,7 @@ const SearchResult = () => {
 
   return (
     <SearchResultContainer>
+      <ResultSlider roadName={state.roadName} />
       <SearchForm
         setSearchKeyword={setSearchKeyword}
         setSelectKeyword={setSelectKeyword}

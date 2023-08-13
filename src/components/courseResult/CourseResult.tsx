@@ -45,7 +45,12 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
                 {item.crsCycle} Lv.{item.crsLevel}
               </St.CourseInfo>
               <St.CourseInfo>{item.sigun}</St.CourseInfo>
-              <St.CourseInfo>{item.crsContents}</St.CourseInfo>
+              <St.CourseInfo>
+                {item.crsContents
+                  .replace(/[<br>]/g, '')
+                  .split('-')
+                  .join('')}
+              </St.CourseInfo>
             </St.CourseBox>
           );
         })}
