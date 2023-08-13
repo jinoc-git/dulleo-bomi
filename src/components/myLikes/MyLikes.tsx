@@ -13,7 +13,7 @@ const MyLikes = () => {
   const { data, isError, isLoading } = useQuery(['likes', userEmail as string], getMyLikes);
 
   if (isLoading || !data) {
-    return <St.LikesContaine>로딩중...</St.LikesContaine>;
+    return <St.LikesContaine></St.LikesContaine>;
   }
   if (isError || !data) {
     return <St.LikesContaine>오류가 생겼습니다.</St.LikesContaine>;
