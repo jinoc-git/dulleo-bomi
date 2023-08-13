@@ -7,12 +7,10 @@ export const WrapBox = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
 export const Logo = styled(Link)`
   width: 200px;
   height: 60px;
 `;
-
 export const LogoImg = styled.img`
   height: 100%;
 `;
@@ -38,4 +36,14 @@ export const UserBtnBox = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+`;
+export const Welcome = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+export const Avatar = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
