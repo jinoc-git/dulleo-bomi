@@ -5,6 +5,7 @@ import * as St from './style';
 import { signInWithFB } from '../../api/firebaseAuth';
 import Layout from '../common/layout/Layout';
 import { useTextInput } from '../../hooks/useTextInput';
+import { useUserStore } from '../../zustand/UserStore';
 
 type FailError = {
   isFail: boolean;
@@ -16,11 +17,13 @@ const SignInForm = () => {
   const [email, setEmail] = useTextInput<string>('');
   const [password, setPassword] = useTextInput<string>('');
   const [failLogin, setFailLogin] = useState<FailError>();
+  const setUserCredential = useUserStore((state) => state.setUserCredential);
   const navigate = useNavigate();
 
   const onSubmitSignInHandler = async () => {
     try {
-      await signInWithFB(email, password);
+      const userCredential = await signInWithFB(email, password);
+      setUserCredential(userCredential);
       navigate('/');
     } catch (error) {
       if (error instanceof Error) {

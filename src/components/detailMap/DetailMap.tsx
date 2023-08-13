@@ -1,11 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Map, MapTypeControl, Polyline, ZoomControl } from 'react-kakao-maps-sdk';
-import { CourseDataResult } from '../../@types/course/courseType';
 import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 import { fetchGPX } from '../../api/map';
 import * as St from './style';
-
-// ***************issue : 이전의 지도가 보여지고 다시 리렌더링됨
 
 const DetailMap = ({ path }: { path: string }) => {
   const { data, isLoading, isError } = useQuery(['gpx', path], () => fetchGPX({ path }));

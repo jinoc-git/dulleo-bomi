@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import { Button } from 'antd';
-import { LeftCircleOutlined, RightCircleOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftCircleOutlined, RightOutlined } from '@ant-design/icons';
 
 let moving = false;
 

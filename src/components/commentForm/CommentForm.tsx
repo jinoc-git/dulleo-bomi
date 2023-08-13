@@ -77,8 +77,11 @@ const CommentForm = ({ crsKorNm }: { crsKorNm: string }) => {
   return (
     <St.CommentFormContainer>
       <St.CommentForm onSubmit={onSubmitCommentHandler}>
-        <Input value={comment} onChange={({ target }) => setComment(target.value)} />
-        <Button htmlType="submit">작성</Button>
+        <St.InputLabel>댓글입력</St.InputLabel>
+        <St.InputBox>
+          <Input value={comment} onChange={({ target }) => setComment(target.value)} />
+          <Button htmlType="submit">작성</Button>
+        </St.InputBox>
       </St.CommentForm>
     </St.CommentFormContainer>
   );

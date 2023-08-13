@@ -1,15 +1,16 @@
-import { doc, updateDoc } from '@firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from '@firebase/storage';
-import { useMutation } from '@tanstack/react-query';
 import { Form, Input, Spin, message } from 'antd';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { auth, db, storage } from '../../firebase/firebaseConfig';
-import useSignUpFormValidator from '../../hooks/useSignUpFormValidator';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { auth } from '../../firebase/firebaseConfig';
 import { useTextInput } from '../../hooks/useTextInput';
 import { useModal } from '../../zustand/ModalStore';
-import { useUserStore } from '../../zustand/UserStore';
+import { UserInfo, useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
+import {
+  setUserProfileImageAndDisplayName,
+  updateUserDisplayName,
+  updateUserProfileImage,
+} from '../../api/firebaseAuth';
 
 export const EditProfileForm = () => {
   const { user, refreshUserInfo } = useUserStore((state) => ({
@@ -17,7 +18,7 @@ export const EditProfileForm = () => {
     refreshUserInfo: state.refreshUserInfo,
   }));
 
-  const { photoURL, email, id } = user ?? {};
+  const { photoURL, email, displayName } = user ?? {};
   const [form] = Form.useForm();
   const { closeModal } = useModal();
 
@@ -29,24 +30,6 @@ export const EditProfileForm = () => {
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  const { nickNameValidator } = useSignUpFormValidator(form);
-
-  const updateProfile = async () => {
-    if (!email) {
-      setErrorMessage('이메일이 없습니다.');
-      return;
-    }
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-    if (userCredential) {
-      if (id) {
-        await updateDoc(doc(db, 'users', id), {
-          displayName: editNickname,
-        });
-      }
-    }
-  };
-
   const resetInputs = () => {
     setErrorMessage('');
     form.setFieldsValue({
@@ -55,45 +38,11 @@ export const EditProfileForm = () => {
     });
   };
 
-  useEffect(() => {
-    return () => {
-      resetInputs();
-    };
-  }, []);
-
-  console.log('닉네임', editNickname);
-  console.log('비번', password);
-
-  const { mutate } = useMutation({
-    mutationFn: updateProfile,
-    onMutate: () => {
-      setIsLoading(true);
-    },
-    onSuccess: async () => {
-      if (!user || !id) return;
-      refreshUserInfo({ ...user, displayName: editNickname }); // 먼저 닉네임 변경 반영
-
-      if (imgFile) {
-        const imageRef = ref(storage, `profiles/${id}`);
-        await uploadBytes(imageRef, imgFile);
-        const attachmentUrl = await getDownloadURL(imageRef);
-        updateDoc(doc(db, 'users', id), { photoURL: attachmentUrl });
-
-        refreshUserInfo({ ...user, photoURL: attachmentUrl, displayName: editNickname }); // 변경된 이미지도 반영
-      }
-
-      await message.success('프로필이 수정되었습니다.');
-      resetInputs();
-      closeModal();
-      setIsLoading(false);
-    },
-    onError: (error: any) => {
-      if (error.code === 'auth/wrong-password') {
-        setErrorMessage('비밀번호가 틀립니다.');
-        setIsLoading(false);
-      }
-    },
-  });
+  const afterSubmit = () => {
+    resetInputs();
+    closeModal();
+    setIsLoading(false);
+  };
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -107,9 +56,53 @@ export const EditProfileForm = () => {
     }
   };
 
-  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
-    mutate();
+  const submitHandler = async () => {
+    setIsLoading(true);
+    const isSameImage = imgFile === null;
+    const isSameDispalyName = displayName === editNickname;
+    try {
+      if (!email) return;
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      if (isSameDispalyName && isSameImage) {
+        afterSubmit();
+        return;
+      } else if (isSameImage) {
+        await updateUserDisplayName(userCredential.user, editNickname);
+      } else if (isSameDispalyName) {
+        await updateUserProfileImage(userCredential.user, imgFile);
+      } else {
+        await setUserProfileImageAndDisplayName(userCredential.user, imgFile, editNickname);
+      }
+
+      if (auth.currentUser) {
+        const updateUser: UserInfo = {
+          displayName: auth.currentUser.displayName!,
+          photoURL: auth.currentUser.photoURL!,
+          email: auth.currentUser.email!,
+          id: auth.currentUser.uid,
+        };
+        refreshUserInfo(updateUser);
+      }
+
+      afterSubmit();
+      message.success('프로필이 수정되었습니다.');
+    } catch (error: any) {
+      if (error.code === 'auth/wrong-password') {
+        setErrorMessage('비밀번호가 틀립니다.');
+        setIsLoading(false);
+      } else {
+        setErrorMessage('알 수 없는 오류가 발생했습니다.');
+        setIsLoading(false);
+      }
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      resetInputs();
+    };
+  }, []);
 
   return (
     <St.ProfileContainer>
@@ -138,7 +131,6 @@ export const EditProfileForm = () => {
           rules={[
             { required: true, message: '닉네임을 입력해주세요.' },
             { min: 2, max: 6, message: '닉네임은 2~6글자로 제한됩니다.' },
-            nickNameValidator,
           ]}
         >
           <Input onChange={onNicknameChangeHandler} placeholder="닉네임 입력" />

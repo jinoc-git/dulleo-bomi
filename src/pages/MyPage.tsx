@@ -38,9 +38,7 @@ const MyPage = () => {
 const ListSection = styled.section`
   width: 100%;
   display: flex;
-  /* justify-content: center; */
   gap: 15px;
-  /* flex-flow: row wrap; */
 
   @media screen and (max-width: 1024px) {
     display: flex;

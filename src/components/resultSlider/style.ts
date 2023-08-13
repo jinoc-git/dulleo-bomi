@@ -5,7 +5,6 @@ export const SliderContainer = styled.section`
 `;
 export const SliderItem = styled.div`
   position: relative;
-  /* padding: 0 80px; */
   cursor: pointer;
   img {
     width: 100%;
@@ -23,6 +22,12 @@ export const SliderItem = styled.div`
     text-align: right;
     p {
       font-size: 2rem;
+    }
+    @media screen and (max-width: 768px) {
+      font-size: 0.7rem;
+      p {
+        font-size: 1.2rem;
+      }
     }
   }
   &:hover {

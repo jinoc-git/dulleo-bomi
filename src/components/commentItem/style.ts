@@ -6,7 +6,7 @@ export const CommentItemContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  padding: 5px 0;
+  padding: 12px;
   border-bottom: 1px solid #dcdcdc;
 
   &:last-child {
@@ -35,6 +35,7 @@ export const CommentWriterName = styled.p`
 
 export const CommentTime = styled.p`
   color: #aaa;
+  font-size: 0.8rem;
 `;
 
 export const CommentContent = styled.p`
