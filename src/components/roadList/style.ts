@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 export const RoadListContainer = styled.section`
+  margin-bottom: 50px;
   & > div {
     display: flex;
     justify-content: space-between;
