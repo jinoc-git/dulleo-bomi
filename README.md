@@ -13,10 +13,10 @@
 ### 🧷 목차
 
 - [1. 프로젝트 소개](#1-프로젝트-소개)
-- [2. 배포 주소](#2-배포-주소)
-- [3. S.A (Starting Assignments)](#3-sa-starting-assignments)
-- [4. 기술스택](#4-기술스택)
-- [5. Project Structure](#5-project-structure)
+- [2. 기술스택](#2-기술스택)
+- [3. Project Structure](#3-project-structure)
+- [4. 배포 주소](#4-배포-주소)
+- [5. S.A (Starting Assignments)](#5-sa-starting-assignments)
 - [6. API Table](#6-api-table)
 - [7. 페이지](#7-페이지)
 
@@ -32,23 +32,23 @@
 
 > 카카오맵을 활용하고 있어 코스경로를 직관적으로 확인하실 수 있습니다.
 
-### 2. 배포 주소
+### 2. 기술스택
+
+<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"><img src="https://img.shields.io/badge/reactrouterdom-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"><img src="https://img.shields.io/badge/ZUSTAND-764ABC?style=for-the-badge&logo=&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/antdesign-0170FE?style=for-the-badge&logo=antdesign&logoColor=white"><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/kakaomap-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/jsonSever-000000?style=for-the-badge&logo=json&logoColor=white">
+
+### 3. Project Structure
+
+![image](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/8ed13655-4be3-4c4f-b0ec-fb9ce32db3a0)
+
+### 4. 배포 주소
 
 [🚵🏻‍♂️둘러보미](배포주소 들어갈 자리)
 
-### 3. S.A (Starting Assignments)
+### 5. S.A (Starting Assignments)
 
 [S.A 문서 링크](https://www.notion.so/d057779341f94f5d92d1105cbcccabe4?pvs=4)
 
 ![image](https://github.com/setItUpLater/comeit/assets/130683029/0c2eef05-5ab8-43c5-9be1-39265ec622fc)
-
-### 4. 기술스택
-
-<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"><img src="https://img.shields.io/badge/reactrouterdom-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"><img src="https://img.shields.io/badge/ZUSTAND-764ABC?style=for-the-badge&logo=&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/antdesign-0170FE?style=for-the-badge&logo=antdesign&logoColor=white"><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/kakaomap-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/jsonSever-000000?style=for-the-badge&logo=json&logoColor=white">
-
-### 5. Project Structure
-
-![image](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/8ed13655-4be3-4c4f-b0ec-fb9ce32db3a0)
 
 ### 6. API Table
 
@@ -90,7 +90,7 @@
 
 데이터를 불러오는데 시간이 소요될 경우, Spiner를 적용해 유저가 로딩 중이라는 사실을 알 수 있게 했다.
 
-### 마이 페이지
+### 마이 페이지\*\*
 
 ![screencapture-localhost-3000-mypage-2023-08-14-00_26_35](https://github.com/jinoc-git/dulleo-bomi/assets/130683029/9614be0c-7303-4120-8e75-a9be8e62434d)
 
