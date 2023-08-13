@@ -5,7 +5,7 @@ import { Form, Input, message } from 'antd';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { auth, db, storage } from '../../firebase/firebaseConfig';
-import { useInput } from '../../hooks/useInput';
+import { useTextInput } from '../../hooks/useInput';
 import { useModal } from '../../zustand/ModalStore';
 import { useUserStore } from '../../zustand/UserStore';
 import * as St from './style';
@@ -19,9 +19,9 @@ export const EditProfileForm = () => {
   const { closeModal } = useModal();
   const { photoURL, email, id } = user ?? {};
 
-  const [password, onPasswordChangeHandler] = useInput('');
-  const [confirmPassword, onConfirmPasswordChangeHandler] = useInput('');
-  const [editNickname, onNicknameChangeHandler] = useInput('');
+  const [password, onPasswordChangeHandler] = useTextInput('');
+  const [confirmPassword, onConfirmPasswordChangeHandler] = useTextInput('');
+  const [editNickname, onNicknameChangeHandler] = useTextInput('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const [imgFile, setImgFile] = useState<File | null>(null);
