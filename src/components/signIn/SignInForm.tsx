@@ -25,9 +25,10 @@ const SignInForm = () => {
     setPassword(e.target.value);
   };
 
-  const onSubmit = async () => {
+  const onSubmitSignInHandler = async () => {
     try {
       await signInWithFB(email, password);
+      navigate('/');
     } catch (error) {
       if (error instanceof Error) {
         setFailLogin({ isFail: true, message: error.message });
@@ -44,7 +45,7 @@ const SignInForm = () => {
       <St.SignInFormContainer>
         <St.SignInForm
           form={form}
-          onFinish={onSubmit}
+          onFinish={onSubmitSignInHandler}
           name="login"
           layout="vertical"
           initialValues={{ remember: true }}

@@ -1,3 +1,4 @@
+import { CourseDataResult } from '../../@types/course/courseType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, Input } from 'antd';
 import { AxiosError } from 'axios';
@@ -11,6 +12,7 @@ import * as St from './style';
 export type CommentType = {
   id: string;
   crsId: string;
+  crsName: string;
   writerNikName: string;
   writerEmail: string;
   writerPhotoURL: string;
@@ -18,7 +20,8 @@ export type CommentType = {
   timestamp: number;
 };
 
-const CommentForm = () => {
+const CommentForm = ({ state }: { state: CourseDataResult }) => {
+  const propsData = state;
   const { id: crsId } = useParams();
   const [comment, setComment] = useState<string>('');
 
@@ -56,6 +59,7 @@ const CommentForm = () => {
     const newComment: CommentType = {
       id: nanoid(),
       crsId: crsId as string,
+      crsName: propsData.crsKorNm,
       writerNikName: user?.displayName || '익명',
       writerEmail: user?.email || '',
       writerPhotoURL: user?.photoURL || '',

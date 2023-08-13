@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import * as St from './style';
 import { Button, Input, Space, Select } from 'antd';
 
@@ -27,15 +27,12 @@ const SearchForm = ({ setSearchKeyword, setSelectKeyword, roadName }: SearchForm
     },
   ];
 
-  const onSubmitSearchHandler = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setSearchKeyword(searchValue);
-      setSelectKeyword(selectedValue);
-      setSearchValue('');
-    },
-    [searchValue, selectedValue],
-  );
+  const onSubmitSearchHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchKeyword(searchValue);
+    setSelectKeyword(selectedValue);
+    setSearchValue('');
+  };
 
   return (
     <St.SearchFormContainer onSubmit={onSubmitSearchHandler}>

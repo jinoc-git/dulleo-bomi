@@ -6,7 +6,7 @@ export const SignUpFormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 120px - 235.97px);
+  min-height: calc(100vh - 180px - 235.97px);
 `;
 
 export const SignUpForm = styled(AntdForm)`

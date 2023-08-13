@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useUserStore } from '../../zustand/UserStore';
 import { nanoid } from 'nanoid';
 import { getLikes, addLike, deleteLike } from '../../api/likes';
 import * as St from './style';
+import { message } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 
 export type LikeType = {
@@ -25,6 +26,8 @@ type LikePropsType = {
 };
 
 const Like = ({ crsName, crsId }: LikePropsType) => {
+  const navigate = useNavigate();
+
   const { user } = useUserStore();
   const userEmail = user?.email || '';
   const { data } = useQuery(['Likes', crsId as string], getLikes);
@@ -79,7 +82,11 @@ const Like = ({ crsName, crsId }: LikePropsType) => {
 
   const switchLike = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
-    if (!user) return;
+    if (!user) {
+      message.error('로그인이 필요합니다');
+      navigate('/signin');
+      return;
+    }
 
     const newLike: LikeType = {
       id: nanoid(),

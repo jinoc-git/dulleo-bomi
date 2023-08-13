@@ -1,8 +1,7 @@
 import * as St from './style';
-import { Map, Polyline } from 'react-kakao-maps-sdk';
+import { Map, MapTypeControl, Polyline, ZoomControl } from 'react-kakao-maps-sdk';
 import { useQuery } from '@tanstack/react-query';
 import { fetchGPX } from '../../api/map';
-
 import { CourseDataResult } from '../../@types/course/courseType';
 
 // ***************issue : 이전의 지도가 보여지고 다시 리렌더링됨
@@ -30,12 +29,15 @@ const DetailMap = ({ state }: { state: CourseDataResult }) => {
     <St.MapContainer>
       <Map
         center={centerData}
+        zoomable={false}
         style={{
           width: '100%',
           height: '450px',
         }}
         level={8}
       >
+        <ZoomControl position={window.kakao.maps.ControlPosition.BOTTOMRIGHT} />
+        <MapTypeControl position={window.kakao.maps.ControlPosition.TOPRIGHT} />
         <Polyline
           path={[polylinePath]}
           strokeWeight={7}

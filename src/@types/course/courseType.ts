@@ -2,6 +2,7 @@ export type pathProps = {
   lat: number;
   lon: number;
 };
+
 export type PageRoadProps = {
   roadName: string;
 };
@@ -24,9 +25,11 @@ export type CourseDataResult = {
   brdDiv: string;
   gpxpath: string;
 };
+
 export type CourseItem = {
   item: CourseDataResult;
 };
+
 export type Course = {
   items: {
     item: CourseDataResult[];

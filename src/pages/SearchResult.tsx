@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import ResultSlider from '../components/resultSlider/ResultSlider';
+import { styled } from 'styled-components';
 
 const SearchResult = () => {
   const { state } = useLocation();
@@ -18,7 +19,7 @@ const SearchResult = () => {
   }, []);
 
   return (
-    <main>
+    <SearchResultContainer>
       <ResultSlider roadName={state.roadName} />
       <SearchForm
         setSearchKeyword={setSearchKeyword}
@@ -29,8 +30,12 @@ const SearchResult = () => {
         searchKeyword={searchKeyword}
         roadName={selectKeyword ? selectKeyword : state.roadName}
       />
-    </main>
+    </SearchResultContainer>
   );
 };
 
 export default SearchResult;
+
+const SearchResultContainer = styled.main`
+  min-height: calc(100vh - 150px - 235.97px);
+`;
