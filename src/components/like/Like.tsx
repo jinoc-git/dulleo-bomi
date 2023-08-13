@@ -8,6 +8,7 @@ import { getLikes, addLike, deleteLike } from '../../api/likes';
 import * as St from './style';
 import { message } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import useLikeMutation from '../../hooks/useLikeMutation';
 
 export type LikeType = {
   id: string;
@@ -16,7 +17,7 @@ export type LikeType = {
   likedUserEmail: string;
 };
 
-type LikeStateType = {
+export type LikeStateType = {
   isChecked: boolean;
 };
 
@@ -25,59 +26,32 @@ type LikePropsType = {
   crsName: string;
 };
 
+let isChanged = false;
+
 const Like = ({ crsName, crsId }: LikePropsType) => {
   const navigate = useNavigate();
 
   const { user } = useUserStore();
   const userEmail = user?.email || '';
-  const { data } = useQuery(['Likes', crsId as string], getLikes);
+  const { data } = useQuery(['likes', crsId], getLikes);
 
   const [likeId, setLikeId] = useState<string>('');
-  const [likesCount, setLikesCount] = useState<number>(0);
-  const [likeState, setLikeState] = useState<LikeStateType>({
-    isChecked: false,
-  });
+  const [likeState, setLikeState] = useState<boolean>(false);
+  const [likeListOfCourse, setLikeListOfCourse] = useState<LikeType[]>([]);
 
   useEffect(() => {
-    setLikesCount(data?.length || 0);
+    if (data) {
+      setLikeListOfCourse(data);
+      const userLiked = data.find((like) => like.likedUserEmail === userEmail);
+      setLikeState(!!userLiked);
+      setLikeId(userLiked?.id || '');
+    }
   }, [data]);
 
-  let userLike = data?.find((like) => like.likedUserEmail === userEmail);
-  useEffect(() => {
-    if (userLike) {
-      setLikeId(userLike.id || '');
-    }
-  }, [userLike]);
-
-  let isLiked = data?.find((like) => like.likedUserEmail === userEmail);
-  useEffect(() => {
-    if (isLiked) {
-      setLikeState({
-        isChecked: true,
-      });
-    }
-  }, [isLiked]);
-
-  const queryClient = useQueryClient();
-  const addMutation = useMutation<void, AxiosError, LikeType>(addLike, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['likes']);
-      setLikeState({ isChecked: true });
-      setLikesCount((pre) => pre + 1);
-    },
-    onError: () => {
-      setLikeState({ isChecked: false });
-    },
-  });
-  const deleteMutation = useMutation(deleteLike, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['likes']);
-      setLikeState({ isChecked: false });
-      setLikesCount((pre) => pre - 1);
-    },
-    onError: () => {
-      setLikeState({ isChecked: true });
-    },
+  const { addMutation, deleteMutation } = useLikeMutation({
+    crsId,
+    setLikeState,
+    isChanged
   });
 
   const switchLike = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -87,6 +61,7 @@ const Like = ({ crsName, crsId }: LikePropsType) => {
       navigate('/signin');
       return;
     }
+    if (isChanged) return;
 
     const newLike: LikeType = {
       id: nanoid(),
@@ -95,11 +70,11 @@ const Like = ({ crsName, crsId }: LikePropsType) => {
       likedUserEmail: userEmail,
     };
 
-    if (likeState.isChecked) {
+    if (likeState) {
       deleteMutation.mutate(likeId);
       setLikeId('');
     }
-    if (!likeState.isChecked) {
+    if (!likeState) {
       addMutation.mutate(newLike);
       setLikeId(newLike.id);
     }
@@ -107,12 +82,12 @@ const Like = ({ crsName, crsId }: LikePropsType) => {
 
   return (
     <St.LikeContainer>
-      {likeState.isChecked ? (
+      {likeState ? (
         <HeartFilled style={{ fontSize: '20px' }} onClick={switchLike} />
       ) : (
         <HeartOutlined style={{ fontSize: '20px' }} onClick={switchLike} />
       )}
-      <St.LikeCount>{likesCount}</St.LikeCount>
+      <St.LikeCount>{likeListOfCourse.length}</St.LikeCount>
     </St.LikeContainer>
   );
 };
