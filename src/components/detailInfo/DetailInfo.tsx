@@ -17,9 +17,6 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
     .replace(/[<br>]/g, '')
     .split('-')
     .join('');
-  // .map((item) => item.trim());
-
-  // const a = fixedCrsTourInfoArr.shift();
 
   return (
     <St.InfoContainer>
