@@ -35,7 +35,11 @@ const useSignUpFormValidator = (formInstance: FormInstance) => {
     },
   };
 
-  return { passwordValidator, confirmPasswordValidator, nickNameValidator: nickNameValidator };
+  return {
+    passwordValidator,
+    confirmPasswordValidator,
+    nickNameValidator: nickNameValidator,
+  };
 };
 
 export default useSignUpFormValidator;

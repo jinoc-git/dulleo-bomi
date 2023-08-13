@@ -17,7 +17,7 @@ const CustomConfirm: React.FC = () => {
           확인
         </>
       }
-      visible={confirmVisible}
+      open={confirmVisible}
       onOk={() => {
         confirmCallback();
         hideConfirm();

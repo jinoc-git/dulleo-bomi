@@ -59,9 +59,9 @@ export const signUpWithFB = async (
     await setUserProfileImageAndDisplayName(user, profileImage, nickname);
 
     const userInfo: UserInfo = {
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      email: user.email,
+      displayName: user.displayName!,
+      photoURL: user.photoURL!,
+      email: user.email!,
       id: user.uid,
     };
     await setDoc(doc(collection(db, 'users'), user.uid), userInfo);
