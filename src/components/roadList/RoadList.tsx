@@ -20,8 +20,8 @@ const RoadList = () => {
   };
 
   return (
-    <St.RoadListContainer>
-      <Layout>
+    <Layout>
+      <St.RoadListContainer>
         <St.RoadItem
           src={westRoad}
           onClick={() => goToSearchRouteList('서해랑길')}
@@ -37,8 +37,8 @@ const RoadList = () => {
           onClick={() => goToSearchRouteList('해파랑길')}
           onMouseOver={() => prefetchInfiniteCourse('해파랑길')}
         />
-      </Layout>
-    </St.RoadListContainer>
+      </St.RoadListContainer>
+    </Layout>
   );
 };
 

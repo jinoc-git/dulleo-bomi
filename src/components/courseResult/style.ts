@@ -12,6 +12,9 @@ export const CourseBox = styled.div`
   border: solid 1px #ddd;
   border-radius: 15px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 export const CourseTitBox = styled.div`
   display: flex;
