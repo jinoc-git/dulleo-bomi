@@ -16,7 +16,7 @@ const MyProfile = () => {
           <p>{user?.displayName}</p>
           <p>{user?.email}</p>
         </div>
-        <Button onClick={showModal}>수정완료</Button>
+        <Button onClick={showModal}>수정하기</Button>
       </>
       <Modal visible={isModalVisible} onOk={closeModal} onCancel={closeModal} footer={null}>
         <EditProfile />
