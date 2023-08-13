@@ -39,13 +39,21 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
           .map((item) => {
             return (
               <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item)}>
-                <St.CourseName>{item.crsKorNm}</St.CourseName>
-                <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+                <St.CourseTitBox>
+                  <St.CourseName>{item.crsKorNm}</St.CourseName>
+                  <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+                </St.CourseTitBox>
+
                 <St.CourseInfo>
                   {item.crsCycle} Lv.{item.crsLevel}
                 </St.CourseInfo>
                 <St.CourseInfo>{item.sigun}</St.CourseInfo>
-                <St.CourseInfo>{item.crsContents}</St.CourseInfo>
+                <St.CourseInfo>
+                  {item.crsContents
+                    .replace(/[<br>]/g, '')
+                    .split('-')
+                    .join('')}
+                </St.CourseInfo>
               </St.CourseBox>
             );
           })}

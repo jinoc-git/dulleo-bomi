@@ -23,10 +23,11 @@ const DetailInfo = ({ state }: { state: CourseDataResult }) => {
 
   return (
     <St.InfoContainer>
-      <Typography>
-        <Title level={3}>{propsData.crsKorNm}</Title>
-      </Typography>
-      <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
+      <St.InfoBox>
+        <St.InfoTitle>{propsData.crsKorNm}</St.InfoTitle>
+        <Like crsName={propsData.crsKorNm} crsId={propsData.crsIdx} />
+      </St.InfoBox>
+
       <Paragraph>
         <blockquote>
           <St.CourseInfo>

@@ -13,8 +13,13 @@ export const CourseBox = styled.div`
   border-radius: 15px;
   cursor: pointer;
 `;
-export const CourseName = styled.h4`
+export const CourseTitBox = styled.div`
+  display: flex;
   margin-bottom: 15px;
+`;
+export const CourseName = styled.h4`
+  padding: 5px 10px 5px 0;
+  line-height: 26px;
 `;
 export const CourseLike = styled.div`
   display: inline-flex;
@@ -26,6 +31,14 @@ export const CourseLike = styled.div`
   }
 `;
 export const CourseInfo = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  max-height: 2.8em;
+  line-height: 1.4em;
   &:last-child {
     margin-top: 10px;
   }

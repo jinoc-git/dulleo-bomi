@@ -5,8 +5,8 @@ import * as St from './style';
 import Flicking, { ViewportSlot } from '@egjs/react-flicking';
 import VIDOO_ID from '../youtube/videoId';
 import { nanoid } from 'nanoid';
-import '@egjs/react-flicking/dist/flicking.css';
 import { Arrow } from '@egjs/flicking-plugins';
+import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/arrow.css';
 
 const Carousel = () => {
@@ -23,8 +23,8 @@ const Carousel = () => {
             );
           })}
           <ViewportSlot>
-            <span className="flicking-arrow-prev is-circle"></span>
-            <span className="flicking-arrow-next is-circle"></span>
+            <span className="flicking-arrow-prev"></span>
+            <span className="flicking-arrow-next"></span>
           </ViewportSlot>
         </Flicking>
       </Layout>

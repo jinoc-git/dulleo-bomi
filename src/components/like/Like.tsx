@@ -105,7 +105,7 @@ const Like = ({ crsName, crsId }: LikePropsType) => {
       ) : (
         <HeartOutlined style={{ fontSize: '20px' }} onClick={switchLike} />
       )}
-      <p>{likesCount}</p>
+      <St.LikeCount>{likesCount}</St.LikeCount>
     </St.LikeContainer>
   );
 };
