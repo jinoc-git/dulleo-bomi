@@ -1,13 +1,13 @@
+import { message } from 'antd';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase/firebaseConfig';
 import { styled } from 'styled-components';
-import { message } from 'antd';
 import Layout from '../components/common/layout/Layout';
-import MyProfile from '../components/myProfile/MyProfile';
 import MyComments from '../components/myComments/MyComments';
 import MyLikes from '../components/myLikes/MyLikes';
+import MyProfile from '../components/myProfile/MyProfile';
+import { auth } from '../firebase/firebaseConfig';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -23,21 +23,41 @@ const MyPage = () => {
 
   return (
     <Layout>
-      <h2>마이 페이지</h2>
-      <MyProfile />
-      <ListSection>
-        <MyLikes />
-        <MyComments />
-      </ListSection>
+      {/* <h2>마이 페이지</h2> */}
+      <MyPageContainer>
+        <MyProfile />
+        <ListSection>
+          <MyLikes />
+          <MyComments />
+        </ListSection>
+      </MyPageContainer>
     </Layout>
   );
 };
 
 const ListSection = styled.section`
+  width: 100%;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   gap: 15px;
-  flex-flow: row wrap;
+  /* flex-flow: row wrap; */
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const MyPageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  min-height: calc(100vh - 180px - 235.97px);
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export default MyPage;

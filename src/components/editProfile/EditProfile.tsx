@@ -88,9 +88,10 @@ export const EditProfileForm = () => {
       setIsLoading(false);
     },
     onError: (error: any) => {
-      setIsLoading(false);
-      const firebaseError = getErrorFromFirebase(error);
-      setErrorMessage(firebaseError);
+      if (error.code === 'auth/wrong-password') {
+        setErrorMessage('비밀번호가 틀립니다.');
+        setIsLoading(false);
+      }
     },
   });
 
@@ -108,23 +109,6 @@ export const EditProfileForm = () => {
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     mutate();
-  };
-
-  const getErrorFromFirebase = (error: any) => {
-    if (error.code === 'auth/wrong-password') {
-      return '비밀번호가 틀립니다.';
-    }
-    return '';
-  };
-
-  const passwordValidator = (_: any, value: any) => {
-    if (!value) {
-      return Promise.reject(new Error('비밀번호를 입력해주세요.'));
-    } else if (errorMessage) {
-      return Promise.reject(new Error(errorMessage));
-    } else {
-      return Promise.resolve();
-    }
   };
 
   return (
@@ -160,9 +144,15 @@ export const EditProfileForm = () => {
           <Input onChange={onNicknameChangeHandler} placeholder="닉네임 입력" />
         </Form.Item>
 
-        <Form.Item label="현재 비밀번호" name="password" rules={[{ validator: passwordValidator }]}>
+        <Form.Item
+          label="현재 비밀번호"
+          name="password"
+          rules={[{ required: true, message: '비밀번호를 입력해주세요.' }]}
+        >
           <Input.Password onChange={onPasswordChangeHandler} />
         </Form.Item>
+
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
         <St.ButtonContainer>
           <St.Button type="default" htmlType="submit">

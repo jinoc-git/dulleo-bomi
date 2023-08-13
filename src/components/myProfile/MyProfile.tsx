@@ -10,11 +10,12 @@ const MyProfile = () => {
 
   return (
     <St.ProfileContainer>
-      <Avatar size={64} src={user?.photoURL} alt="프로필 이미지" />
-      <div>
+      <Avatar size={200} src={user?.photoURL} alt="프로필 이미지" />
+
+      <St.UserBox>
         <p>{user?.displayName}</p>
         <p>{user?.email}</p>
-      </div>
+      </St.UserBox>
       <Button onClick={showModal}>내정보 수정</Button>
 
       <Modal open={isModalVisible} onOk={closeModal} onCancel={closeModal} footer={null}>
