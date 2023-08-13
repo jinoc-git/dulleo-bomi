@@ -1,10 +1,10 @@
-import CourseResult from '../components/courseResult/CourseResult';
-import SearchForm from '../components/searchForm/SearchForm';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
-import ResultSlider from '../components/resultSlider/ResultSlider';
 import { styled } from 'styled-components';
+import CourseResult from '../components/courseResult/CourseResult';
+import ResultSlider from '../components/resultSlider/ResultSlider';
+import SearchForm from '../components/searchForm/SearchForm';
 
 const SearchResult = () => {
   const { state } = useLocation();

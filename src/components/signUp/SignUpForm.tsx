@@ -2,11 +2,11 @@ import { Form, Input, message, Spin } from 'antd';
 import { FirebaseError } from 'firebase/app';
 import { ReactElement, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserStore } from '../../zustand/UserStore';
-import * as St from './style';
-import Layout from '../common/layout/Layout';
 import { signUpWithFB } from '../../api/firebaseAuth';
 import useSignUpFormValidator from '../../hooks/useSignUpFormValidator';
+import { useUserStore } from '../../zustand/UserStore';
+import Layout from '../common/layout/Layout';
+import * as St from './style';
 
 export type SignUpFormData = {
   profileImage: File[];
