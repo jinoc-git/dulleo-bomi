@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import { Button } from 'antd';
-import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
+import { LeftCircleOutlined, RightCircleOutlined, RightOutlined } from '@ant-design/icons';
 
 let moving = false;
 
@@ -30,8 +30,8 @@ const Carousel = () => {
   };
 
   return (
-    <St.CarouselContainer>
-      <Layout>
+    <Layout>
+      <St.CarouselContainer>
         <Flicking
           panelsPerView={3}
           align="center"
@@ -48,10 +48,11 @@ const Carousel = () => {
             );
           })}
         </Flicking>
-      </Layout>
-      <Button icon={<LeftCircleOutlined />} onClick={prev} className="prev-button" />
-      <Button icon={<RightCircleOutlined />} onClick={next} className="prev-button" />
-    </St.CarouselContainer>
+        <Button icon={<LeftCircleOutlined />} onClick={prev} className="prev-button" />
+        {/* <Button icon={<RightCircleOutlined />} onClick={next} className="prev-button" /> */}
+        <Button icon={<RightOutlined />} onClick={next} className="prev-button" />
+      </St.CarouselContainer>
+    </Layout>
   );
 };
 
