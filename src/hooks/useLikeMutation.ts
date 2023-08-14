@@ -5,12 +5,11 @@ import { LikeStateType, LikeType } from '../components/like/Like';
 import { addLike, deleteLike } from '../api/likes';
 
 type UseLikeMutation = {
-  crsId: string;
   setLikeState: React.Dispatch<React.SetStateAction<boolean>>;
   isChanged: boolean
 };
 
-export const useLikeMutation = ({ crsId, setLikeState, isChanged }: UseLikeMutation) => {
+export const useLikeMutation = ({ setLikeState, isChanged }: UseLikeMutation) => {
   const queryClient = useQueryClient();
 
   const addMutation = useMutation<
@@ -24,22 +23,22 @@ export const useLikeMutation = ({ crsId, setLikeState, isChanged }: UseLikeMutat
     onMutate: async (newLike) => {
       isChanged = true;
       setLikeState(true);
-      await queryClient.cancelQueries(['likes', crsId]);
-      const prevLikeList = queryClient.getQueryData<LikeType[]>(['likes', crsId]);
+      await queryClient.cancelQueries(['likes']);
+      const prevLikeList = queryClient.getQueryData<LikeType[]>(['likes']);
       if (prevLikeList) {
-        queryClient.setQueryData(['likes', crsId], [...prevLikeList, newLike]);
+        queryClient.setQueryData(['likes'], [...prevLikeList, newLike]);
       } else {
-        queryClient.setQueryData(['likes', crsId], [newLike]);
+        queryClient.setQueryData(['likes'], [newLike]);
       }
       return { prevLikeList };
     },
     onError: (err, newLike, context) => {
       setLikeState(false);
-      queryClient.setQueryData(['likes', crsId], context?.prevLikeList);
+      queryClient.setQueryData(['likes'], context?.prevLikeList);
     },
     onSettled: () => {
       isChanged = false;
-      queryClient.invalidateQueries(['likes', crsId]);
+      queryClient.invalidateQueries(['likes']);
     },
   });
 
@@ -54,21 +53,21 @@ export const useLikeMutation = ({ crsId, setLikeState, isChanged }: UseLikeMutat
     onMutate: async (likeId) => {
       isChanged = true;
       setLikeState(false);
-      await queryClient.cancelQueries(['likes', crsId]);
-      const prevLikeList = queryClient.getQueryData<LikeType[]>(['likes', crsId]);
+      await queryClient.cancelQueries(['likes']);
+      const prevLikeList = queryClient.getQueryData<LikeType[]>(['likes']);
       if (prevLikeList) {
         const newLikeList = prevLikeList.filter((like) => like.id !== likeId);
-        queryClient.setQueryData(['likes', crsId], newLikeList);
+        queryClient.setQueryData(['likes'], newLikeList);
       }
       return { prevLikeList };
     },
     onError: (err, newLike, context) => {
       setLikeState(true);
-      queryClient.setQueryData(['likes', crsId], context?.prevLikeList);
+      queryClient.setQueryData(['likes'], context?.prevLikeList);
     },
     onSettled: () => {
       isChanged = false;
-      queryClient.invalidateQueries(['likes', crsId]);
+      queryClient.invalidateQueries(['likes']);
     },
   });
 

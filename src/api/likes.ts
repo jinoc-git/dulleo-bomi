@@ -6,7 +6,7 @@ const LIKE_URL = process.env.REACT_APP_SERVER_URL + '/likes';
 
 export const getLikes = async ({ queryKey }: { queryKey: string[] }) => {
   const [_, crsId] = queryKey;
-  const res = await axios.get<LikeType[]>(`${LIKE_URL}?crsId=${crsId}`);
+  const res = await axios.get<LikeType[]>(`${LIKE_URL}`);
   return res.data;
 };
 
