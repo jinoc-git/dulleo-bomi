@@ -6,15 +6,18 @@ import slider01 from '../../assets/slider01.jpg';
 import slider02 from '../../assets/slider02.jpg';
 import slider03 from '../../assets/slider03.jpg';
 import * as St from './style';
-import { useNavigate } from 'react-router-dom';
 
-const ResultSlider = ({ roadName }: { roadName: string }) => {
+type ResultSliderProps = {
+  setSelectKeyword: React.Dispatch<React.SetStateAction<string>>;
+  setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const ResultSlider = ({ setSelectKeyword, setSearchKeyword }: ResultSliderProps) => {
   const _plugins = [new Perspective({ rotate: 0.5 })];
 
-  const navigate = useNavigate();
   const goToSearchRouteList = (road: string) => {
-    navigate('/result', { state: { roadName: road } });
-    window.scrollTo(0, 700); //ref?
+    setSelectKeyword(road);
+    setSearchKeyword('');
   };
 
   return (

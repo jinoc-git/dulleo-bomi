@@ -13,6 +13,9 @@ const SearchResult = () => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
+    if (state.roadName) {
+      setSelectKeyword(state.roadName);
+    }
     return () => {
       queryClient.removeQueries(['infiniteCourse']);
     };
@@ -20,11 +23,11 @@ const SearchResult = () => {
 
   return (
     <SearchResultContainer>
-      <ResultSlider roadName={state.roadName} />
+      <ResultSlider setSelectKeyword={setSelectKeyword} setSearchKeyword={setSearchKeyword} />
       <SearchForm
         setSearchKeyword={setSearchKeyword}
         setSelectKeyword={setSelectKeyword}
-        roadName={state.roadName}
+        roadName={selectKeyword ? selectKeyword : state.roadName}
       />
       <CourseResult
         searchKeyword={searchKeyword}

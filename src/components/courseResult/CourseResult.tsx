@@ -4,6 +4,8 @@ import Layout from '../common/layout/Layout';
 import TopButton from '../common/topButton/TopButton';
 import Like from '../like/Like';
 import * as St from './style';
+import { useQuery } from '@tanstack/react-query';
+import { getLikes } from '../../api/likes';
 
 type CourseResultProps = {
   searchKeyword?: string;
@@ -14,6 +16,7 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   const navigate = useNavigate();
 
   const [courseList, ref] = useInfiniteGetCourse(roadName);
+  const { data: likes } = useQuery(['likes'], getLikes);
 
   const goToDetail = (crsKorNm: string) => {
     navigate(`/detail/${crsKorNm}`);
@@ -36,11 +39,12 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
       <St.CourseListContainer>
         {filteredCourseList.length === 0 && <div>검색 결과가 없습니다</div>}
         {filteredCourseList.map((item) => {
+          const like = likes?.filter((like) => like.crsId === item.crsIdx)
           return (
             <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsKorNm)}>
               <St.CourseTitBox>
                 <St.CourseName>{item.crsKorNm}</St.CourseName>
-                <Like crsName={item.crsKorNm} crsId={item.crsIdx} />
+                <Like crsName={item.crsKorNm} crsId={item.crsIdx} likeList={like} />
               </St.CourseTitBox>
               <St.CourseInfo>
                 {item.crsCycle} Lv.{item.crsLevel}

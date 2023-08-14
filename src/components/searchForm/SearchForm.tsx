@@ -40,6 +40,7 @@ const SearchForm = ({ setSearchKeyword, setSelectKeyword, roadName }: SearchForm
         <Select
           defaultValue={roadName}
           options={options}
+          value={selectedValue ? selectedValue : roadName}
           size="large"
           onSelect={(value) => setSelectedValue(value)}
         />
