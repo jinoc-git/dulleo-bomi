@@ -24,34 +24,33 @@ export type LikeStateType = {
 type LikePropsType = {
   crsId: string;
   crsName: string;
+  likeList?: LikeType[];
 };
 
 let isChanged = false;
 
-const Like = ({ crsName, crsId }: LikePropsType) => {
+const Like = ({ crsName, crsId, likeList }: LikePropsType) => {
   const navigate = useNavigate();
 
   const { user } = useUserStore();
   const userEmail = user?.email || '';
-  const { data } = useQuery(['likes', crsId], getLikes);
 
   const [likeId, setLikeId] = useState<string>('');
   const [likeState, setLikeState] = useState<boolean>(false);
   const [likeListOfCourse, setLikeListOfCourse] = useState<LikeType[]>([]);
 
   useEffect(() => {
-    if (data) {
-      setLikeListOfCourse(data);
-      const userLiked = data.find((like) => like.likedUserEmail === userEmail);
+    if (likeList) {
+      setLikeListOfCourse(likeList);
+      const userLiked = likeList.find((like) => like.likedUserEmail === userEmail);
       setLikeState(!!userLiked);
       setLikeId(userLiked?.id || '');
     }
-  }, [data]);
+  }, [likeList]);
 
   const { addMutation, deleteMutation } = useLikeMutation({
-    crsId,
     setLikeState,
-    isChanged
+    isChanged,
   });
 
   const switchLike = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
