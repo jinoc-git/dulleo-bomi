@@ -2,6 +2,8 @@ import { CourseDataResult } from '../../@types/course/courseType';
 import { Typography } from 'antd';
 import Like from '../like/Like';
 import * as St from './style';
+import { useQuery } from '@tanstack/react-query';
+import { getLikes } from '../../api/likes';
 
 const { Paragraph } = Typography;
 
@@ -18,6 +20,9 @@ const DetailInfo = ({ courseData }: { courseData: CourseDataResult }) => {
     brdDiv,
   } = courseData;
 
+  const { data: likes } = useQuery(['likes'], getLikes);
+  const likeList = likes?.filter((like) => like.crsId === crsIdx);
+
   const hour = Math.floor(Number(crsTotlRqrmHour) / 60);
   const min = Number(crsTotlRqrmHour) % 60;
 
@@ -32,7 +37,7 @@ const DetailInfo = ({ courseData }: { courseData: CourseDataResult }) => {
     <St.InfoContainer>
       <St.InfoBox>
         <St.InfoTitle>{crsKorNm}</St.InfoTitle>
-        <Like crsName={crsKorNm} crsId={crsIdx} />
+        <Like crsName={crsKorNm} crsId={crsIdx} likeList={likeList} />
       </St.InfoBox>
 
       <Paragraph>

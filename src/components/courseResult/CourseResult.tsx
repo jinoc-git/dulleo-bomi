@@ -34,17 +34,17 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   return (
     <Layout>
       <St.PageTitleH2>
-        {searchKeyword ? `${roadName} ${searchKeyword}` : roadName} 추천
+        {searchKeyword ? `${roadName} ${searchKeyword}` : roadName} 코스 목록
       </St.PageTitleH2>
       <St.CourseListContainer>
         {filteredCourseList.length === 0 && <div>검색 결과가 없습니다</div>}
         {filteredCourseList.map((item) => {
-          const like = likes?.filter((like) => like.crsId === item.crsIdx)
+          const likeList = likes?.filter((like) => like.crsId === item.crsIdx)
           return (
             <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsKorNm)}>
               <St.CourseTitBox>
                 <St.CourseName>{item.crsKorNm}</St.CourseName>
-                <Like crsName={item.crsKorNm} crsId={item.crsIdx} likeList={like} />
+                <Like crsName={item.crsKorNm} crsId={item.crsIdx} likeList={likeList} />
               </St.CourseTitBox>
               <St.CourseInfo>
                 {item.crsCycle} Lv.{item.crsLevel}
