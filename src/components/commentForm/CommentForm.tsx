@@ -54,7 +54,7 @@ const CommentForm = ({ crsKorNm }: { crsKorNm: string }) => {
     e.preventDefault();
     if (!isLoggedIn || !user) {
       message.warning('로그인이 필요합니다');
-      navigate('/');
+      navigate('/signin');
       return;
     }
     if (!comment) return;
