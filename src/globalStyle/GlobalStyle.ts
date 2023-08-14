@@ -39,6 +39,9 @@ const GlobalStyles = createGlobalStyle`
   ul {
     list-style: none;
   }
+  .ant-modal-root .ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;
 
 export default GlobalStyles;
