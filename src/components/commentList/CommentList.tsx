@@ -50,9 +50,11 @@ const CommentList = () => {
     return <div>댓글 목록을 불러오는 중 오류가 발생했습니다: {(error as AxiosError).message}</div>;
   }
 
+  const commentList = comments.reverse();
+
   return (
     <St.CommentListContainer>
-      {comments.map((comment) => {
+      {commentList.map((comment) => {
         return (
           <CommentItem
             key={comment.id}
