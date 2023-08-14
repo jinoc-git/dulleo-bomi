@@ -4,8 +4,15 @@ import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 import { fetchGPX } from '../../api/map';
 import * as St from './style';
 
-const DetailMap = ({ path }: { path: string }) => {
+export enum StyleType {
+  WEST_ROAD = '서해랑길',
+  SOUTH_ROAD = '남파랑길',
+  EAST_ROAD = '해파랑길',
+}
+
+const DetailMap = ({ path, roadName }: { path: string; roadName: string }) => {
   const { data, isLoading, isError } = useQuery(['gpx', path], () => fetchGPX({ path }));
+  const road = roadName.split(' ');
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -21,6 +28,21 @@ const DetailMap = ({ path }: { path: string }) => {
     lat: coord.lat,
     lng: coord.lon,
   }));
+
+  let strokeColor = '#994df0';
+  switch (road[0]) {
+    case StyleType.WEST_ROAD:
+      strokeColor = '#994df0';
+      break;
+    case StyleType.SOUTH_ROAD:
+      strokeColor = '#00ad96';
+      break;
+    case StyleType.EAST_ROAD:
+      strokeColor = '#003ab8';
+      break;
+    default:
+      break;
+  }
 
   return (
     <St.MapContainer>
@@ -38,7 +60,7 @@ const DetailMap = ({ path }: { path: string }) => {
         <Polyline
           path={[polylinePath]}
           strokeWeight={7}
-          strokeColor={'#994df0'}
+          strokeColor={strokeColor}
           strokeOpacity={0.8}
           strokeStyle={'solid'}
         />
