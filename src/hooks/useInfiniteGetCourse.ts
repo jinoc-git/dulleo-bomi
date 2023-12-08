@@ -7,8 +7,8 @@ import { useInView } from 'react-intersection-observer';
 
 const useInfiniteGetCourse = (
   roadName: string,
-): [CourseDataResult[], (node?: Element | null) => void] | [] => {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
+): [CourseDataResult[], boolean, (node?: Element | null) => void] | [] => {
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery<
     Course,
     AxiosError
   >(
@@ -36,12 +36,12 @@ const useInfiniteGetCourse = (
   });
 
   if (!data) {
-    return [[], ref];
+    return [[], isLoading, ref];
   }
 
   const rourseList = data.pages.map((item) => item.items.item).flat();
 
-  return [rourseList, ref];
+  return [rourseList, isLoading, ref];
 };
 
 export default useInfiniteGetCourse;

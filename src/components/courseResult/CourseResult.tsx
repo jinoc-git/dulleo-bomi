@@ -6,6 +6,7 @@ import Like from '../like/Like';
 import * as St from './style';
 import { useQuery } from '@tanstack/react-query';
 import { getLikes } from '../../api/likes';
+import LoadingSpinner from '../common/loadingSpinner/LoadingSpinner';
 
 type CourseResultProps = {
   searchKeyword?: string;
@@ -15,12 +16,16 @@ type CourseResultProps = {
 const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
   const navigate = useNavigate();
 
-  const [courseList, ref] = useInfiniteGetCourse(roadName);
+  const [courseList, isLoading, ref] = useInfiniteGetCourse(roadName);
   const { data: likes } = useQuery(['likes'], getLikes);
 
   const goToDetail = (crsKorNm: string) => {
     navigate(`/detail/${crsKorNm}`);
   };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (!courseList) {
     return <div>데이터가 존재하지 않습니다.</div>;
@@ -39,7 +44,7 @@ const CourseResult = ({ searchKeyword, roadName }: CourseResultProps) => {
       <St.CourseListContainer>
         {filteredCourseList.length === 0 && <div>검색 결과가 없습니다</div>}
         {filteredCourseList.map((item) => {
-          const likeList = likes?.filter((like) => like.crsId === item.crsIdx)
+          const likeList = likes?.filter((like) => like.crsId === item.crsIdx);
           return (
             <St.CourseBox key={item.crsIdx} onClick={() => goToDetail(item.crsKorNm)}>
               <St.CourseTitBox>

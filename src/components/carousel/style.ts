@@ -6,17 +6,13 @@ export const CarouselContainer = styled.section`
   & .prev-button {
     position: absolute;
     top: -32px;
-    right: 0;
+    left: 0;
   }
 
   & .next-button {
     position: absolute;
-    top: 0;
+    top: -32px;
     right: 0;
-    span {
-      position: relative;
-      top: 2px;
-    }
   }
 `;
 

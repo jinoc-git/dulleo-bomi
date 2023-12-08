@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import { Button } from 'antd';
-import { LeftCircleOutlined, RightOutlined } from '@ant-design/icons';
+import { RightOutlined } from '@ant-design/icons';
 
 let moving = false;
 
@@ -22,12 +22,13 @@ const Carousel = () => {
     }
   };
 
-  const prev = async () => {
-    if (moving) return;
-    if (flickingRef.current !== null) {
-      await flickingRef.current.prev();
-    }
-  };
+  // 유튜브 오류로 인해 미사용
+  // const prev = async () => {
+  //   if (moving) return;
+  //   if (flickingRef.current !== null) {
+  //     await flickingRef.current.prev();
+  //   }
+  // };
 
   return (
     <Layout>
@@ -48,9 +49,7 @@ const Carousel = () => {
             );
           })}
         </Flicking>
-        <Button icon={<LeftCircleOutlined />} onClick={prev} className="prev-button" />
-        {/* <Button icon={<RightCircleOutlined />} onClick={next} className="prev-button" /> */}
-        <Button icon={<RightOutlined />} onClick={next} className="prev-button" />
+        <Button icon={<RightOutlined />} onClick={next} className="next-button" />
       </St.CarouselContainer>
     </Layout>
   );
