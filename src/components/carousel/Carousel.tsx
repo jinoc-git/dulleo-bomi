@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Layout from '../common/layout/Layout';
 import YoutubePlayer from '../youtube/YoutubePlayer';
 import * as St from './style';
@@ -9,10 +9,13 @@ import '@egjs/react-flicking/dist/flicking.css';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import { Button } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
+import useThrottle from '../../hooks/useThrottle';
 
 let moving = false;
 
 const Carousel = () => {
+  const [panelsPerView, setPanelsPerView] = useState(3);
+  const handleResize = useThrottle(() => updatePanelsPerView(), 200);
   const flickingRef = useRef<Flicking>(null);
 
   const next = async () => {
@@ -22,19 +25,31 @@ const Carousel = () => {
     }
   };
 
-  // 유튜브 오류로 인해 미사용
-  // const prev = async () => {
-  //   if (moving) return;
-  //   if (flickingRef.current !== null) {
-  //     await flickingRef.current.prev();
-  //   }
-  // };
+  const updatePanelsPerView = () => {
+    if (flickingRef.current) {
+      const viewportWidth = window.innerWidth;
+      let panelCount = 3;
+
+      if (viewportWidth < 768) panelCount = 1;
+      else if (viewportWidth < 1024) panelCount = 2;
+
+      setPanelsPerView(panelCount);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <Layout>
       <St.CarouselContainer>
         <Flicking
-          panelsPerView={3}
+          panelsPerView={panelsPerView}
           align="center"
           circular={true}
           ref={flickingRef}

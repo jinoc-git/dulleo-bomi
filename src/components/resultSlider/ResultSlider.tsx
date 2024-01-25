@@ -6,6 +6,7 @@ import slider01 from '../../assets/slider01.jpg';
 import slider02 from '../../assets/slider02.jpg';
 import slider03 from '../../assets/slider03.jpg';
 import * as St from './style';
+import React from 'react';
 
 type ResultSliderProps = {
   setSelectKeyword: React.Dispatch<React.SetStateAction<string>>;
@@ -20,9 +21,24 @@ const ResultSlider = ({ setSelectKeyword, setSearchKeyword }: ResultSliderProps)
     setSearchKeyword('');
   };
 
+  const flicking = React.useRef<Flicking | null>(null);
+
+  const handlePanelClick = (index: number) => {
+    if (flicking.current) {
+      flicking.current.moveTo(index);
+    }
+  };
+
   return (
     <St.SliderContainer>
-      <Flicking panelsPerView={3} align="center" circular={true} plugins={_plugins}>
+      <Flicking
+        panelsPerView={3}
+        align="center"
+        circular={true}
+        plugins={_plugins}
+        ref={flicking}
+        onSelect={(e) => handlePanelClick(e.index)}
+      >
         <St.SliderItem className="card-panel" onClick={() => goToSearchRouteList('서해랑길')}>
           <img src={slider01} alt="서해랑길" />
           <div>
