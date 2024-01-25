@@ -24,9 +24,11 @@ const ResultSlider = ({ setSelectKeyword, setSearchKeyword }: ResultSliderProps)
   const flicking = React.useRef<Flicking | null>(null);
 
   const handlePanelClick = (index: number) => {
-    if (flicking.current) {
-      flicking.current.moveTo(index);
-    }
+    if (flicking.current) flicking.current.moveTo(index);
+
+    if (index === 0 || index === 3) goToSearchRouteList('서해랑길');
+    if (index === 1 || index === 4) goToSearchRouteList('남파랑길');
+    if (index === 2 || index === 5) goToSearchRouteList('해파랑길');
   };
 
   return (
@@ -39,35 +41,35 @@ const ResultSlider = ({ setSelectKeyword, setSearchKeyword }: ResultSliderProps)
         ref={flicking}
         onSelect={(e) => handlePanelClick(e.index)}
       >
-        <St.SliderItem className="card-panel" onClick={() => goToSearchRouteList('서해랑길')}>
+        <St.SliderItem className="card-panel">
           <img src={slider01} alt="서해랑길" />
           <div>
             노을색 물감으로 물든
             <p>서해랑길</p>
           </div>
         </St.SliderItem>
-        <St.SliderItem className="card-panel" onClick={() => goToSearchRouteList('남파랑길')}>
+        <St.SliderItem className="card-panel">
           <img src={slider02} alt="남파랑길" />
           <div>
             신비로운 해남을 걷는
             <p>남파랑길</p>
           </div>
         </St.SliderItem>
-        <St.SliderItem className="card-panel" onClick={() => goToSearchRouteList('해파랑길')}>
+        <St.SliderItem className="card-panel">
           <img src={slider03} alt="해파랑길" />
           <div>
             송지호 해변을 따라 걷는
             <p>해파랑길</p>
           </div>
         </St.SliderItem>
-        <St.SliderItem className="card-panel" onClick={() => goToSearchRouteList('서해랑길')}>
+        <St.SliderItem className="card-panel">
           <img src={slider01} alt="서해랑길" />
           <div>
             노을색 물감으로 물든
             <p>서해랑길</p>
           </div>
         </St.SliderItem>
-        <St.SliderItem className="card-panel" onClick={() => goToSearchRouteList('남파랑길')}>
+        <St.SliderItem className="card-panel">
           <img src={slider02} alt="남파랑길" />
           <div>
             신비로운 해남을 걷는
